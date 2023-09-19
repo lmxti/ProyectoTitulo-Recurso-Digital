@@ -20,6 +20,8 @@ module.exports = {
         background: "var(--bg-color)",
         backgroundAlpha: "var(--bg-color-transparent)",
         transparent: "var(--transparent)",
+        eastBay: "var(--east-bay)",
+        gray: "var(--gray)",
     },
     extend: {
       backgroundImage: {

@@ -11,6 +11,7 @@ const Home = () => {
         <div className="top-0 left-0 min-h-screen w-full text-text bg-background p-4 flex">
 
             <div className='flex-col w-1/2 h-[screen] mr-8'>
+                
                 {/* Content Section (Top Left) */}
                 <section className="h-[50%] max-h-[50%] overflow-hidden ">
                     <h2 className="text-2xl font-thin mb-4">Monitor</h2>
@@ -19,7 +20,7 @@ const Home = () => {
                         {/* You can embed animations or other interactive elements */}
                         <div className=" w-full h-[calc(100%-2px)] overflow-hidden bg-white rounded-lg">
                         {/* <img src='/aa.png' className='w-full mt-[-140px] rounded-lg' /> */}
-                    
+
                         </div>
                     </div>
                 </section>

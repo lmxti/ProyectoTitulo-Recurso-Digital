@@ -38,7 +38,7 @@ const CodingSection = () => {
     return (
         <div className='text-[18px] p-[1px] rounded-[10px] bg-accent shadow-md'>
             <div className='flex'>
-                <h2 className="ml-[10px] text-2xl font-thin mb-1">Codigo</h2>
+                <h2 className="text-2xl font-thin rounded-t-lg bg-accent p-2">Compilador</h2>
                 <button onClick={execCode}
                     className="bg-primary text-background ml-auto mr-1 px-4 py-[5px] mb-[2px] rounded-[10px] hover:bg-secondary font-bold  hover:text-text " >
                     Execute
@@ -47,7 +47,7 @@ const CodingSection = () => {
             </div>
             <CodeMirror
                 value={code}
-                height="40vh"
+                height={"450px"}
                 theme={aura}
                 extensions={extensions}
                 onChange={onChange}
