@@ -47,7 +47,7 @@ const CodingSection = () => {
             </div>
             <CodeMirror
                 value={code}
-                height={"450px"}
+                height={"40vh"}
                 theme={aura}
                 extensions={extensions}
                 onChange={onChange}
