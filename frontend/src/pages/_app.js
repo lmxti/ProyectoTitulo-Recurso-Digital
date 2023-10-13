@@ -1,0 +1,32 @@
+import React from 'react';
+import App from 'next/app';
+import Head from 'next/head';
+import NavBar from '@/components/NavBar';
+// import Layout from "./layout"
+import { ThemeProvider } from 'next-themes'
+
+import '../styles/globals.css';
+
+class MyApp extends App {
+    render() {
+        const { Component, pageProps } = this.props;
+
+        return (
+            <ThemeProvider>
+                <Head>
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                    <title>E-Learning</title>
+                </Head>
+                <NavBar/>
+                {/* <Layout> */}
+                    <Component {...pageProps} />
+                {/* </Layout> */}
+            </ThemeProvider>
+        );
+    }
+}
+
+export default MyApp;
+
+
+
