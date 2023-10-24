@@ -1,19 +1,24 @@
-// Base module that provides utilities and functions for HTTP routes and handlers
+// <----------------------------------MODULOS------------------------------------------>
+// Modulo 'Express' que provee utilidades y funciones para rutas y controladores HTTP
 const express = require('express');
-// Method from the "child_process" library that generates a shell and allows a command to be executed
-const { exec } = require('child_process');
-const { log } = require('console');
+// Modulo 'fs' que provee funciones para leer y escribir archivos (Sistema de archivos)
 const fs = require('fs');
 
-// Instance of an Express application "app"
+// <----------------------------------MÉTODOS------------------------------------------>
+// Metodo de la biblioteca 'child_process' que genera un shell y ejecuta comandos en el
+const { exec } = require('child_process');
+const { log } = require('console');
+
+
+// Instancia de la aplicacion Express en "app"
 const app = express();
-// Server port number definition
+// Definicion de número de puerto del servidor
 const port = 3001;
 
-// Middleware that parses JSON content of requests and makes them accessible in "req.body".
+// Middleware que analiza el contenido de las solicitudes y las hace accesibles en req.body
 app.use(express.json());
 
-// Set up the options object with the cwd property
+// Configuracion de directorio de trabajo actual (cwd = current working directory) para ejecutar comandos con 'exec'
 const options = {
     cwd: './java'
 };
@@ -21,13 +26,19 @@ const options = {
 
 const waitFunctionRegex = /Esperar\(\);/g;  // Regular expression to match "Esperar();" lines    
 
-// HTTP POST request path that executes Java code (Assuming the request body contains the Java code)
+/**
+ *  Ejecuta el código del usuario y devuelve el resultado de la ejecución.
+ *  @param {string} req.body.code - Código del usuario.
+ */
 app.post('/execute', (req, res) => {
-
-    // Storage of user code in "userCode".
+    // Almacenamiento del codigo de usuario en una variable 'userCode'
     let userCode = req.body.code;
+
     const functionsToCheck = req.body.functionCheckInfo;
+
     console.log("BODY", req.body)
+
+
     checkValidity(userCode.replace(waitFunctionRegex, '//Esperar();'), res, (isValid) => {
         if (isValid) {
             if (functionsToCheck) {
@@ -292,3 +303,4 @@ app.get('/execute', (req, res) => {
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
+// J

@@ -14,7 +14,10 @@ const NavBar = () => {
                         Explorar
                     </a>
                     <a className="text-white font-bold text-xl" href="/Leccion/1">
-                        Leccion
+                        Leccion 1
+                    </a>
+                    <a className="text-white font-bold text-xl" href="/Leccion/2">
+                        Leccion 2
                     </a>
                 </div>
                 <div>
