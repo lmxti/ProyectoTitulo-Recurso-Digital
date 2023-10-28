@@ -12,6 +12,10 @@ import { classname } from '@uiw/codemirror-extensions-classname';
 import { autocompletion } from "@codemirror/autocomplete"
 /* import { EditorView } from "@uiw/react-codemirror"; */
 
+// <------------------------------------ICONOS---------------------------------------->
+import {AiFillCode} from 'react-icons/ai'
+import {FaPlay} from 'react-icons/fa'
+
 // <--------------------------------FUNCIONES---------------------------------------->
 
 /**
@@ -58,7 +62,7 @@ const executeCode = async ({code, functionCheckInfo}) => {
 
 
 /* <-------------------------COMPONENTE EDITOR DE CODIGO-----------------------------> */
-const CodingSection = ({ onResult, lessonInfo }) => {
+const CodingSection = ({ onResult, leccionInfo }) => {
     //  Lenguaje de editor de codigo
     const jav = java()
     // Extension para resaltar lineas de codigo con errores
@@ -72,7 +76,19 @@ const CodingSection = ({ onResult, lessonInfo }) => {
     // Extensiones cargadas en el editor de codigo
     const extensions = [jav, classnameExt, autocompletion({ override: [myCompletions] })];
     // Codigo de la leccion actual
-    const [code, setCode] = useState(lessonInfo.code);
+    const [code, setCode] = useState(leccionInfo.code);
+
+    useEffect(()=>{
+
+        /* const editor = container.CodeMirror; */
+       /*  console.log(editor) */
+/* editor.setValue(STATE_VALUE); */
+        setCode(leccionInfo.code)
+        if(container){
+            container.value = leccionInfo.code 
+        }
+        //container.setAttribute()
+    }, [leccionInfo.code])
 
     // Lineas de codigo erroneas
     const [errorLines, setErrorLines] = useState([])
@@ -81,18 +97,19 @@ const CodingSection = ({ onResult, lessonInfo }) => {
 
     // Hook para actualizar el codigo de la leccion actual
     const onChange = React.useCallback((value, viewUpdate) => {
-        setCode(value);
+        setCode(value) 
     }, []);
     
     // Hook que crea el editor de codigo y su configuracion
-    const { view, setContainer } = useCodeMirror({
+    const { view, setContainer, container, state, setState } = useCodeMirror({
         container: editorRef.current,
         value: code,
-        height: "40vh",
+        height: "42vh",
         theme: aura,
         extensions:  extensions,
         onChange: onChange,
-        basicSetup: { searchKeymap: false, tabSize : 4 }
+        basicSetup: { searchKeymap: false, tabSize : 4 },
+         
     });
 
    
@@ -102,7 +119,7 @@ const CodingSection = ({ onResult, lessonInfo }) => {
      */
     const execCode = () => {
         // Llamado de funcion con parametros de ejecucion que ejecuta el codigo en el lado del servidor (backend)
-        executeCode({code, functionCheckInfo : lessonInfo.functionToCheck}).then((res) => {
+        executeCode({code, functionCheckInfo : leccionInfo.functionToCheck}).then((res) => {
             // Devuelve el "output" (resultado de la ejecucion) y la
             console.log("CodingSection -> execCode ->", res);
             if (res.error) {
@@ -141,16 +158,14 @@ const CodingSection = ({ onResult, lessonInfo }) => {
     return (
         <div>
             {/* Code header section */}
-            <div className=" bg-accent rounded-t-lg flex justify-between p-2 font-thin">
-                <h2 className="text-2xl">Compilador</h2>
-
+            <div className="bg-accent rounded-t-lg flex justify-between font-thin">
+                <div className="flex items-center p-2 text-2xl font-thin">
+                    <AiFillCode/>
+                    <h2 className="ml-2">Compilador</h2>
+                </div>
                 <div className="flex justify-around">
-                <button onClick={execCode} className="bg-primary text-background px-6 rounded-lg hover:bg-secondary font-bold hover:text-text mr-2">
-                    Ejecutar
-                </button>
-                <button 
-                className="bg-primary text-background px-6 rounded-lg hover:bg-secondary font-bold hover:text-text">
-                    Comprobar
+                <button onClick={execCode} className=" flex items-center bg-primary text-background rounded-lg hover:bg-secondary font-bold hover:text-text px-6 m-2">
+                    <FaPlay/> 
                 </button>
                 </div>
             </div>

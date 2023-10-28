@@ -42,7 +42,7 @@ app.post('/execute', (req, res) => {
     checkValidity(userCode.replace(waitFunctionRegex, '//Esperar();'), res, (isValid) => {
         if (isValid) {
             if (functionsToCheck) {
-                checkFunctions(userCode, functionsToCheck, (functionsResult) => {
+                checkFunctions(userCode.replace(waitFunctionRegex, '//Esperar();'), functionsToCheck, (functionsResult) => {
                     userCode = formatCode(userCode);
                     fs.writeFileSync('./java/src/com/heart/app/Main.java', userCode); // Save 'Main.java' inside the 'java' folder
 
