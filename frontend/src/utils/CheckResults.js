@@ -3,12 +3,14 @@ import React from "react";
 const CheckResults = (resInfo, lesInfo) => {
     const badFunctions = []
     let index = -1;
-    console.log(resInfo, lesInfo);
-    for(let i = 0; i < lesInfo.functionToCheck.length; i++){
-        if((index = resInfo.functionsResult.findIndex((func)=> func.name == lesInfo.functionToCheck[i].name)) == -1 
-        || resInfo.functionsResult[index].result != lesInfo.functionToCheck[i].result){
-            badFunctions.push(lesInfo.functionToCheck[i].name);
-        } 
+/*     console.log("Chekingres ", resInfo, lesInfo); */
+    if(lesInfo.functionToCheck){
+        for(let i = 0; i < lesInfo.functionToCheck.length; i++){
+            if((index = resInfo.functionsResult.findIndex((func)=> func.name == lesInfo.functionToCheck[i].name)) == -1 
+            || resInfo.functionsResult[index].result != lesInfo.functionToCheck[i].result){
+                badFunctions.push(lesInfo.functionToCheck[i].name);
+            } 
+        }
     }
 
     
@@ -51,14 +53,17 @@ const CheckResults = (resInfo, lesInfo) => {
 
     const badObjects = []
     let objs = []
-    for(let i = 0; i < lesInfo.objectsToCheck.length; i++){ 
-        if((objs = resInfo.objectsResult.filter((obj)=> obj.type == lesInfo.objectsToCheck[i].type)).length > 0){
-            for(let p = 0; p < lesInfo.objectsToCheck[i].properties.length; p++){
-                if(!objs.some(()=> objs.changes.some((obj)=> checkProperty(obj, lesInfo.objectsToCheck[i].properties[p])))){
-                    badFunctions.push({name: lesInfo.objectsToCheck[i].name, variable : lesInfo.objectsToCheck[i].properties[p].name}); 
+
+    if(lesInfo.objectsToCheck){
+        for(let i = 0; i < lesInfo.objectsToCheck.length; i++){ 
+            if((objs = resInfo.objectsResult.filter((obj)=> obj.type == lesInfo.objectsToCheck[i].type)).length > 0){
+                for(let p = 0; p < lesInfo.objectsToCheck[i].properties.length; p++){
+                    if(!objs.some(()=> objs.changes.some((obj)=> checkProperty(obj, lesInfo.objectsToCheck[i].properties[p])))){
+                        badFunctions.push({name: lesInfo.objectsToCheck[i].name, variable : lesInfo.objectsToCheck[i].properties[p].name}); 
+                    }
                 }
-            }
-        } 
+            } 
+        }
     }
 
 

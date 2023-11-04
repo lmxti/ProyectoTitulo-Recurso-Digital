@@ -10,7 +10,7 @@ import Lesson from "@/components/Lesson"
 // <----------------------------------ICONOS--------------------------------------------->
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
 import {BiDownload, BiHelpCircle} from 'react-icons/bi'
-
+import Modal from "@/components/Modal";
 /**
  * @name StagePage
  * @description Contenido de la leccion seleccionada
@@ -26,21 +26,37 @@ const StagePage = () => {
     // Seteo
     const [StageID, setStageID] = useState(0)
 
+    const [correctResults, setCorrectResult] = useState([])
+
+    const [problems, setProblems] = useState(undefined)
+
+    const setResult = (resInfo)=>{
+        setCorrectResult((prev)=>[...prev, resInfo])
+        if(resInfo.problems){
+            setProblems(resInfo.problems)
+        }
+    }
+
     // <
     const changeIndexSiguiente = () => {
         console.log(stages.length);
         if (index < stages.length - 1) {
             // Si existen más lecciones en la etapa actual, ir a la siguiente lección
             const newIndex = index + 1;
+            if(!stages[index].checkResult){
+                setCorrectResult((prev)=> [...prev, {id : stages[index].id, res: undefined}])
+            }
+
             router.push(`/Etapa/${StageID}/${newIndex}`);
         } else {
             // Verificación de existencia de etapas siguientes
             const nextStage = StageID + 1;
             // NOTA: POR EL MOMENTO ES FIJO, PERO DEBERIA SER DINAMICO
-            const totalStages = 5; 
+            const totalStages = 6; 
             if (nextStage < totalStages) {
                 // Si existe una siguiente etapa, ir a la siguiente etapa
                 const newIndex = 0;
+                setCorrectResult([])
                 router.push(`/Etapa/${nextStage}/${newIndex}`);
             }
         }
@@ -93,17 +109,26 @@ const StagePage = () => {
                 {/* Botones centrales */}
                 <div className="flex items-center">
 
-                    <button onClick={changeIndexAtras} className="h-8 w-10 px-2 border-b border-l border-t">
-                         <FaArrowLeft />
+                    <button onClick={changeIndexAtras} className="h-8 w-10 px-2 border-b border-l border-t hover:bg-background hover:fill-white">
+                         <FaArrowLeft className="fill-inherit"/>
                     </button>
 
                     <button className="h-8 px-2 border">
                         Leccion {index}
                     </button>
 
-                    <button onClick={changeIndexSiguiente} className="h-8 w-10 px-2 border-b border-r border-t">
-                        <FaArrowRight />
+                    <button onClick={changeIndexSiguiente} className="h-8 w-10 px-2 border-b border-r border-t hover:bg-background hover:fill-white">
+                        <FaArrowRight className="fill-inherit"/>
                     </button>
+
+                    <div className="w-[1px] bg-background h-[30px] mx-[20px] opacity-40"/>
+
+                    {stages.map((less)=>{
+                        return (<div className="rounded-[100%] mr-[10px] w-[15px] h-[15px] border-[1px] border-background" 
+                        style={{ background: (index == less.id ? "var(--secondary-color)" : correctResults.some((corr)=> corr.id == less.id && corr.res === undefined) ? "var(--primary-color)" : "") } }/>)
+
+                    })}
+
                 </div>
                 {/* Botones lateral derecho */}
                 <div>
@@ -112,10 +137,10 @@ const StagePage = () => {
                 </div>
             </div>
 
-
+            {problems && <Modal isOpen={true} onClose={()=> setProblems(undefined)} problems={problems}/>}
 
  
-            {stages.length > 0 && <Lesson leccionInfo={stages[index]}/>}
+            {stages.length > 0 && <Lesson leccionInfo={stages[index]} setResult={setResult}/>}
         
         </>
     );

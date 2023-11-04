@@ -22,7 +22,7 @@ const sleep = (delay) => new Promise((resolve) => setTimeout(resolve, delay))
  * @name LeccionPage
  * @description Contenido de la leccion seleccionada
  */
-const Lesson = ({leccionInfo, setCorrectResult}) => {
+const Lesson = ({leccionInfo, setResult}) => {
     // <--------------------------------CONSTANTES----------------------------------------->
     // Enrutamiento de Next.js
     const router = useRouter();
@@ -104,9 +104,11 @@ const Lesson = ({leccionInfo, setCorrectResult}) => {
                 try {
                     // Descomposicion de datos esperados 'data' y 'maxFrames'del primer elemento 'matches' (matches[0])
                     const { data, maxFrames } = JSON.parse(matches[0]);
-                    console.log(data, maxFrames)
+                    console.log("beffCheck", data, maxFrames)
                     if(leccionInfo.checkResult){ 
-                        setCorrectResult(CheckResults({objectsResult : data, functionsResult : nuevoResultado.resFunctions}, leccionInfo))
+                        const problems = CheckResults({objectsResult : data, functionsResult : nuevoResultado.resFunctions}, leccionInfo) 
+                        console.log("Problems", problems)
+                        setResult({id : leccionInfo.id,  problems }) 
                     }
                     
                     if(!leccionInfo.isConsole){
@@ -124,6 +126,11 @@ const Lesson = ({leccionInfo, setCorrectResult}) => {
                     console.log("Fallo al convertir en JSON", error)
                 }
             } else {
+                if(leccionInfo.checkResult){ 
+                    const problems = CheckResults({objectsResult : [], functionsResult : []}, leccionInfo) 
+                    console.log("Problems", problems)
+                    setResult({id : leccionInfo.id,  problems }) 
+                }
                 // No se encontro JSON dentro de los bloques entre llaves
                 console.log("No JSON encontrado ");
             }
@@ -493,17 +500,19 @@ const Lesson = ({leccionInfo, setCorrectResult}) => {
                     </section>
 
                         { leccionInfo.isConsole &&  
-                            <section className="bg-white overflow-y-auto rounded-[10px]">
+                            <section className="overflow-y-auto bg-foreground rounded-[10px]">
                                 <div className="sticky top-0 flex items-center bg-eastBay p-2 text-2xl font-thin">
                                     <MdQuestionAnswer/>
                                     <h2 className="ml-2">Consola</h2>
                                 </div>
 
-                                <div className="text-black p-4">
-                                    {resultado.split(/\r?\n/).map((res, index) => {
-                                        return (<div key={index}><code >{res}</code><br /></div>)
+                                <div className="p-2 bg-foreground ">
+                                    <div className="bg-background h-[39vh] overflow-y-scroll  rounded-[10px] text-white p-5">
+                                            {resultado.split(/\r?\n/).map((res, index) => {
+                                                return (<div key={index}><code >{res}</code><br /></div>)
 
-                                    })}
+                                            })}
+                                    </div>
                                 </div>
                             </section>
 

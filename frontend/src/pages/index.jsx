@@ -26,23 +26,9 @@ const explorar = () => {
               className="w-full h-full object-contain"
             />
           </div>
-          <h1 className="text-2xl font-thin rounded-t-lg">Lección 2</h1>
-          <div>
-            <p>Variables y tipos de datos</p>
-          </div>
-        </section>
-
-        <section className="bg-eastBay flex flex-col justify-center items-center">
-          <div className="w-[300px] h-[300px] bg-white ">
-            <img
-              src="/images/java-logo.png"
-              alt=""
-              className="w-full h-full object-contain"
-            />
-          </div>
           <h1 className="text-2xl font-thin rounded-t-lg">Lección 3</h1>
           <div>
-            <p>Estructuras de control</p>
+            <p>Estructuras de control y funciones</p>
           </div>
         </section>
 
@@ -57,20 +43,6 @@ const explorar = () => {
           <h1 className="text-2xl font-thin rounded-t-lg">Lección 4</h1>
           <div>
             <p>Arrays y matrices</p>
-          </div>
-        </section>
-
-        <section className="bg-eastBay flex flex-col justify-center items-center">
-          <div className="w-[300px] h-[300px] bg-white p-2">
-            <img
-              src="/images/java-logo.png"
-              alt=""
-              className="w-full h-full object-contain"
-            />
-          </div>
-          <h1 className="text-2xl font-thin rounded-t-lg">Lección 5</h1>
-          <div>
-            <p>Métodos y funciones</p>
           </div>
         </section>
 

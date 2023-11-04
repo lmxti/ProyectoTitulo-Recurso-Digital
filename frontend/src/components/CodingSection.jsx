@@ -86,6 +86,7 @@ const CodingSection = ({ onResult, leccionInfo }) => {
         setCode(leccionInfo.code)
         if(container){
             container.value = leccionInfo.code 
+            /* container.setAttribute("height", "100vh") */
         }
         //container.setAttribute()
     }, [leccionInfo.code])
@@ -104,12 +105,11 @@ const CodingSection = ({ onResult, leccionInfo }) => {
     const { view, setContainer, container, state, setState } = useCodeMirror({
         container: editorRef.current,
         value: code,
-        height: "42vh",
+        height: "calc(50vh - 48px - 1.5rem)", 
         theme: aura,
         extensions:  extensions,
         onChange: onChange,
         basicSetup: { searchKeymap: false, tabSize : 4 },
-         
     });
 
    
@@ -165,13 +165,13 @@ const CodingSection = ({ onResult, leccionInfo }) => {
                 </div>
                 <div className="flex justify-around">
                 <button onClick={execCode} className=" flex items-center bg-primary text-background rounded-lg hover:bg-secondary font-bold hover:text-text px-6 m-2">
-                    <FaPlay/> 
+                    <FaPlay title="Compilar"/> 
                 </button>
                 </div>
             </div>
 
             {/* Code section */}
-            <div className="bg-accent p-2 text-[18px] rounded-b-lg">
+            <div className="bg-accent p-2  text-[18px] rounded-b-lg">
                 <div onClick={printVisibleLines} ref={editorRef}></div>
             </div>
         </div>

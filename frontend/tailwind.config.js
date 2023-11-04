@@ -18,6 +18,7 @@ module.exports = {
         accent: "var(--accent-color)",
         foreground: "var(--foreground-color)",
         background: "var(--bg-color)",
+        backgroundLite: "var(--bg-color-lite)",
         backgroundAlpha: "var(--bg-color-transparent)",
         transparent: "var(--transparent)",
         eastBay: "var(--east-bay)",
