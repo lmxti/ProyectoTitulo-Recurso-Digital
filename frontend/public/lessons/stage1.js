@@ -33,10 +33,10 @@ const lessonsStage1 =[
                 </p>
 
                 <ul className="list-disc p-4">
-                    <li>1. Pulsa el boton ejecutar que se encuentra en el compilador.</li>
-                    <li>2. Observa lo que se muestra en la consola, ¿Que mensaje aparece?.</li>
+                    <li> Pulsa el boton ejecutar que se encuentra en el compilador.</li>
+                    <li>Observa lo que se muestra en la consola, ¿Que mensaje aparece?.</li>
                     <li>
-                        3. Prueba cambiando el texto que contiene <code style={codeStyle(0)}>System.out.println()</code>
+                        Prueba cambiando el texto que contiene <code style={codeStyle(0)}>System.out.println()</code>
                         por otro como "Hola, mundo!" y vuelve a ejecutar el programa.
                     </li>
                 </ul>
@@ -52,7 +52,7 @@ const lessonsStage1 =[
 
 public class Main {
     public static void main(String[] args) {
-        /*Ejecuta este código para ver como funciona!*/
+        // Ejecuta este código para ver como funciona!
         System.out.println("Hello, World!");
     }
 }
@@ -65,11 +65,11 @@ public class Main {
         id: 1,
         enunciado: (
             <div className=" text-black">
-                    <p>Variables y tipos de variables (primitivas)</p>
-                    <p>Imagen con contenido de convencion de nombres para palabras compuestas</p>
-                    <p>Imagen que explica como declarar variables inicializadas o no</p>
                 <div className="flex justify-center">
-                    {/* Imagen */}
+                    <img
+                        src="/images/lessons/stage1/VariablesPrimitivas.jpg"
+                        alt="Leccion1-img"
+                    />
                 </div>
           </div >)
         ,
@@ -105,7 +105,9 @@ public class Main {
         
 public class Main {
     public static void main(String[] args) {
+        // Declaracion de variable
         int horasDia = 24;
+        // Imprimir valor de variable
         System.out.println(horasDia);
 
     }
@@ -163,7 +165,9 @@ public class Main {
     
 public class Main {
     public static void main(String[] args) {
+        // Declaracion de variable
         int horasDia = 24;
+        // Imprimir mensaje concatenado con valor de variable
         System.out.println("El dia tiene: "+ horasDia + " horas");
     }
 }
@@ -211,12 +215,11 @@ isConsole : true,
     
 public class Main {
     public static void main(String[] args) {
-        // 1. Declara variable para almacenar tu nombre
+        // Declaracion de variable para almacenar nombre
         String nombre = "Juan";
-        // 2. Declara una variable para almacenar tu edad
+        // Declaracion de variable para almacenar edad
         int edad = 20;
-
-        // 3. Imprime por consola el mensaje "Hola, mi nombre es: " y el valor de la variable "nombre".
+        // Imprimir mensaje concatenado con valores de variables
         System.out.println("Hola, mi nombre es: " + nombre);
     }
 }

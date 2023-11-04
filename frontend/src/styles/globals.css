@@ -28,7 +28,7 @@
     --foreground-color: #7209B7;
     --bg-color: #21202e;
     --bg-color-lite: #34324f;
-    --bg-color-transparent: #390ca349;
+    --bg-color-transparent: #21202ea1;
     --transparent: rgba(0, 0, 0, 0);
     --east-bay: #36517E;
     --gray: #a5a5a5;
@@ -45,7 +45,7 @@
     --accent-color: #F72585;
     --foreground-color: #7209B7;
     --bg-color: #21202e;
-    --bg-color-transparent: #390ca349;
+    --bg-color-transparent: #21202ea1;
 
 }
 

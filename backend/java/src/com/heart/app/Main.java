@@ -1,24 +1,28 @@
 package com.heart.app;
 
 
+
 public class Main {
 static Utils utils = new Utils();
     public static void main(String[] args) {
-        System.out.println(MenosUno(2));
-        int result = sumar(2, 3);
-        System.out.println(result);
+        // Creación de un objeto de la clase Gato
+        Gato miGato = new Gato();
+Utils.current.storeObject(miGato);
+
+        // Asignación de valores a las propiedades del gato
+        miGato.nombre = "Mittens";
+        miGato.edad = 5;
+
+        // Imprimir la información del gato
+        System.out.println("Nombre del gato: " + miGato.nombre);
+        System.out.println("Edad del gato: " + miGato.edad);
    Utils.current.printObjectList();
 }
-
-    //Declaracion de una funcion que resta 1 a un numero
-    public static int MenosUno(int a){
-        return a - 1;
-    }
-
-    public static int sumar(int a, int b){
-        return a + b;
-    }
 }
-            
-                    
+
+class Gato {
+    public String nombre;
+    public int edad;
+}
+
         

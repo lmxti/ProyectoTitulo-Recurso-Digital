@@ -3,7 +3,7 @@ import React from "react";
 const CheckResults = (resInfo, lesInfo) => {
     const badFunctions = []
     let index = -1;
-/*     console.log("Chekingres ", resInfo, lesInfo); */
+    console.log("Chekingres ", lesInfo, resInfo); 
     if(lesInfo.functionToCheck){
         for(let i = 0; i < lesInfo.functionToCheck.length; i++){
             if((index = resInfo.functionsResult.findIndex((func)=> func.name == lesInfo.functionToCheck[i].name)) == -1 

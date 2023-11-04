@@ -10,6 +10,8 @@ import CodingSection from "@/components/CodingSection";
 import Interpreter from "@/utils/Interpreter";
 import CheckResults from "@/utils/CheckResults";
 
+import { AiFillCaretDown } from "react-icons/ai";
+
 import {HiOutlineDocumentText} from 'react-icons/hi'
 import {FaAlignJustify} from 'react-icons/fa'
 import {MdQuestionAnswer} from 'react-icons/md'
@@ -32,12 +34,16 @@ const Lesson = ({leccionInfo, setResult}) => {
 
     // Referencia al lienzo (canvas)
     const canvasRef = useRef();
+    //
+    const theoryScrollRef = useRef();
+
     // Seteo de tamaño de lienzo (canvas)
     const [canvasSize, setCanvasSize] = useState({ width: 1680, height: 720 })
     // Seteo de frames (almacena los fotogramas de la animacion)
     const [frames, setFrames] = useState();
     // Seteo de frame actual de la animacion
     const [currentFrame, setCurrentFrame] = useState(undefined)
+    const [expandInstructions, setExpandInstructions] = useState(false)
     
 
     const extractResJson = async (nuevoResultado)=>{
@@ -127,7 +133,7 @@ const Lesson = ({leccionInfo, setResult}) => {
                 }
             } else {
                 if(leccionInfo.checkResult){ 
-                    const problems = CheckResults({objectsResult : [], functionsResult : []}, leccionInfo) 
+                    const problems = CheckResults({objectsResult : [], functionsResult : nuevoResultado.resFunctions}, leccionInfo) 
                     console.log("Problems", problems)
                     setResult({id : leccionInfo.id,  problems }) 
                 }
@@ -415,6 +421,23 @@ const Lesson = ({leccionInfo, setResult}) => {
         setCurrentFrame(frames[frames.length - 1])
     }
 
+     // Add an event listener for the scroll event
+    useEffect(() => {
+        const scrollContainer = theoryScrollRef.current;
+        if (!scrollContainer) return;
+
+        const handleScroll = () => {
+            const isBottom = scrollContainer.scrollTop + scrollContainer.clientHeight >= scrollContainer.scrollHeight;
+
+            setExpandInstructions(isBottom);
+        };
+
+        scrollContainer.addEventListener('scroll', handleScroll);
+
+        return () => {
+            scrollContainer.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
 
 
     // Actualiza el tamaño del lienzo (canvas) cada vez que cambia la leccion
@@ -439,6 +462,9 @@ const Lesson = ({leccionInfo, setResult}) => {
                 window.removeEventListener('resize', resizeCanvas);
             };
         }
+
+        setExpandInstructions(false)
+        setResultado("")
     }, [leccionInfo]);
 
 
@@ -471,37 +497,45 @@ const Lesson = ({leccionInfo, setResult}) => {
     }, [frames])
 
 
+    
+
     return (
         <>
             {(leccionInfo &&
 
-                <div className="grid grid-cols-2 grid-rows-2 gap-5 m-4 h-screen">
-                    {/* Seccion de enunciado */}
-                    <section className="bg-white overflow-y-scroll rounded-[10px]">
-                         <div className="sticky top-0 flex items-center bg-eastBay p-2 text-2xl font-thin">
-                                <HiOutlineDocumentText/>
-                                <h2 className="ml-2">Enunciado</h2>
-                        </div>
-                        {leccionInfo.enunciado}
+                <div className="grid grid-cols-2 grid-rows-6 gap-5 m-4 h-screen">
+
+                    <section className="row-span-6">
+                        {/* Seccion de enunciado */}
+                        <section className={`bg-white overflow-y-hidden rounded-[10px] mb-[1.5rem] ${expandInstructions ? "h-min" : "h-[calc(100%-48px-1.5rem)]"} `} >
+                            <div className="sticky top-0 flex items-center bg-eastBay p-2 text-2xl hover:bg-foreground cursor-pointer font-thin" onClick={()=>setExpandInstructions(false)}>
+                                    <HiOutlineDocumentText/>
+                                    <h2 className="ml-2">Enunciado</h2>
+                            </div>
+                            {!expandInstructions && <div className="overflow-y-scroll h-full" ref={theoryScrollRef}> {leccionInfo.enunciado} </div>} 
+                        </section>
+                        
+                        
+                    
+                        {/* Seccion de instrucciones */}
+                        <section className={`bg-white overflow-y-hidden rounded-[10px] ${!expandInstructions ? "h-min" : "h-[calc(100%-48px-1.5rem)]"}`} >
+                            <div className="sticky top-0 flex items-center bg-eastBay p-2 hover:bg-foreground cursor-pointer text-2xl font-thin" onClick={()=>setExpandInstructions(true)}>
+                                <FaAlignJustify/>
+                                <h2 className="ml-2">Instrucciones</h2>
+                            </div>
+                            {expandInstructions && <div className="overflow-y-scroll h-full"> {leccionInfo.instrucciones} </div> }
+                            
+                        </section>
                     </section>
 
                     {/* Seccion de editor de codigo */}
-                    <section>
+                    <section className="row-span-3">
                         <CodingSection onResult={handleResultado} leccionInfo={leccionInfo} />
                     </section>
                     
-                    {/* Seccion de instrucciones */}
-                    <section className="bg-white overflow-y-scroll rounded-[10px]">
-                        <div className="sticky top-0 flex items-center bg-eastBay p-2 text-2xl font-thin">
-                            <FaAlignJustify/>
-                            <h2 className="ml-2">Instrucciones</h2>
-                        </div>
-                        {leccionInfo.instrucciones}
-                    </section>
-
-                        { leccionInfo.isConsole &&  
-                            <section className="overflow-y-auto bg-foreground rounded-[10px]">
-                                <div className="sticky top-0 flex items-center bg-eastBay p-2 text-2xl font-thin">
+                    { leccionInfo.isConsole &&  
+                            <section className="overflow-y-auto bg-foreground rounded-[10px] row-span-3">
+                                <div className="sticky top-0 flex items-center bg-foreground p-2 text-2xl font-thin">
                                     <MdQuestionAnswer/>
                                     <h2 className="ml-2">Consola</h2>
                                 </div>
@@ -523,6 +557,7 @@ const Lesson = ({leccionInfo, setResult}) => {
                             </section>
 
                         }
+
                 </div>)
 
                 ||

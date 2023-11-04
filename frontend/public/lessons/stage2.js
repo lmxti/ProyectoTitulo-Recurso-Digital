@@ -177,22 +177,20 @@ public class Main {
                     
                     <p className="font-extrabold" >Objetivo de la Lección: <br/></p>
                         Aprender a crear una función en Java que realice la suma de dos números enteros y devuelva el resultado. <br/> 
-                        <br/>
 
                     <ul className="list-disc p-4">
                         
-                        <li>
-                        1. &emsp; Definir la Función de Suma<br/>
-                        Dentro de la Main, define una función llamada "sumar" que tome dos parámetros de tipo entero(int), de tal manera que quede "sumar(a, b)". 
-                        <br/>
-                        2. &emsp; Implementar la Función de Suma<br/>
-                        Dentro del cuerpo de la función sumar, calcula la suma de los dos números que recibes como parámetros. La función debe devolver la suma de estos dos números, para ello ocupa la palabra clave "return".
-                        <br/>
-                        3. &emsp; Llamada a la Función<br/>
-                        Dentro del método main, llama a la función sumar con dos números enteros como argumentos. Almacena el resultado en una variable.
-                        <br/>
-                        4. &emsp; Imprimir el Resultado<br/>
-                        Usa la función System.out.println() para imprimir el resultado de la suma en la consola.
+                        <li>  Definir la Función de Suma<br/> 
+                        &emsp; Dentro de la Main, define una función llamada "sumar" que tome dos parámetros de tipo entero(int), de tal manera que quede "sumar(a, b)". 
+                        </li><br/>
+                        <li>  Implementar la Función de Suma<br/> 
+                        &emsp; Dentro del cuerpo de la función sumar, calcula la suma de los dos números que recibes como parámetros. La función debe devolver la suma de estos dos números, para ello ocupa la palabra clave "return".
+                        </li><br/>
+                        <li> Llamada a la Función<br/> 
+                        &emsp;  Dentro del método main, llama a la función sumar con dos números enteros como argumentos. Almacena el resultado en una variable.
+                        </li> <br/>
+                        <li>  Imprimir el Resultado<br/> 
+                        &emsp; Usa la función System.out.println() para imprimir el resultado de la suma en la consola.
                         </li>
                     </ul>
                 </div>

@@ -1,7 +1,7 @@
 import React from "react";
 
 const primitivos = ['Cuadrado', 'Circulo', 'Texto']
-const objImgs = [{ type: 'Persona', img: '/objectsImgs/Persona.png' }]
+const objImgs = [{ type: 'Persona', img: '/objectsImgs/Persona.png' }, { type: 'Gato', img: '/objectsImgs/Gato.png' }]
 
 const Interpreter = async (objectsList, maxFrames) => {
     const frames = []
