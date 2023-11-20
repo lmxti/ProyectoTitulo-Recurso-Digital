@@ -34,6 +34,7 @@ app.post('/execute', (req, res) => {
     // Almacenamiento del codigo de usuario en una variable 'userCode'
     let userCode = req.body.code;
 
+    // Se debe verificar funciones?
     const functionsToCheck = req.body.functionCheckInfo;
 
     console.log("BODY", req.body)
@@ -66,16 +67,21 @@ app.post('/execute', (req, res) => {
                     });
                 })
             } else {
+                // Formateo del codigo de usuario
                 userCode = formatCode(userCode);
+                // Escritura del codigo de usuario en el archivo 'Main.java' dentro de la carpeta 'java'
                 fs.writeFileSync('./java/src/com/heart/app/Main.java', userCode);
 
+                // Ejecucion del codigo de usuario
                 exec(`javac -cp ./lib/* -d . src/com/heart/app/*.java && jar cfm executer.jar MANIFEST.MF com/heart/app/*.class && java -jar executer.jar`, options, (error, stdout, stderr) => {
                     if (error) {
                         console.log("message------------", error.message);
 
                         res.status(500).json({ error: error.message, output: stderr });
                     } else {
-                        console.log(stdout)
+                        console.log("hola mundo");
+                        console.log(stdout);
+                        console.log("hola mundo2");
                         res.status(200).json({ output: stdout });
                     }
                 });
@@ -116,10 +122,11 @@ const checkValidity = (dummyCode, res, callback) => {
 const checkFunctions = (code, functionsToCheck, callback) => {
 
     let dummyCode = code
-    const regexe = /[;={]\s*([a-zA-Z][a-zA-Z0-9_]*\.)*[a-zA-Z][a-zA-Z0-9_]*\s*\(\s*((?:(?:[^)(]+|))*?)\s*\)(?=\s*;)/g
-    const functionCalls = []
+    const regexe = /[;={]\s*([a-zA-Z][a-zA-Z0-9_]*\.)*[a-zA-Z][a-zA-Z0-9_]*\(\s*([^)]*)\s*\)(?=\s*;)/g
 
-    while ((match = regexe.exec(dummyCode)) !== null) {
+    
+
+    while ((match = regexe.exec(code)) !== null) {
         const functionName = match[0].substring(0, match[0].indexOf("(")).substring(1).trim(); // Use match[0] to get the entire matched function call
         const argumentsList = match[2].split(/\s*,\s*/);
 
@@ -128,7 +135,7 @@ const checkFunctions = (code, functionsToCheck, callback) => {
 
         const funcInfo = functionsToCheck.find((func) => func.name == functionName && argumentsList.length == func.params.length)
         if (funcInfo) {
-
+            console.log(funcInfo.params)
             let funcContent = match[0]
             funcContent = funcContent + `\n;System.out.println("*g*${functionName}:" + ${functionName}(${funcInfo.params.join(',')}));\n`;
 
@@ -138,6 +145,7 @@ const checkFunctions = (code, functionsToCheck, callback) => {
         }
     }
 
+    console.log("On the code", dummyCode)
 
     fs.writeFileSync('./java/src/com/heart/app/Main.java', dummyCode);
 

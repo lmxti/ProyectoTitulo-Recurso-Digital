@@ -3,6 +3,7 @@ package com.heart.app;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.fasterxml.jackson.databind.SerializationFeature;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +43,7 @@ public class Utils {
         int id = object.hashCode();
 
         WeakReference<Object> weakReference = new WeakReference<>(object);
-
+        
         ObjectWrapper toSave = new ObjectWrapper(id, nameType, weakReference, frames, getChilds(object));
         objectList.add(toSave);
     }
@@ -96,6 +97,7 @@ public class Utils {
 
         try {
             ObjectMapper objectMapper = new ObjectMapper();
+            objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
             return objectMapper.writeValueAsString(object);
         } catch (Exception e) {
             e.printStackTrace();
@@ -119,6 +121,8 @@ public class Utils {
     public static Object CloneObject(Object obj) {
         try {
             ObjectMapper mapper = new ObjectMapper();
+            
+            mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
             return mapper.treeToValue(mapper.valueToTree(obj), Object.class);
         } catch (Exception e) {
             e.printStackTrace();
@@ -131,7 +135,8 @@ public class Utils {
 
             // Create ObjectMapper
             ObjectMapper objectMapper = new ObjectMapper();
-
+            objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+            
             // Parse JSON strings into JSON objects
             JsonNode json1 = objectMapper.valueToTree(obj);
 
@@ -178,7 +183,8 @@ public class Utils {
             boolean isChanged = false;
 
             // Create ObjectMapper
-            ObjectMapper objectMapper = new ObjectMapper();
+            ObjectMapper objectMapper = new ObjectMapper(); 
+            objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
 
             // Create a new JSON object to store the changed properties
             JsonNode prevProperties;
@@ -224,7 +230,9 @@ public class Utils {
             boolean isChanged = false;
 
             // Create ObjectMapper
-            ObjectMapper objectMapper = new ObjectMapper();
+            ObjectMapper objectMapper = new ObjectMapper(); 
+            objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+
             JsonNode prevProperties = objectMapper.valueToTree(stateA); // new changes
 
             ObjectNode changedProperties = null; // prevValue

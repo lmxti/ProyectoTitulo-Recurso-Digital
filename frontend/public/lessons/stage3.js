@@ -5,36 +5,59 @@ const lessonsStage3 = [
         id: 0,
         enunciado: (
             <div className="text-black">
-                <div>
-                    <p>Contenido/introduccion arrays (Imagen visual/comparativa entre codigo y comparacion array)</p>
+                <div className="flex justify-center p-0">
+                    <img
+                        src="/images/lessons/stage3/Leccion1-img.jpg"
+                        alt="Leccion1-img"
+                    />
                 </div>
           </div>)
         ,
         instrucciones: (
             <div className="text-black p-4">
-                <p>Instrucciones para crear un array</p>
+                <p>
+                    Los arrays tambien se pueden declarar inicializados con valores, para ello debes declarar el array y utilizando el operador '=' asignarle los valores que deseas que contenga entre llaves '{}' y separados por comas ','.
+                </p>
                 <ul className="list-disc p-4">
                     <li>
-                        Crea un array de tipo String llmado 'Nombres' con 5 valores: "Juan", "Pedro", "Maria", "Jose" y "Luis".
+                        Como podrás observar, tienes un array "edades" de tipo 'int' ya inicializado que contiene en orden las edades de 5 personas
                     </li>
                     <li>
-                        Utiliza un bucle 'for' para recorrer todos los valores del array e imprimirlos por consola.
+                        Las edades en orden corresponden a "Juan", "Pedro", "Maria", "Jose" y "Luis", crea un array de tipo 'String' llamado 'nombres' con estos valores.
+                    </li>
+
+                    <li>
+                        Crea una funcion llamada 'infoPersonas' que reciba como parametros ambos arrays y retorne un String con la informacion de las personas concatenadas en este formato: "Edad.Nombre-"
                     </li>
                 </ul>
             </div>
         ),
-        checkResult : false,
+        functionToCheck: [{ name: "infoPersonas", params: ["new int[]{16, 45, 30, 20, 30}", "new String[]{ \"Juan\", \"Pedro\", \"Maria\", \"Jose\", \"Luis\" }"], result: "16.Juan-45.Pedro-30.Maria-20.Jose-30.Luis-" }], 
+        checkResult : true,
         
         code: `
 
 public class Main {
     public static void main(String[] args) {
-        // Crea un array de tipo String llmado 'Nombres' con 5 valores: "Juan", "Pedro", "Maria", "Jose" y "Luis".
+        //Array de enteros que contiene las edades en orden
+        int[] edades = { 16, 45, 30, 20, 30 };
+        // Array de Strings que contiene los nombres en orden
         String[] nombres = {"Juan", "Pedro", "Maria", "Jose", "Luis"};
-        // Utiliza un bucle 'for' para recorrer todos los valores del array e imprimirlos por consola.
-        for(int i = 0; i < nombres.length; i++){
-            System.out.println(nombres[i]);
+
+        // Declara un String llamado 'informacion' que almacenara la informacion de las personas
+        String informacion = infoPersonas(edades, nombres);
+        // Imprime el String 'informacion' por consola
+        System.out.print(informacion);
+    }
+
+    /* Funcion "InfoPersonas" que recibe dos arrays y
+         retorna un String con la informacion de las personas */
+    static String infoPersonas(int[] edades, String[] nombres){
+        String informacion = "";
+        for(int i = 0; i < edades.length; i++){
+            informacion += edades[i] + "." + nombres[i] + "-";  
         }
+        return informacion;
     }
 }
 
@@ -46,67 +69,10 @@ public class Main {
         id: 1,
         enunciado: (
             <div className="text-black">
-                <div>
-                    <p>Contenido/introduccion arrays Idea: mostrar las cajas con datos [][][][][]
-                    </p>
-                </div>
-          </div>)
-        ,
-        instrucciones: (
-            <div className="text-black p-4">
-                <p>
-                    Ahora vas a comprender que es un array y realizaras operaciones con los elementos que contiene, en este caso
-                    sumaras los elementos que contiene un array de tipo entero (int) con 5 valores: 5, 8, 3, 10 y 2.
-                </p>
-                <ul className="list-disc p-4">
-                    <li>
-                        Crea un array de tipo entero llamado 'array' con 5 valores: 5, 8, 3, 10 y 2.
-                    </li>
-                    <li>
-                        Declara e inicializa un entero llamado 'suma' con valor 0 que almacenara el resultado de suma de los elementos del array.
-                    </li>
-                    <li>
-                        Utiliza un bucle 'for' para recorrer todos los valores del array e ir sumandolos a la variable 'suma'.
-                    </li>
-                    <li>
-                        Imprime el resultado de la suma por consola.
-                    </li>
-                </ul>
-            </div>
-
-        ),
-        checkResult : false,
-        
-        code: `
-
-public class Main {
-    public static void main(String[] args) {
-        // Declara e inicializa un array con 5 valores enteros
-        int[] array = {5, 8, 3, 10, 2};
-        // Declara e inicializa un entero llamado 'suma' con valor 0 que almacenara el resultado de suma de los elementos del array
-        int suma = 0;
-        // Utiliza un bucle 'for' para recorrer todos los valores del array e ir sumandolos a la variable 'suma'
-        for(int i = 0; i < array.length; i++){
-            suma += array[i];
-        }
-        // Imprime el resultado de la suma por consola
-        System.out.println("La suma de los elementos del array es: " + suma);
-    }
-}
-        
-
-
-        `,
-        isConsole : true
-    },
-    //  <------------------------------------------------------ EJERCICIO 3 ---------------------------------------------------------->
-    {
-        id: 2,
-        enunciado: (
-            <div className="text-black">
-                <div>
-                    <p>Contenido para utilizar una funcion y un array</p>
-                </div>
+                    <img
+                        src="/images/lessons/stage3/Leccion2-img.jpg"
+                        alt="Leccion2-img"
+                    />
           </div>)
         ,
         instrucciones: (
@@ -135,14 +101,6 @@ public class Main {
         code: `
 
 public class Main {
-    // Declara una funcion que sume los elementos de un array y retorne el resultado
-    public static int sumaArray(int[] array){
-        int suma = 0;
-        for(int i = 0; i < array.length; i++){
-            suma += array[i];
-        }
-        return suma;
-    }
 
     // Funcion principal
     public static void main(String[] args) {
@@ -155,6 +113,15 @@ public class Main {
         // Imprime el resultado de la suma por consola
         System.out.println("La suma de los elementos del array es: " + resultado);
     }
+
+    // Declara una funcion que sume los elementos de un array y retorne el resultado
+    public static int sumaArray(int[] array){
+        int suma = 0;
+        for(int i = 0; i < array.length; i++){
+            suma += array[i];
+        }
+        return suma;
+    }
 }
 
         `,
@@ -165,9 +132,10 @@ public class Main {
         id: 3,
         enunciado: (
             <div className="text-black">
-                <div>
-                    <p>Contenido/introduccion matriz, agregar informacion sobre FOR ANIDADO</p>
-                </div>
+                    <img
+                        src="/images/lessons/stage3/Leccion3-img.jpg"
+                        alt="Leccion3-img"
+                    />
           </div>)
         ,
         instrucciones: (

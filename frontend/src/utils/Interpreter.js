@@ -1,23 +1,22 @@
 import React from "react";
 
 const primitivos = ['Cuadrado', 'Circulo', 'Texto']
-const objImgs = [{ type: 'Persona', img: '/objectsImgs/Persona.png' }, { type: 'Gato', img: '/objectsImgs/Gato.png' }]
+const objImgs = [{ type: 'Persona', img: '/objects/Persona.png' }, { type: 'Gato', img: '/objects/gato.png' }, { type: 'Auto', img: '/objects/autoRojo.png' }]
 
 const Interpreter = async (objectsList, maxFrames) => {
     const frames = []
 
     for (let i = 0; i < maxFrames; i++) {
         const asyncList = objectsList.filter((el) => el.startFrame <= i).map(async (obj) => {
-
             if(obj.startFrame == i){
                 let state = obj.changes.length == 0 ? obj.value : obj.changes[0];
-
                 if (i == 0 && !primitivos.includes(obj.type)) {
-                    const index = objImgs.indexOf((objImg) => objImg.type == obj.type);
+                    const index = objImgs.findIndex((objImg) => objImg.type == obj.type);
                     if (index > -1) {
                         var img = new Image();
-                        img.src = imgObj[index];
+                        img.src = objImgs[index].img;
                         state = { ...state, img }
+
 
                     } else { //LLAMAR API DE ICONOS? PROBLEMA EN INGLES?}
 
@@ -64,10 +63,19 @@ const Interpreter = async (objectsList, maxFrames) => {
 
         frames.push(auxObjectStates)
     }
-
     frames.push(objectsList.map((obj)=>{ //BECAUSE IT MAY BE THAT THERE IS NOT A WAITIGN AT THE END
         if(obj.value != null){
-            return { id: obj.id, state : {...obj.value, parent : obj.lastValue.parent}, type: obj.type } 
+            const index = objImgs.findIndex((objImg) => objImg.type == obj.type);
+            if (index > -1) {
+                const img = new Image();
+                img.src = objImgs[index].img;
+                return { id: obj.id, state : {...obj.value, parent : obj.lastValue.parent, img}, type: obj.type } 
+
+            }else{
+                return { id: obj.id, state : {...obj.value, parent : obj.lastValue.parent}, type: obj.type } 
+
+            }
+
         }else{
             return { id: obj.id, deleted: true } 
         }

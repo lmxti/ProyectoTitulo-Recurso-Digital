@@ -43,7 +43,6 @@ const Lesson = ({leccionInfo, setResult}) => {
     const [frames, setFrames] = useState();
     // Seteo de frame actual de la animacion
     const [currentFrame, setCurrentFrame] = useState(undefined)
-    const [expandInstructions, setExpandInstructions] = useState(false)
     
 
     const extractResJson = async (nuevoResultado)=>{
@@ -120,7 +119,7 @@ const Lesson = ({leccionInfo, setResult}) => {
                     if(!leccionInfo.isConsole){
                         
                         // NOTA: COMENTAR FUNCIONAMIENTO DE INTERPRETER
-                        await Interpreter(data, maxFrames).then((frames) => setFrames(frames))
+                        await Interpreter(data, maxFrames).then((frames) => {console.log("setting frames"); setFrames(frames)})
                         // Finaliza ya que la funcion 'Interpreter' tuvo exito.
                         
                     }
@@ -199,7 +198,12 @@ const Lesson = ({leccionInfo, setResult}) => {
                 if (auxElement.state.parent != -1) {
                     // Busqueda del objeto padre en el arreglo de objetos que tenga el mismo id que el padre del objeto actual
                     // Esto establece la posicion en el eje "x" del objeto en funcion a su padre
-                    auxElement.state.x = objects.find((ob) => ob.id == auxElement.state.parent).state.x
+
+                    if(objects.find((ob) => ob.id == auxElement.state.parent).state.x){
+                        auxElement.state.x = objects.find((ob) => ob.id == auxElement.state.parent).state.x 
+                    }else{
+                        auxElement.state.x = canvasSize.width * 0.5 
+                    }
                 } else {
                     // Si el objeto no tiene padre, se establece su posicion en el eje x en la mitad del lienzo (canvas)
                     auxElement.state.x = canvasSize.width * 0.5;
@@ -212,7 +216,13 @@ const Lesson = ({leccionInfo, setResult}) => {
                 if (auxElement.state.parent != -1) {
                     // Busqueda del objeto padre en el arreglo de objetos que tenga el mismo id que el padre del objeto actual
                     // Esto establece la posicion en el eje "y" del objeto en funcion a su padre
-                    auxElement.state.y = objects.find((ob) => ob.id == auxElement.state.parent).state.y
+                    const parent = objects.find((ob) => ob.id == auxElement.state.parent).state
+                    if(parent.y){
+                        auxElement.state.y = objects.find((ob) => ob.id == auxElement.state.parent).state.y +  + (auxElement.type == "Texto" ? (parent.alto ? parent.alto : (parent.img ? canvasSize.height / 5 : -100)) : 0) 
+                    }else{
+                        auxElement.state.y = canvasSize.height * 0.5  + (auxElement.type == "Texto" ? (parent.alto ? parent.alto : (parent.img ? canvasSize.height / 5 : -100)) : 0) 
+                    }
+
                 } else {
                     // Si el objeto no tiene padre, se establece su posicion en el eje y en la mitad del lienzo (canvas)
                     auxElement.state.y = canvasSize.height * 0.5;
@@ -281,6 +291,37 @@ const Lesson = ({leccionInfo, setResult}) => {
 
                 // Se restaura el estado del contexto de dibujo, para evitar transformaciones y configuraciones afecten a otros objetos dibujados posteriormente
                 context.restore()
+
+            }else if(auxElement.state.img ){
+                
+                if(auxElement.state.img.complete){
+                    context.save()
+                    const originalWidth = canvasSize.width / 3;
+                    const originalHeight = canvasSize.height / 3;
+
+                    // Se establece el "punto de origen" del contexto a la posicion `auxElement.state.x` y `auxElement.state.y`
+                    context.translate(auxElement.state.x, auxElement.state.y)
+                    // Draw the image on the canvas
+                    context.drawImage(auxElement.state.img, -originalWidth * 0.5, -originalHeight * 0.5, originalWidth, originalHeight);
+                    // Se restaura el estado del contexto de dibujo, para evitar transformaciones y configuraciones afecten a otros objetos dibujados posteriormente
+                    context.restore()
+                }else{
+                    auxElement.state.img.onload = ()=>{
+                        // Guarda el estado actual del contexto, permite realizar transformaciones/configuraciones sin afectar otros objetos dibujados
+                        context.save()
+                        const originalWidth = canvasSize.width / 3;
+                        const originalHeight = canvasSize.height / 3;
+    
+                        // Se establece el "punto de origen" del contexto a la posicion `auxElement.state.x` y `auxElement.state.y`
+                        context.translate(auxElement.state.x, auxElement.state.y)
+                        // Draw the image on the canvas
+                        context.drawImage(auxElement.state.img, -originalWidth * 0.5, -originalHeight * 0.5, originalWidth, originalHeight);
+                        // Se restaura el estado del contexto de dibujo, para evitar transformaciones y configuraciones afecten a otros objetos dibujados posteriormente
+                        context.restore()
+                    }
+
+                }
+                
             }
         })
     }
@@ -362,6 +403,7 @@ const Lesson = ({leccionInfo, setResult}) => {
         await sleep(500)
 
         for (let i = 1; i < frames.length; i++) {
+            console.log(onScreen)
             // Copia del frame actual
             const prevFrame = [...onScreen];
             // Inicializacion de arreglo para rastrear cambios
@@ -406,7 +448,7 @@ const Lesson = ({leccionInfo, setResult}) => {
                 // Se agregan los objetos que no estan en 'onScreen' al final del arreglo
                 onScreen.push(...frames[i].filter((f) => !onScreen.some((obj) => obj.id == f.id)))
             }
-
+            console.log("frame: ", i);
             // Animacion de transicion entre frames
             for (let f = 0; f < 25; f++) {
                 // Actualiza el lienzo (canvas) con los objetos que representan una transicion
@@ -421,15 +463,23 @@ const Lesson = ({leccionInfo, setResult}) => {
         setCurrentFrame(frames[frames.length - 1])
     }
 
+    const [flipInstructions, setFlipInstructions] = useState(true)
      // Add an event listener for the scroll event
     useEffect(() => {
         const scrollContainer = theoryScrollRef.current;
         if (!scrollContainer) return;
 
         const handleScroll = () => {
-            const isBottom = scrollContainer.scrollTop + scrollContainer.clientHeight >= scrollContainer.scrollHeight;
+            if(flipInstructions){
+                const isBottom = scrollContainer.scrollTop + scrollContainer.clientHeight >= scrollContainer.scrollHeight;
+                if(isBottom){
+                    setExpand(isBottom);
+                    setFlipInstructions(false)
+                    console.log("BROOO");
+    
 
-            setExpandInstructions(isBottom);
+                }
+            }
         };
 
         scrollContainer.addEventListener('scroll', handleScroll);
@@ -437,7 +487,7 @@ const Lesson = ({leccionInfo, setResult}) => {
         return () => {
             scrollContainer.removeEventListener('scroll', handleScroll);
         };
-    }, []);
+    }, [flipInstructions]);
 
 
     // Actualiza el tamaño del lienzo (canvas) cada vez que cambia la leccion
@@ -463,7 +513,12 @@ const Lesson = ({leccionInfo, setResult}) => {
             };
         }
 
-        setExpandInstructions(false)
+        theoryScrollRef.current.scrollTo({
+            top: 0,
+            behavior: 'smooth', // Use smooth scrolling if supported
+          });
+        setFlipInstructions(true)
+        setExpand(false)
         setResultado("")
     }, [leccionInfo]);
 
@@ -496,6 +551,11 @@ const Lesson = ({leccionInfo, setResult}) => {
         }
     }, [frames])
 
+    const [expand, setExpand] = useState(false);
+
+    const handleClick = () => {
+        setExpand(!expand);
+    };
 
     
 
@@ -506,26 +566,56 @@ const Lesson = ({leccionInfo, setResult}) => {
                 <div className="grid grid-cols-2 grid-rows-6 gap-5 m-4 h-screen">
 
                     <section className="row-span-6">
-                        {/* Seccion de enunciado */}
-                        <section className={`bg-white overflow-y-hidden rounded-[10px] mb-[1.5rem] ${expandInstructions ? "h-min" : "h-[calc(100%-48px-1.5rem)]"} `} >
-                            <div className="sticky top-0 flex items-center bg-eastBay p-2 text-2xl hover:bg-foreground cursor-pointer font-thin" onClick={()=>setExpandInstructions(false)}>
-                                    <HiOutlineDocumentText/>
-                                    <h2 className="ml-2">Enunciado</h2>
-                            </div>
-                            {!expandInstructions && <div className="overflow-y-scroll h-full" ref={theoryScrollRef}> {leccionInfo.enunciado} </div>} 
-                        </section>
-                        
-                        
-                    
-                        {/* Seccion de instrucciones */}
-                        <section className={`bg-white overflow-y-hidden rounded-[10px] ${!expandInstructions ? "h-min" : "h-[calc(100%-48px-1.5rem)]"}`} >
-                            <div className="sticky top-0 flex items-center bg-eastBay p-2 hover:bg-foreground cursor-pointer text-2xl font-thin" onClick={()=>setExpandInstructions(true)}>
-                                <FaAlignJustify/>
-                                <h2 className="ml-2">Instrucciones</h2>
-                            </div>
-                            {expandInstructions && <div className="overflow-y-scroll h-full"> {leccionInfo.instrucciones} </div> }
+                        <div className="relative overflow-hidden h-min max-h-[calc(100%-48px-1.5rem)] mb-[1.5rem]">
                             
-                        </section>
+                            <input
+                                type="checkbox"
+                                className="peer absolute top-0 inset-x-0 w-full h-12 opacity-0 z-10 cursor-pointer"
+                                onClick={handleClick}
+                                />
+
+                            <div className="bg-[#1A4781] h-12 pl-5 flex items-center cursor-pointer">
+                                <HiOutlineDocumentText/>
+                                <h1 className="ml-2 text-lg font-semibold text-white">Contenido</h1>
+                            </div>
+                            <div className={`absolute top-3 right-3 text-white transition-transform duration-500 ${expand ? "rotate-0" : "rotate-180"}`}>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                </svg>
+                            </div>
+
+
+                            <div ref={theoryScrollRef} className={` text-stone transition-all overflow-y-scroll duration-1000  ${expand ? "h-0" : "h-[86vh] "}`}>
+                                {leccionInfo.enunciado}
+                            </div>
+                            
+                        </div>
+
+                        <div className="relative overflow-hidden h-min max-h-[calc(100%-48px-1.5rem)]">
+                            <input
+                                type="checkbox"
+                                className="peer absolute top-0 inset-x-0 w-full h-12 opacity-0 z-10 cursor-pointer"
+                                onClick={handleClick}
+                                />
+
+                            <div className="bg-[#1A4781] h-12 pl-5 flex items-center cursor-pointer">
+                                <FaAlignJustify/>
+                                <h1 className="ml-2 text-lg font-semibold text-white">Instrucciones</h1>
+                            </div>
+                            <div className={`absolute top-3 right-3 text-white transition-transform duration-500 ${expand ? "rotate-180" : "rotate-0"}`}>
+                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" className="w-6 h-6">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 8.25l-7.5 7.5-7.5-7.5" />
+                                </svg>
+                            </div>
+
+
+                            <div className={`bg-white text-stone-900 transition-all duration-1000 overflow-y-scroll ${expand ? "h-screen" : "h-0"}`}>
+                                {leccionInfo.instrucciones}
+                            </div>
+                        </div>
+
+
+                    
                     </section>
 
                     {/* Seccion de editor de codigo */}
@@ -534,13 +624,13 @@ const Lesson = ({leccionInfo, setResult}) => {
                     </section>
                     
                     { leccionInfo.isConsole &&  
-                            <section className="overflow-y-auto bg-foreground rounded-[10px] row-span-3">
-                                <div className="sticky top-0 flex items-center bg-foreground p-2 text-2xl font-thin">
+                            <section className="overflow-y-auto bg-[#5F5986] rounded-[10px] row-span-3">
+                                <div className="sticky top-0 flex items-center bg-[#5F5986] h-12 pl-5 text-2xl font-thin">
                                     <MdQuestionAnswer/>
-                                    <h2 className="ml-2">Consola</h2>
+                                    <h1 className="ml-2 text-lg font-semibold text-white">Consola</h1>
                                 </div>
 
-                                <div className="p-2 bg-foreground ">
+                                <div className="p-2 bg-[#5F5986] ">
                                     <div className="bg-background h-[39vh] overflow-y-scroll  rounded-[10px] text-white p-5">
                                             {resultado.split(/\r?\n/).map((res, index) => {
                                                 return (<div key={index}><code >{res}</code><br /></div>)
@@ -552,8 +642,12 @@ const Lesson = ({leccionInfo, setResult}) => {
 
                         ||
 
-                            <section className="p-2 bg-foreground rounded-[10px]">
-                                <canvas ref={canvasRef} width={canvasSize.width} height={canvasSize.height} className="bg-white border-[3px] w-full border-background h-[46vh] rounded-[10px]" />
+                            <section className="h-12 rounded-[10px]">
+                                <div className="sticky top-0 flex items-center bg-[#5F5986] rounded-t-[10px]  h-12 pl-5 text-2xl font-thin">
+                                    <MdQuestionAnswer/>
+                                    <h1 className="ml-2 text-lg font-semibold text-white">Visualizador</h1>
+                                </div>
+                                <canvas ref={canvasRef} width={canvasSize.width} height={canvasSize.height} style={{height : "calc(46vh - 30px)"}} className="bg-white border-[3px] w-full border-background  rounded-b-[10px]" />
                             </section>
 
                         }

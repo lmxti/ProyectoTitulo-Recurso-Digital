@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 const Modal = ({ isOpen, onClose, Display, tittle }) => {
     console.log("MODALLLL")
     return (
-        <div className={`fixed inset-0 ${isOpen ? '' : 'hidden'} bg-backgroundAlpha`}>
+        <div className={`fixed text-black inset-0 ${isOpen ? '' : 'hidden'} bg-backgroundAlpha`}>
             <div className="flex items-center justify-center min-h-screen">
                 <div className="bg-white rounded-[10px] shadow-md w-96 ">
 

@@ -5,10 +5,10 @@ const lessonsStage2 =[
         id: 0,
        enunciado: (
            <div className=" text-black">
-
-               <div className="flex justify-center p-0">
-                    <p>Agregar contenido sobre la estructura de control 'if-else'</p>
-               </div>
+                <img
+                    src="/images/lessons/stage2/Leccion1-img.jpg"
+                    alt="Leccion1-img"
+                />
          </div >)
        ,
        instrucciones: (
@@ -41,9 +41,9 @@ const lessonsStage2 =[
 
 public class Main {
    public static void main(String[] args) {
-    // Declara una variable
+        // Declara una variable
          int numero = 2;
-    // Utiliza una estructura de control "if-else"
+        // Utiliza una estructura de control "if-else"
          if(numero % 2 == 0){
               System.out.println("El numero es par");
          }else{
@@ -60,9 +60,10 @@ public class Main {
     id: 1,
     enunciado: (
         <div className=" text-black">
-            <div className="flex justify-center p-0">
-            <p>Estructura de control for </p>
-            </div>
+                <img
+                    src="/images/lessons/stage2/Leccion2-img.jpg"
+                    alt="Leccion2-img"
+                />
         </div >),
         
     instrucciones: (
@@ -78,12 +79,12 @@ public class Main {
     code: `
 
 public class Main {
-public static void main(String[] args) {
-    // Declara estructura de control 'for'
-    for(int i = 0; i < 5; i++){
-        System.out.println(i);
+    public static void main(String[] args) {
+        // Declara estructura de control 'for'
+        for(int i = 0; i < 5; i++){
+            System.out.println(i);
+        }
     }
-}
 }
 
 `,
@@ -94,9 +95,10 @@ public static void main(String[] args) {
         id: 2,
         enunciado: (
             <div className=" text-black">
-                <div className="flex justify-center p-0">
-                    <p>Estructura de control while </p>
-                </div>
+                <img
+                    src="/images/lessons/stage2/Leccion3-img.jpg"
+                    alt="Leccion3-img"
+                />
             </div >),
             
         instrucciones: (
@@ -112,14 +114,14 @@ public static void main(String[] args) {
         code: `
     
 public class Main {
-public static void main(String[] args) {
-    // Declara una estructura while
-    int i = 0;
-    while(i < 6){
-        System.out.println(i);
-        i++;
+    public static void main(String[] args) {
+        // Declara una estructura while
+        int i = 0;
+        while(i < 6){
+            System.out.println(i);
+            i++;
+        }
     }
-}
 }
     
     `,
@@ -130,9 +132,10 @@ public static void main(String[] args) {
         id: 3,
         enunciado: (
             <div className=" text-black">
-                <div className="flex justify-center p-0">
-                    <p>Estructura de control do-while </p>
-                </div>
+                <img
+                    src="/images/lessons/stage2/Leccion4-img.jpg"
+                    alt="Leccion4-img"
+                />
             </div >),
             
         instrucciones: (
@@ -166,10 +169,10 @@ public class Main {
             id: 4,
             enunciado: (
                 <div className=" text-black">
-        
-                    <div className="flex justify-center p-0">
-                        <p>Contenido </p>
-                    </div>
+                    <img
+                        src="/images/lessons/stage2/Leccion5-img.jpg"
+                        alt="Leccion5-img"
+                    />
                 </div >),
                 
             instrucciones: (
@@ -209,11 +212,11 @@ public class Main {
     }
 
     //Declaracion de una funcion que resta 1 a un numero
-    public static int MenosUno(int a){
+    static int MenosUno(int a){
         return a - 1;
     }
 
-    public static int sumar(int a, int b){
+    static int sumar(int a, int b){
         return a + b;
     }
 }

@@ -1,7 +1,6 @@
 import React from 'react';
 import App from 'next/app';
 import Head from 'next/head';
-import NavBar from '@/components/NavBar';
 // import Layout from "./layout"
 import { ThemeProvider } from 'next-themes'
 
@@ -16,8 +15,7 @@ class MyApp extends App {
                 <Head>
                     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
                     <title>E-Learning</title>
-                </Head>
-                <NavBar/>
+                </Head>                
                 {/* <Layout> */}
                     <Component {...pageProps} />
                 {/* </Layout> */}

@@ -9,7 +9,7 @@ import Lesson from "@/components/Lesson"
 
 // <----------------------------------ICONOS--------------------------------------------->
 import { FaArrowLeft, FaArrowRight } from 'react-icons/fa';
-import {BiDownload, BiHelpCircle} from 'react-icons/bi'
+import {BiDownload, BiHelpCircle, BiSolidHomeAlt2} from 'react-icons/bi'
 import Modal from "@/components/Modal";
 /**
  * @name StagePage
@@ -159,44 +159,66 @@ const StagePage = () => {
 
     return (
         <>
-            <div className="bg-white h-12 flex items-center justify-evenly text-black">
+            <div className="flex items-center justify-evenly text-black bg-[#3A3F43] ">
                 {/* Titulo de la leccion */}
-                <div className="font-bold text-xl"> Etapa {StageID}</div>
+                <nav className="text-white text-sm sm:text-base p-2 rounded-md ">
+                    <ol className="list-none p-0 inline-flex space-x-2">
+                        <li className="flex items-center">
+                            <a href="/" className="cursor-pointer text-white transition-colors duration-300 flex items-center">
+                                <svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 576 512" className="cursor-pointer fill-white  hover:fill-orange-500 transition-colors duration-300" fill="#4b5563">
+                                    <path d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"/>
+                                </svg>
+                            </a>
+                            <span className="mx-2">/</span>
+                        </li>
+                        <li className="flex items-center">
+                            <a href="#" className="text-gray-600 hover:text-orange-500 transition-colors duration-300">Etapa {StageID}</a>
+                            <span className="mx-2">/</span>
+                        </li>
+                        <li className="flex items-center">
+                            <span className="text-gray-800">Leccion {index}</span>
+                        </li>
+                    </ol>
+                </nav>
+
+
                 {/* Botones centrales */}
                 <div className="flex items-center">
+                    <div className="flex flex-colum mx-auto">
+                        <button onClick={changeIndexAtras} type="button" className="p-1 bg-teal-500 rounded-l-md transition duration-200 border-r border-gray-100  hover:bg-emerald-500 hover:text-white px-3">
+                        <div className="flex flex-row align-middle">
+                            <svg className="w-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path fillRule="evenodd" d="M7.707 14.707a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l2.293 2.293a1 1 0 010 1.414z" clipRule="evenodd"></path>
+                            </svg>
+                            <p className="ml-2">Prev</p>
+                        </div>
+                        </button>
 
-                    <button onClick={changeIndexAtras} className="h-8 w-10 px-2 border-b border-l border-t hover:bg-background hover:fill-white">
-                         <FaArrowLeft className="fill-inherit"/>
-                    </button>
-
-                    <div className="h-8  p-1 border">
-                        Leccion {index}
+                        <button onClick={changeIndexSiguiente}  type="button" className="bg-teal-500 rounded-r-md transition duration-200  border-l border-gray-500 hover:bg-emerald-500 hover:text-white px-3">
+                        <div className="flex flex-row align-middle">
+                            <span className="mr-2">Next</span>
+                            <svg className="w-5 ml-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                            <path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd"></path>
+                            </svg>
+                        </div>
+                        </button>
                     </div>
+                </div>
 
-                    <button onClick={changeIndexSiguiente} className="h-8 w-10 px-2 border-b border-r border-t hover:bg-background hover:fill-white">
-                        <FaArrowRight className="fill-inherit"/>
-                    </button>
-
-                    <div className="w-[1px] bg-background h-[30px] mx-[20px] opacity-40"/>
-
+                {/* Botones lateral derecho */}
+                <div className="flex">
                     {stages.map((less)=>{
-                        return (<div className="rounded-[100%] mr-[10px] w-[15px] h-[15px] border-[1px] border-background" 
-                        style={{ background: (index == less.id ? "var(--secondary-color)" : correctResults.some((corr)=> corr.id == less.id && corr.res === undefined) ? "var(--primary-color)" : "") } }/>)
+                            return (<div className="rounded-[100%] mr-[10px] w-[15px] h-[15px] border-[1px] border-background" 
+                            style={{ background: (index == less.id ? "var(--secondary-color)" : correctResults.some((corr)=> corr.id == less.id && corr.res === undefined) ? "var(--primary-color)" : "") } }/>)
 
                     })}
-
-                </div>
-                {/* Botones lateral derecho */}
-                <div>
-                    <button className="hover:text-gray-300 mx-2 h-8"><BiDownload size={20}/></button>
-                    <button className="hover:text-gray-300 mx-2 h-8"><BiHelpCircle size={20}/></button>
                 </div>
             </div>
             
             {stages.length > 0 &&  <Lesson leccionInfo={stages[index]} setResult={setResult}/>}
            
 
-            {isLoading &&  <div className="absolute top-[calc(48px+44px)] left-0 w-full h-[calc(100vh+30px)]"><LoadingDiv/>  </div>}
+            {isLoading &&  <div className="absolute top-[calc(44px)] left-0 w-full h-[calc(100vh+30px)]"><LoadingDiv/>  </div>}
 
           
 
@@ -209,6 +231,10 @@ const StagePage = () => {
 
 const LoadingDiv = () => {
     return (
+        // <div className="flex items-center justify-center h-screen w-full bg-backgroundAlpha">
+        //         <div className="w-20 h-20 rounded-full animate-spin border-4 border-solid border-green-500 border-t-transparent"></div>
+        // </div>
+        
         <div className="absolute h-full w-full object-cover flex flex-col items-center justify-center bg-backgroundAlpha">
             <div className='animate-bounce mx-auto flex flex-col items-center  justify-center mt-[20px]'>
 
@@ -217,9 +243,11 @@ const LoadingDiv = () => {
                     <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill" />
                 </svg>
 
-                <h1 className=" font-extrabold text-[2vw] mt-[5px]">CARGANDO...</h1>
             </div>
-        </div>)
+                <h1 className=" font-extrabold text-[2vw] mt-[5px]">CARGANDO...</h1>
+        </div>
+
+        )
 }
 
 

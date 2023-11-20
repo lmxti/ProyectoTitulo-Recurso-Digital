@@ -158,20 +158,20 @@ const CodingSection = ({ onResult, leccionInfo }) => {
     return (
         <div>
             {/* Code header section */}
-            <div className="bg-accent rounded-t-lg flex justify-between font-thin">
+            <div className="bg-[#5F5986] rounded-t-lg flex justify-between font-thin">
                 <div className="flex items-center p-2 text-2xl font-thin">
                     <AiFillCode/>
-                    <h2 className="ml-2">Compilador</h2>
+                    <h2 className="ml-2 text-lg font-semibold text-white">Compilador</h2>
                 </div>
                 <div className="flex justify-around">
-                <button onClick={execCode} className=" flex items-center bg-primary text-background rounded-lg hover:bg-secondary font-bold hover:text-text px-6 m-2">
+                <button onClick={execCode} className=" flex items-center bg-teal-500 text-background rounded-lg hover:bg-emerald-500 transition ease-in-out duration-500 font-bold hover:text-text px-6 m-2">
                     <FaPlay title="Compilar"/> 
                 </button>
                 </div>
             </div>
 
             {/* Code section */}
-            <div className="bg-accent p-2  text-[18px] rounded-b-lg">
+            <div className="bg-[#5F5986] p-2  text-[18px] rounded-b-lg">
                 <div onClick={printVisibleLines} ref={editorRef}></div>
             </div>
         </div>
