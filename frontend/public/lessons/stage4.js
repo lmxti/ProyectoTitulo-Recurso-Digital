@@ -5,7 +5,10 @@ const lessonsStage4 = [
         id: 0,
         enunciado: (
             <div className="text-black">
-                Hacer infografia sobre leccion en general, setters,getters, clase, metodo, etc.
+                    <img
+                        src="/images/lessons/stage4/Leccion0-img.jpg"
+                        alt="Leccion0-img"
+                    />
           </div>)
         ,
         instrucciones: (
@@ -122,7 +125,7 @@ class Texto {
         enunciado: (
             <div className="text-black">
                     <img
-                        src="/images/lessons/stage4/Leccion1v2-img.jpg"
+                        src="/images/lessons/stage4/Leccion1v3-img.jpg"
                         alt="Leccion1-img"
                     />
           </div>)
