@@ -1,22 +1,25 @@
 package com.heart.app;
 
-        
 public class Main {
 static Utils utils = new Utils();
     public static void main(String[] args) {
-
-        /* Crea una variable "result" que almacene lo que retorna
-         el método sumar pasandole dos parámetros de tipo entero */
-        int result = sumar(2, 3);
-
-        // Imprime el valor de la variable "result"
-        System.out.println(result);
+        // Bus
+        Bus bus1 = new Bus("ABC123");
+Utils.current.storeObject(bus1);
+        utils.saveObjectsState();
    Utils.current.printObjectList();
 }
+}
 
-    static int sumar(int a, int b){
-        return a + b;
+
+class Bus{
+    String matricula;
+    double x;
+
+    public Bus(String matricula) {
+        this.matricula = matricula;
+        x = 200;
     }
 }
-    
-                
+
+

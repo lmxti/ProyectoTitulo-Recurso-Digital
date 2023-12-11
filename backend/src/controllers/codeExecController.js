@@ -252,20 +252,26 @@ const formatCode = (code) => {
     return userCode
 }
 
-
-function isUnsafeCode(code) {
-    const blockedKeywords = ['require', 'process', 'child_process', 'exec', 'eval', '__dirname', '__filename'];
+function isUnsafeCode(javaCode) {
+    const blockedKeywords = [
+        'Runtime',
+        'ProcessBuilder',
+        'exec',
+        'java.lang.reflect',
+        'System.getProperty',
+        'Runtime.getRuntime().exec',
+        'java.io.InputStream',
+        'java.util.Scanner'
+    ];
 
     for (const keyword of blockedKeywords) {
-        const regex = new RegExp('\\b' + keyword + '\\b', 'i');
-        if (regex.test(code)) {
+        if (javaCode.includes(keyword)) {
             return true;
         }
     }
 
     return false;
 }
-
 
 module.exports = {
     executeCode

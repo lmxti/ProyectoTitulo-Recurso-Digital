@@ -494,6 +494,12 @@ const Lesson = ({leccionInfo, setResult}) => {
     useEffect(() => {
         // Verificacion si la leccion no es de tipo 'consola' y si el lienzo (canvas) existe
         if (!leccionInfo.isConsole && canvasRef.current) {
+            
+            // Obtencion del contexto 2D del lienzo (canvas)
+            const context = canvasRef.current.getContext('2d')
+            // Limpieza de contenido previo en  lienzo (canvas)
+            context.clearRect(0, 0, canvasRef.current.width, canvasRef.current.height)
+
             /**
              * @name resizeCanvas
              * @description Funcion que actualiza el tamaño del lienzo (canvas) en funcion al tamaño de la ventana
@@ -520,6 +526,7 @@ const Lesson = ({leccionInfo, setResult}) => {
         setFlipInstructions(true)
         setExpand(false)
         setResultado("")
+        setFrames([])
 
     }, [leccionInfo]);
 

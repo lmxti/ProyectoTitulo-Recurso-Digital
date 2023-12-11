@@ -108,7 +108,7 @@ const TutorialOverlay = ({ onClose }) => {
 
                 <img src="/images/panda-rojo.png" alt="Character" className="mb-4 z-0 w-[100%] h-full animate__slowMov " />
 
-                <div className="absolute flex right-[-45%] top-[-35%] cursor-pointer w-[80%]  animate__speedMov" onClick={() => nextTutorial()} style={{ transformOrigin: 'left bottom' }}>
+                <div className="absolute flex right-[-45%] top-[-35%] cursor-pointer w-[80%] " onClick={() => nextTutorial()} style={{ transformOrigin: 'left bottom' }}>
                     <img id="panda" src="/images/speechBubble.png" alt="bubble" className=" mb-4 w-[100%] h-full" />
 
                     <div className="absolute top-[36%] left-[60%] transform -translate-x-[60%] -translate-y-[36%] w-[70%]  text-center text-background ">
@@ -139,7 +139,7 @@ const TutorialOverlay = ({ onClose }) => {
                     }
                     
                     .animate__slowMov {
-                        animation: rotateAndScale 1s ease-in-out infinite;
+                        animation: rotateAndScale 4s ease-in-out infinite;
                     }
                 `}</style>
 

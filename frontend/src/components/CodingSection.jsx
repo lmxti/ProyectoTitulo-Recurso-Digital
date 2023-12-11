@@ -34,10 +34,10 @@ function myCompletions(context) { //OCUPAR DE PRUEBA
     return {
         from: word.from,
         options: [
-            { label: "match", type: "keyword" },
+            { label: "System.out.println()", type: "function", detail: "function" },
             { label: "hello", type: "variable", info: "(World)" },
+            { label: "match", type: "keyword", detail: "keyword" },
             { label: "magic", type: "text", apply: "⠁⭒*.✩.*⭒⠁", detail: "macro" },
-            { label: "Edison", type: "text", apply: "chupa pija", detail: "macro" }
         ]
     };
 }
@@ -93,11 +93,14 @@ const CodingSection = ({ onResult, leccionInfo }) => {
 
     useEffect(() => {
         setUserCode(leccionInfo.code)
+        setOnUserCode(true)
         setCode(leccionInfo.code)
         if (container) {
             container.value = leccionInfo.code
             /* container.setAttribute("height", "100vh") */
         }
+        setErrorToShow(undefined)
+
         //container.setAttribute()
     }, [leccionInfo.code])
 
