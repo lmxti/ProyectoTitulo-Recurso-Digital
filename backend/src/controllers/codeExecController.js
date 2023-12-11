@@ -23,6 +23,11 @@ const executeCode = async (req, res) => {
     let userCode = req.body.code;
     userCode = userCode.replace(/import\s+\w+(\.\w+)*\s*;\s*/g, '');
 
+    if (isUnsafeCode(userCode)) {
+        res.status(500).json({ error: "Codigo Inseguro" });
+        return;
+    } 
+
     const user = req.user
     console.log(user)
     // Se debe verificar funciones?
@@ -245,6 +250,20 @@ const formatCode = (code) => {
     }
 
     return userCode
+}
+
+
+function isUnsafeCode(code) {
+    const blockedKeywords = ['require', 'process', 'child_process', 'exec', 'eval', '__dirname', '__filename'];
+
+    for (const keyword of blockedKeywords) {
+        const regex = new RegExp('\\b' + keyword + '\\b', 'i');
+        if (regex.test(code)) {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 
