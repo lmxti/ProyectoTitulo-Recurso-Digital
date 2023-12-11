@@ -64,14 +64,15 @@ const index = () => {
                         </a>
 
                         <hr className="my-4" />
-
+                    {/* 
                         <a href="#"
                             target="_blank"
                             className="text-white/90 hover:text-white">
                             Enlace en blanco
                         </a>
 
-                        <hr className="my-4" />
+                        <hr className="my-4" /> 
+                    */}
 
                     </span>
 
@@ -127,13 +128,6 @@ const index = () => {
 
                     </div>
                 </section>
-
-
-                <section className="p-10 bg-black">
-                    <img src="/images/prueba1.jpg" alt="" />
-                </section>
-
-
             </main>
         </>
     );

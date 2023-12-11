@@ -6,7 +6,7 @@ const userSchema = new mongoose.Schema({
     password: { type: String, required: true },
     completedLessons: [
         {
-          lessonId: { type: String, unique: true }, // Lesson ID like '4-0' for stage 4, lesson 0
+          lessonId: { type: String }, // Lesson ID like '4-0' for stage 4, lesson 0
           completed: { type: Boolean, default: false },
         },
       ],

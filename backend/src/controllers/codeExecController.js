@@ -21,9 +21,13 @@ const executeCode = async (req, res) => {
 
     // Almacenamiento del codigo de usuario en una variable 'userCode'
     let userCode = req.body.code;
+    userCode = userCode.replace(/import\s+\w+(\.\w+)*\s*;\s*/g, '');
 
+    const user = req.user
+    console.log(user)
     // Se debe verificar funciones?
     const functionsToCheck = req.body.functionCheckInfo;
+    const regex = /^(?:src\\com\\heart\\app\\Main.java:(\d+): error:)/gm;
 
     console.log("BODY", req.body.code.replace(/\n+/g, '\n'))
 
@@ -43,7 +47,7 @@ const executeCode = async (req, res) => {
                     /*in case of libs change use = javac -cp ./lib/* -d . src/com/heart/app/*.java
                      otherwise = javac -d . src/com/heart/app/Main.java*/
 
-                    exec(`javac -d . src/com/heart/app/Main.java && jar cfm executer.jar MANIFEST.MF com/heart/app/*.class && java -jar executer.jar`, options, (error, stdout, stderr) => {
+                    exec(`javac -d . src/com/heart/app/Main.java && jar cfm executer${user}.jar MANIFEST.MF com/heart/app/*.class && java -jar executer${user}.jar`, options, (error, stdout, stderr) => {
                         if (error) {
                             console.log("message------------", error.message);
 
@@ -61,7 +65,7 @@ const executeCode = async (req, res) => {
                 fs.writeFileSync(javaMainDir, userCode);
 
                 // Ejecucion del codigo de usuario
-                exec(`javac -d . src/com/heart/app/Main.java && jar cfm executer.jar MANIFEST.MF com/heart/app/*.class && java -jar executer.jar`, options, (error, stdout, stderr) => {
+                exec(`javac -d . src/com/heart/app/Main.java && jar cfm executer${user}.jar MANIFEST.MF com/heart/app/*.class && java -jar executer${user}.jar`, options, (error, stdout, stderr) => {
                     if (error) {
                         console.log("message------------", error.message);
 

@@ -36,7 +36,8 @@ function myCompletions(context) { //OCUPAR DE PRUEBA
         options: [
             { label: "match", type: "keyword" },
             { label: "hello", type: "variable", info: "(World)" },
-            { label: "magic", type: "text", apply: "⠁⭒*.✩.*⭒⠁", detail: "macro" }
+            { label: "magic", type: "text", apply: "⠁⭒*.✩.*⭒⠁", detail: "macro" },
+            { label: "Edison", type: "text", apply: "chupa pija", detail: "macro" }
         ]
     };
 }
@@ -82,7 +83,7 @@ const CodingSection = ({ onResult, leccionInfo }) => {
     // Extensiones cargadas en el editor de codigo
     const extensions = [jav, classnameExt, autocompletion({ override: [myCompletions] })];
     // Codigo de la leccion actual
-    const [code, setCode] = useState(leccionInfo.code);
+    const [code, setCode] = useState(leccionInfo.codeAnswer);
     const [userCode, setUserCode] = useState(leccionInfo.code);
     const [onUserCode, setOnUserCode] = useState(true)
 
@@ -91,6 +92,7 @@ const CodingSection = ({ onResult, leccionInfo }) => {
     const [executingCode, setExecutingCode] = useState(false)
 
     useEffect(() => {
+        setUserCode(leccionInfo.code)
         setCode(leccionInfo.code)
         if (container) {
             container.value = leccionInfo.code
@@ -164,10 +166,10 @@ const CodingSection = ({ onResult, leccionInfo }) => {
         const switchCodeUser = !onUserCode
         setOnUserCode(switchCodeUser)
         if (container) {
-            container.value = (switchCodeUser ? userCode : leccionInfo.code)
+            container.value = (switchCodeUser ? userCode : leccionInfo.codeAnswer)
         }
 
-        setCode(switchCodeUser ? userCode : leccionInfo.code)
+        setCode(switchCodeUser ? userCode : leccionInfo.codeAnswer)
     }
 
 

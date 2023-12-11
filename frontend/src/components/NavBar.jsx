@@ -2,6 +2,8 @@
 import Link from 'next/link';
 
 const NavBar = () => {
+
+    
     
     return (
         <header className="bg-[#3A3F43]">
@@ -14,9 +16,6 @@ const NavBar = () => {
                 <ul className="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8">
                     <li>
                         <Link className="text-white" href="/">Inicio</Link>
-                    </li>
-                    <li>
-                        <Link className="text-white" href="/poo">¿Qué es la POO?</Link>
                     </li>
                 </ul>
             </div>

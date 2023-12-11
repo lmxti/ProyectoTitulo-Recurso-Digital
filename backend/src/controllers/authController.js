@@ -7,7 +7,7 @@ const Register = async (req, res) => {
     try {
         const { username, password } = req.body;
         console.log(req.body, username, password)
-        const user = new User({ username, password });
+        const user = new User({ username, password, completedLessons : [] });
         
         await user.save();
         

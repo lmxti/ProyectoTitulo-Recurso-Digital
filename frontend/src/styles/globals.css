@@ -23,10 +23,11 @@
     
     --secondary-color: #a277ff;
     --primary-color: #38be92;
-    --text-color: #caf0f8;
+    --text-color: #82eaff;
     --accent-color: #F72585;
     --foreground-color: #453b7e;
     --bg-color: #21202e;
+    --prueba: #21202efd;
     --bg-color-lite: #34324f;
     --bg-color-transparent: #21202ea1;
     --transparent: rgba(0, 0, 0, 0);
@@ -116,9 +117,15 @@ a {
     }
 }
 
+
 body {
     color: rgb(var(--secondary-color));
     background: var(--bg-color);
+}
+
+li{
+    margin-bottom: 10px; /* Adjust the margin-bottom as needed */
+    list-style-position: inside;
 }
 
 

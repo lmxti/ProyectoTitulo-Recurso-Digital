@@ -1,7 +1,13 @@
 import React from "react";
 
 const primitivos = ['Cuadrado', 'Circulo', 'Texto']
-const objImgs = [{ type: 'Persona', img: '/objects/Persona.png' }, { type: 'Gato', img: '/objects/gato.png' }, { type: 'Auto', img: '/objects/autoRojo.png' }]
+const objImgs = [
+    { type: 'Gato', img: '/objects/gato.png' },
+    { type: 'Auto', img: '/objects/autoRojo.png' },
+    { type: 'Bus', img: '/objects/bus.png' },
+    { type: 'Pasajero', img: '/objects/pasajero.png' },
+    { type: 'Conductor', img: '/objects/conductor.png' },
+]
 
 const Interpreter = async (objectsList, maxFrames) => {
     const frames = []

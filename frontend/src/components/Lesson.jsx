@@ -603,7 +603,7 @@ const Lesson = ({leccionInfo, setResult}) => {
                             </div>
 
 
-                            <div className={`bg-white text-stone-900 transition-all duration-1000 overflow-y-scroll ${expand ? "h-screen" : "h-0"}`}>
+                            <div className={`bg-white text-stone-900 transition-all duration-1000 overflow-y-scroll ${expand ? "h-[84vh]  pb-[100px]" : "h-0"}`}>
                                 {leccionInfo.instrucciones}
                             </div>
                         </div>

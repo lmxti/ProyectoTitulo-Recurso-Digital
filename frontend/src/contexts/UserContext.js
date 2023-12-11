@@ -8,36 +8,41 @@ export const useUser = () => {
 };
 
 export const UserProvider = ({ children }) => {
+
     const [user, setUser] = useState(null);
     const [stagesInfo, setStagesInfo] = useState(undefined);
 
+    // <---------------------- FUNCION LOGIN ---------------------->
     const login = async (userData) => {
-
         try {
+            // Configuracion cabeceras solitiud HTTP
             const headers = { 'Content-Type': 'application/json' }
+
+            // Envio de solitud HTTP POST a la ruta /api/auth/login
             const response = await fetch('/api/auth/login', {
                 method: 'POST',
                 headers: headers,
                 body: JSON.stringify({ data: userData, headers }),
             });
 
+            // Datos de respuesta HTTP parseados a JSON
             const data = await response.json();
 
+            // Respuesta HTTP OK
             if (response.ok) {
                 setUser(data);
                 getStagesInfo(data.completedLessons)
-
                 return undefined
-
-            } else {
-                // Handle registration failure
+            }
+            // Error en respuesta HTTP
+            else {
                 return data.error
             }
+            
         } catch (error) {
             console.error('Error durante Logueo:', error);
             return error
         }
-
     };
 
     const getUser = async () => {
@@ -80,6 +85,8 @@ export const UserProvider = ({ children }) => {
 
     const getStage = async (stageID) => {
         try {
+
+            console.log(`../../public/lessons/stage${stageID}.js`)
             const module = await import(`../../public/lessons/stage${stageID}.js`).catch((error) => console.log("No hay mas lecciones"));
 
             if (!module) {

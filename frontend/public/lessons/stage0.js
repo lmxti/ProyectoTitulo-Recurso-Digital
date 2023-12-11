@@ -1,15 +1,13 @@
+import { codeStyle, valueStyle, variableStyle } from "./stagesStyle";
 
-
-import {codeStyle, variableStyle} from "./stagesStyle"
-export const infoStage = { 
-    nombre: "Introduccion",
-    descripcion: "Para Empezar!",
-    imagen: "/images/java-logo.png"
-}
-
+export const infoStage = {
+  nombre: "Introduccion",
+  descripcion: "Para Empezar!",
+  imagen: "/images/java-logo.png",
+};
 
 const lessonsStage0 = [
-{
+  {
     id: 0,
     enunciado: (
       <div className=" text-black">
@@ -22,59 +20,88 @@ const lessonsStage0 = [
       </div>
     ),
     instrucciones: (
-      <div className=" text-black p-4">
-        <p>
-          Bienvenido a la primera lección de Java, aquí empezaras tu camino para
-          aprender lo que es la programacion orientada a objetos (POO), el
-          primer paso es comprender la sintaxis y funcionamiento basico de un
-          programa.
-        </p>
-        <br />
+      <div className=" text-black p-4 text-justify">
+          <p>En esta primera lección, nos sumergiremos en comprender la estructura basica y fundamental de un código Java.
+            En la sección teórica, podrás profundizar en la estructura y el funcionamiento de este lenguaje de programación.
+          </p>
+          <br/>
 
-        {/* <p>
-          Como podrás observar, tienes cuatro ventanas que podrás utilizar para
-          aprender (enunciado), escribir código (editor), seguir pasos
-          (instrucciones) y ver el resultado de tu código (consola).
-        </p> */}
+          <p>
+             Para comenzar:
+          </p>
 
-
-        cuales podras utilizar para aprender y practicar los conceptos basicos de la programacion en Java.
-        <ul className="list-disc p-4">
+        <ul className="list-disc p-2" style={{ listStyleType: 'decimal'}}>
           <li>
-              
+            Pulsa el boton ejecutar que se encuentra en el editor de código.
           </li>
-        </ul>
-
-
-
-
-
-        {/* <ul className="list-disc p-4">
-          <li> Pulsa el boton ejecutar que se encuentra en el compilador.</li>
           <li>
             Observa lo que se muestra en la consola, ¿Que mensaje aparece?.
           </li>
           <li>
-            Prueba cambiando el texto que contiene{" "}
-            <code style={codeStyle(0)}>System.out.println()</code>
+            Intenta cambiar el texto que contiene
+            <code style={codeStyle(0)}>System.out.println(" ")</code>
             por otro como "Hola, mundo!" y vuelve a ejecutar el programa.
           </li>
-        </ul> */}
+        </ul>
+
+        <hr className="my-4"/>
 
         <p>
-          Como podrás darte cuenta, la funcion{" "}
-          <code style={codeStyle(0)}>System.out.println()</code> se utiliza para
-          imprimir mensajes por consola
+          <code style={codeStyle(0)}>System.out.println()</code>
+          es una expresion que se utiliza para imprimir en la consola de Java, puedes utilizarla para imprimir desde:
         </p>
+        <ul className="list-disc p-4">
+          <li>
+            Mensajes simples, como el de este ejercicio: <code style={valueStyle(0)}>"Hello, World!"</code>
+          </li>
+          <li>
+            Valores numéricos, por ejemplo,  <code style={valueStyle(0)}>2750</code>
+          </li>
+          <li>
+            Secuencias de caracteres (Strings) como:, <code style={valueStyle(0)}>"Hola mundo, 1234"</code>
+          </li>
+          <li>
+            El valor de una variables: <code style={variableStyle(0)}>nombre</code>
+            (no te preocupes si aún no conoces qué es una variable; eso lo abordaremos en la siguiente lección).
+          </li>
+        </ul>
+        <p>
+          Es importante mencionar que al utilizarlo para imprimir texto, este debe ir entre comillas dobles (" ") o simples (' '),
+          en caso de imprimir solo un valor numerico o el valor de una variable, no es necesario.
+        </p>
+
+
+        <hr className="my-4"/>
+
+        <p>
+          Por ultimo, en el editor de codigo podrás encontrar comentarios, estos son lineas de texto que no se ejecutan,
+          pero que sirven para explicar el funcionamiento del codigo, los podrás identificar por que comienzan con <code style={codeStyle(0)}>//</code>
+        </p>
+
+
+
       </div>
     ),
     checkResult: false,
+
+    codeAnswer: `
+
+public class Main {
+    public static void main(String[] args) {
+        // Woau!!!
+        System.out.println("Aqui estara el codigo de ejemplo de respuesta posible");
+        System.out.println("En caso de que seas incapaz de encontrar la solucion");
+        
+    }
+}
+
+        `,
 
     code: `
 
 public class Main {
     public static void main(String[] args) {
-        // Ejecuta este código para ver como funciona!
+        // Prueba ejecutar el codigo :)!
         System.out.println("Hello, World!");
     }
 }
@@ -82,7 +109,6 @@ public class Main {
         `,
     isConsole: true,
   },
-]
-
+];
 
 export default lessonsStage0;

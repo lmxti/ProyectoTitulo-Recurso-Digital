@@ -6,7 +6,7 @@ export async function middleware(req, res) {
     const cookie = req.cookies.get('user')?.value
 
     console.log(page)
-    if (!cookie && page != '/Login' && page != '/' /* && page != '/Register' */) {
+    if (!cookie && page != '/Login' && page != '/'  && page != '/Register' ) {
         console.log('NO cookie')
         return NextResponse.redirect(new URL('/Login', req.url))
 
