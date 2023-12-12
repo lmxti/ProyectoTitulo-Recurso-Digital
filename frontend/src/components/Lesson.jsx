@@ -155,10 +155,14 @@ const Lesson = ({leccionInfo, setResult}) => {
      * @description Funcion que segun el tipo de resultado de la leccion, muestra el resultado en la consola o en el lienzo (canvas)
      * @param {Object} nuevoResultado - Resultado de la leccion
      */
+    
     const handleResultado = async (nuevoResultado) => {
-        // Leccion es de tipo 'consola'
-        if (leccionInfo.isConsole) {
-            console.log("[LeccionID] -> HandleResultado ->", nuevoResultado)
+
+        if(nuevoResultado.error){
+            setResultado(nuevoResultado.error);
+        }else if (leccionInfo.isConsole) { // Leccion es de tipo 'consola'
+            
+           /*  console.log("[LeccionID] -> HandleResultado ->", nuevoResultado) */
             extractResJson(nuevoResultado).then((res)=>setResultado(res));
             
            /*  console.log("->Resultado de la funcion", extractResJson(nuevoResultado)); //NO LLAMAR DOS VECES BOBO*/
