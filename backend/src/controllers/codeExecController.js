@@ -1,9 +1,6 @@
 
 const fs = require('fs');
 const { exec } = require('child_process');
-const { log } = require('console');
-
-
 // Configuracion de directorio de trabajo actual (cwd = current working directory) para ejecutar comandos con 'exec'
 const options = {
     cwd: './src/java'
@@ -23,16 +20,10 @@ const executeCode = async (req, res) => {
     let userCode = req.body.code;
     userCode = userCode.replace(/import\s+\w+(\.\w+)*\s*;\s*/g, '');
 
-    if (isUnsafeCode(userCode)) {
-        res.status(500).json({ error: "Codigo Inseguro" });
-        return;
-    } 
-
     const user = req.user
     console.log(user)
     // Se debe verificar funciones?
     const functionsToCheck = req.body.functionCheckInfo;
-    const regex = /^(?:src\\com\\heart\\app\\Main.java:(\d+): error:)/gm;
 
     console.log("BODY", req.body.code.replace(/\n+/g, '\n'))
 
@@ -90,8 +81,52 @@ const executeCode = async (req, res) => {
 }
 
 const checkValidity = (dummyCode, res, callback) => {
+    
+  /*   if (isUnsafeCode(dummyCode)) {
+        res.status(500).json({ error: "Codigo Inseguro" });
+        return;
+    } 
+ */
+    let auxDummyCode = dummyCode
+    let mainFunctionMatch = extractMainFunction(auxDummyCode);
 
-    fs.writeFileSync(javaMainDir, dummyCode, options);
+    if (mainFunctionMatch) {
+        let mainFunctionContent = mainFunctionMatch
+        mainFunctionContent = 'public static void main(String[] args) {\nSystem.setSecurityManager(new CustomSecurityManager());\n' 
+        + mainFunctionContent.substring(mainFunctionContent.indexOf('{') + 1, mainFunctionContent.length-1); 
+        
+        auxDummyCode = auxDummyCode.replace(mainFunctionMatch, mainFunctionContent) +
+        `\nclass CustomSecurityManager extends SecurityManager {
+
+            @Override
+            public void checkRead(String file) {
+                if (!esRutaPermitida(file)) {
+                    System.out.println("AAAAAAAAAAAAAAAAA");
+                    System.err.println("Acceso no autorizado a la lectura de archivos");
+                    throw new SecurityException("Acceso no autorizado a la lectura de archivos");
+                }
+            }
+        
+            @Override
+            public void checkWrite(String file) {
+                if (!esRutaPermitida(file)) {
+                    System.out.println("AAAAAAAAAA");
+                    System.err.println("Acceso no autorizado a la escritura de archivos");
+                    throw new SecurityException("Acceso no autorizado a la escritura de archivos");
+                }
+            }
+        
+            private boolean esRutaPermitida(String file) {
+                // Implementa tu lógica para validar si la ruta del archivo es permitida
+                // En este ejemplo, solo permitimos archivos que estén en /ruta/permitida
+                return true;
+            }
+        }
+        `;
+    }
+    console.log(auxDummyCode);
+
+    fs.writeFileSync(javaMainDir, auxDummyCode, options);
 
     exec(`javac -d test src/com/heart/app/Main.java && cd test && java Main`, options, (error, stdout, stderr) => {
         if (error) {
@@ -108,7 +143,8 @@ const checkValidity = (dummyCode, res, callback) => {
             res.status(500).json({ error: error.message, output: errorsInfo });
             callback(false); // Pass false to the callback if there's an error
         } else {
-            callback(true); // Pass true to the callback if everything is okay
+            console.log(stdout, 'vroo\n', stderr)
+            callback(true); // Pass true to the callback if everything is okay 
         }
     });
 
@@ -227,6 +263,7 @@ const formatCode = (code) => {
 
     let userCode = code
 
+  
     userCode = "package com.heart.app;\n" + userCode;
 
     // Apply the regular expression to the main function content
@@ -251,7 +288,7 @@ const formatCode = (code) => {
 
     return userCode
 }
-
+/* 
 function isUnsafeCode(javaCode) {
     const blockedKeywords = [
         'Runtime',
@@ -272,7 +309,7 @@ function isUnsafeCode(javaCode) {
 
     return false;
 }
-
+ */
 module.exports = {
     executeCode
 };
