@@ -18,7 +18,6 @@ const executeCode = async (req, res) => {
 
     // Almacenamiento del codigo de usuario en una variable 'userCode'
     let userCode = req.body.code;
-    userCode = userCode.replace(/import\s+\w+(\.\w+)*\s*;\s*/g, '');
 
     const user = req.user
     console.log(user)
@@ -45,9 +44,8 @@ const executeCode = async (req, res) => {
 
                     exec(`javac -d . src/com/heart/app/Main.java && jar cfm executer${user}.jar MANIFEST.MF com/heart/app/*.class && java -jar executer${user}.jar`, options, (error, stdout, stderr) => {
                         if (error) {
-                            console.log("message------------", error.message);
 
-                            res.status(500).json({ error: error.message, output: stderr });
+                            res.status(500).json({ error: "Error en el codigo", output: stderr });
                         } else {
                             console.log(stdout)
                             res.status(200).json({ output: stdout, functionsResult });
@@ -65,7 +63,7 @@ const executeCode = async (req, res) => {
                     if (error) {
                         console.log("message------------", error.message);
 
-                        res.status(500).json({ error: error.message, output: stderr });
+                        res.status(500).json({ error: "Error en el codigo", output: stderr });
                     } else {
                         console.log("DONE OK", stdout);
                         res.status(200).json({ output: stdout });
@@ -87,41 +85,63 @@ const checkValidity = (dummyCode, res, callback) => {
         return;
     } 
  */
+    if(dummyCode.match(/import\s+\w+(\.\w+)*\s*;\s*/g) != null){
+        
+        res.status(500).json({ error: "No puede se permiten imports" });
+        callback(false);
+        return
+    }
+    
+    //userCode = userCode.replace(/import\s+\w+(\.\w+)*\s*;\s*/g, ''); 
+    
     let auxDummyCode = dummyCode
     let mainFunctionMatch = extractMainFunction(auxDummyCode);
 
     if (mainFunctionMatch) {
         let mainFunctionContent = mainFunctionMatch
-        mainFunctionContent = 'public static void main(String[] args) {\nSystem.setSecurityManager(new CustomSecurityManager());\n' 
+        mainFunctionContent = 'public static void main(String[] args) { System.setSecurityManager(new CustomSecurityManager()); \n ' 
         + mainFunctionContent.substring(mainFunctionContent.indexOf('{') + 1, mainFunctionContent.length-1); 
         
         auxDummyCode = auxDummyCode.replace(mainFunctionMatch, mainFunctionContent) +
         `\nclass CustomSecurityManager extends SecurityManager {
 
+           
             @Override
             public void checkRead(String file) {
                 if (!esRutaPermitida(file)) {
-                    System.out.println("AAAAAAAAAAAAAAAAA");
                     System.err.println("Acceso no autorizado a la lectura de archivos");
                     throw new SecurityException("Acceso no autorizado a la lectura de archivos");
                 }
             }
-        
+
             @Override
             public void checkWrite(String file) {
                 if (!esRutaPermitida(file)) {
-                    System.out.println("AAAAAAAAAA");
-                    System.err.println("Acceso no autorizado a la escritura de archivos");
+                    System.err.println("Acceso no autorizado a la lectura de archivos");
                     throw new SecurityException("Acceso no autorizado a la escritura de archivos");
                 }
             }
-        
+
             private boolean esRutaPermitida(String file) {
                 // Implementa tu lógica para validar si la ruta del archivo es permitida
                 // En este ejemplo, solo permitimos archivos que estén en /ruta/permitida
-                return true;
+                return !file.startsWith("C:");
             }
-        }
+
+            @Override
+            public void checkExec(String cmd) {
+                System.err.println("No se pueden realizar comandos");
+                throw new SecurityException("No se pueden realizar comandos");
+            }
+
+           
+            @Override
+            public void checkPropertyAccess(String key){
+                    System.err.println("¿Que buscas?");
+                throw new SecurityException("¿Que buscas?");
+                
+            }
+        }   
         `;
     }
     console.log(auxDummyCode);
@@ -129,21 +149,15 @@ const checkValidity = (dummyCode, res, callback) => {
     fs.writeFileSync(javaMainDir, auxDummyCode, options);
 
     exec(`javac -d test src/com/heart/app/Main.java && cd test && java Main`, options, (error, stdout, stderr) => {
-        if (error) {
-            console.log(error)
-            const regex = /^(?:src\\com\\heart\\app\\Main.java:(\d+): error:)/gm;
-            const matches = error.message.matchAll(regex);
-            const errorsInfo = []
+        
+        if (error || stderr.split('\n').length > 3) {
+            console.log("vro", error, stderr)
 
-            for (const match of matches) {
-                const lineNumber = match[1];
-                errorsInfo.push({ line: lineNumber, msg: error.message.substring(match.index + match[0].length, error.message.indexOf('\n', match.index + match.length)) })
-            }
-
-            res.status(500).json({ error: error.message, output: errorsInfo });
+            res.status(500).json({ error: (stderr ?  stderr.split('\n')[2] :"Error en la validez el codigo"), output: (error ? extractErrors(error, -1) : undefined) });
             callback(false); // Pass false to the callback if there's an error
         } else {
-            console.log(stdout, 'vroo\n', stderr)
+            console.log("err: ",stderr)
+            console.log(stdout)
             callback(true); // Pass true to the callback if everything is okay 
         }
     });
@@ -182,19 +196,10 @@ const checkFunctions = (code, functionsToCheck, callback) => {
 
     exec(`javac -d test src/com/heart/app/Main.java && cd test && java Main`, options, (error, stdout, stderr) => {
         if (error) {
+            
             console.log(error)
-            const regex = /^(?:src\\com\\heart\\app\\Main.java:(\d+): error:)/gm;
-            const matches = error.message.matchAll(regex);
-            const errorsInfo = []
-
-            for (const match of matches) {
-                const lineNumber = match[1];
-                errorsInfo.push({ line: lineNumber, msg: error.message.substring(match.index + match[0].length, error.message.indexOf('\n', match.index + match.length)) })
-            }
-
-            console.log("ERROR DE FUNCIONES:", errorsInfo)
             /*  res.status(500).json({ error: error.message, output: errorsInfo }); */
-            callback(errorsInfo); // Pass false to the callback if there's an error
+            callback(extractErrors(error, 0)); // Pass false to the callback if there's an error
         } else {
             console.log("PRUEBA DE FUNCIONES:", stdout.split('\r\n'))
 
@@ -213,6 +218,21 @@ const checkFunctions = (code, functionsToCheck, callback) => {
             callback(extractedData); // Pass true to the callback if everything is okay
         }
     });
+}
+const extractErrors = (error, linesOffset) =>{
+    
+    const regex = /^(?:src\\com\\heart\\app\\Main.java:(\d+): error:)/gm;
+    const matches = error.message.matchAll(regex);
+    const errorsInfo = []
+
+    for (const match of matches) {
+        const lineNumber = match[1];
+        const end = error.message.indexOf('\n', match.index + match.length);
+        errorsInfo.push({ line: parseInt(lineNumber) + linesOffset, 
+            msg: error.message.substring(match.index + match[0].length, 
+            (error.message.includes("cannot find symbol") ? error.message.indexOf('\n', end + 2) : end )) })
+    }
+    return errorsInfo
 }
 
 function extractMainFunction(code) {
