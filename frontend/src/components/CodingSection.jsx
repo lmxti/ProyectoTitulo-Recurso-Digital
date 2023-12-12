@@ -132,6 +132,7 @@ const CodingSection = ({ onResult, leccionInfo }) => {
      * Funcion que ejecuta el codigo en el lado del servidor (backend) y
      * en caso de error, registra las lineas de codigo con errores
      */
+    
     const execCode = async () => {
         setExecutingCode(true)
         // Llamado de funcion con parametros de ejecucion que ejecuta el codigo en el lado del servidor (backend)
@@ -140,24 +141,31 @@ const CodingSection = ({ onResult, leccionInfo }) => {
             console.log("CodingSection -> execCode ->", res);
             if (res.error) {
                 // Seteo de lineas de codigo con errores
+                if (res.output) {
+                    const resultArray = res.output.reduce((accumulator, current) => {
+                        const existingItem = accumulator.find(item => item.line === current.line);
+                        if (existingItem) {
+                            existingItem.msg = [...new Set([existingItem.msg, current.msg].flat())];
+                        } else {
+                            accumulator.push({ line: current.line, msg: [current.msg] });
+                        }
+                        return accumulator;
+                    }, []);
+                    onResult({ error: `Error: ${res.error}` })
+                    setErrorLines(resultArray); //Los errores SON [{msg : "MENSAJE DEL ERROR", line: "LINEA DEL ERROR"} ]
 
-                const resultArray = res.output.reduce((accumulator, current) => {
-                    const existingItem = accumulator.find(item => item.line === current.line);
-                    if (existingItem) {
-                        existingItem.msg = [...new Set([existingItem.msg, current.msg].flat())];
-                    } else {
-                        accumulator.push({ line: current.line, msg: [current.msg] });
-                    }
-                    return accumulator;
-                }, []);
+                } else {
+                    onResult({ error: `Error: ${res.error}` })
+                    setErrorLines([])
+                }
 
-                setErrorLines(resultArray); //Los errores SON [{msg : "MENSAJE DEL ERROR", line: "LINEA DEL ERROR"} ]
 
             } else {
                 setErrorLines([])
                 onResult({ resCode: res.output, resFunctions: res.functionsResult });
             }
         }).catch((error) => {
+            setErrorLines([])
             onResult(`Error: ${error.message}`);
         });
 
@@ -278,11 +286,22 @@ const CodingSection = ({ onResult, leccionInfo }) => {
 
             )}
 
-            {errorToShow != undefined &&
+               {errorToShow != undefined &&
                 <div className="fixed bg-background p-5 rounded-[10px] shadow-2xl border-[1px] border-foreground flex" style={{ top: errorLines[errorToShow].y - 25, left: rectLeft }} onMouseLeave={() => setErrorToShow(undefined)}>
                     <BiSolidErrorCircle size={25} className="fill-accent mr-3 my-auto" />
                     <h3 className=" text-justify text-md font-bold text-white font-mono " >
-                        {errorLines[errorToShow].msg.map((msg, index) => (<span key={index}> {"> " + msg[1].toUpperCase() + msg.substring('2')} <br /> </span>))}
+                        {errorLines[errorToShow].msg.map((msg, index) => ( 
+                            
+                            <React.Fragment key={index}>
+                                {"> "}{ msg.split('\n').map((line, lineIndex) => (
+                                    <span key={lineIndex}>
+                                        {line[1].toUpperCase() + line.substring(2)}
+                                        <br />
+                                    </span>
+                                ))}
+                            </React.Fragment> )
+
+                        )}
 
                     </h3>
                 </div>}
