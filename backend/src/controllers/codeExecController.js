@@ -1,6 +1,8 @@
 
 const fs = require('fs');
 const { exec } = require('child_process');
+
+
 // Configuracion de directorio de trabajo actual (cwd = current working directory) para ejecutar comandos con 'exec'
 const options = {
     cwd: './src/java'
@@ -24,7 +26,7 @@ const executeCode = async (req, res) => {
     // Se debe verificar funciones?
     const functionsToCheck = req.body.functionCheckInfo;
 
-    console.log("BODY", req.body.code.replace(/\n+/g, '\n'))
+    //console.log("BODY", req.body.code.replace(/\n+/g, '\n'))
 
 
     checkValidity(userCode.replace(waitFunctionRegex, '//Esperar();'), res, (isValid) => {
@@ -85,15 +87,18 @@ const checkValidity = (dummyCode, res, callback) => {
         return;
     } 
  */
-    if(dummyCode.match(/import\s+\w+(\.\w+)*\s*;\s*/g) != null){
+    if(dummyCode.match(/import\s+\w+(\.\w+)*\s*;\s*/g) != null){//false){//dummyCode.match(/import\s+\w+(\.\w+)*\s*;\s*/g) != null){
         
         res.status(500).json({ error: "No puede se permiten imports" });
         callback(false);
         return
-    }
+    } 
     
     //userCode = userCode.replace(/import\s+\w+(\.\w+)*\s*;\s*/g, ''); 
-    
+
+    // Get the current working directory
+const currentDirectory = process.cwd();
+
     let auxDummyCode = dummyCode
     let mainFunctionMatch = extractMainFunction(auxDummyCode);
 
@@ -108,16 +113,16 @@ const checkValidity = (dummyCode, res, callback) => {
            
             @Override
             public void checkRead(String file) {
-                if (!esRutaPermitida(file)) {
-                    System.err.println("Acceso no autorizado a la lectura de archivos");
-                    throw new SecurityException("Acceso no autorizado a la lectura de archivos");
+                if (!esRutaPermitida(file)) { 
+                    System.err.println("Acceso no autorizado a la lectura de archivos " + file ); 
+                    throw new SecurityException("Acceso no autorizado a la lectura de archivos " + file );
                 }
             }
 
             @Override
             public void checkWrite(String file) {
                 if (!esRutaPermitida(file)) {
-                    System.err.println("Acceso no autorizado a la lectura de archivos");
+                    System.err.println("Acceso no autorizado a la escritura de archivos " + file );
                     throw new SecurityException("Acceso no autorizado a la escritura de archivos");
                 }
             }
@@ -125,7 +130,7 @@ const checkValidity = (dummyCode, res, callback) => {
             private boolean esRutaPermitida(String file) {
                 // Implementa tu lógica para validar si la ruta del archivo es permitida
                 // En este ejemplo, solo permitimos archivos que estén en /ruta/permitida
-                return !file.startsWith("C:");
+                return  !file.startsWith("C:") || file.startsWith("${currentDirectory.replace(/\\/g, '\\\\')}\\\\src\\\\java\\\\test\\\\");
             }
 
             @Override
@@ -137,14 +142,15 @@ const checkValidity = (dummyCode, res, callback) => {
            
             @Override
             public void checkPropertyAccess(String key){
-                    System.err.println("¿Que buscas?");
-                throw new SecurityException("¿Que buscas?");
+                
+                    System.err.println("¿Que buscas? " );
+                throw new SecurityException("¿Que buscas? ");
                 
             }
         }   
         `;
     }
-    console.log(auxDummyCode);
+   // console.log(auxDummyCode);
 
     fs.writeFileSync(javaMainDir, auxDummyCode, options);
 
@@ -308,28 +314,6 @@ const formatCode = (code) => {
 
     return userCode
 }
-/* 
-function isUnsafeCode(javaCode) {
-    const blockedKeywords = [
-        'Runtime',
-        'ProcessBuilder',
-        'exec',
-        'java.lang.reflect',
-        'System.getProperty',
-        'Runtime.getRuntime().exec',
-        'java.io.InputStream',
-        'java.util.Scanner'
-    ];
-
-    for (const keyword of blockedKeywords) {
-        if (javaCode.includes(keyword)) {
-            return true;
-        }
-    }
-
-    return false;
-}
- */
 module.exports = {
     executeCode
 };
