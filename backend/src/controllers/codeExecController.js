@@ -5,7 +5,8 @@ const { exec } = require('child_process');
 
 // Configuracion de directorio de trabajo actual (cwd = current working directory) para ejecutar comandos con 'exec'
 const options = {
-    cwd: './src/java'
+    cwd: './src/java',
+    encoding: 'utf-8'
 };
 
 const javaMainDir = './src/java/src/com/heart/app/Main.java'
@@ -41,10 +42,14 @@ const executeCode = async (req, res) => {
                         "javac Main.java" : Compiles the Java code and if the compilation is successful creates a file 'Main.class'
                         "java Main" : Executes the compiled Java code and prints the output to the console
                     */
-                    /*in case of libs change use = javac -cp ./lib/* -d . src/com/heart/app/*.java
-                     otherwise = javac -d . src/com/heart/app/Main.java*/
 
-                    exec(`javac -d . src/com/heart/app/Main.java && jar cfm executer${user}.jar MANIFEST.MF com/heart/app/*.class && java -jar executer${user}.jar`, options, (error, stdout, stderr) => {
+                    /*
+                    
+                    EN LINUX ES './lib/*' en windows sin comillas ./lib/*   --->FUCK
+                    in case of libs change use = javac -encoding UTF-8  -cp ./lib/*  -d . src/com/heart/app/*.java
+                     otherwise = javac -encoding UTF-8  -d . src/com/heart/app/Main.java*/
+
+                    exec(`LANG=es_ES.UTF-8 javac -encoding UTF-8 -d . src/com/heart/app/Main.java && jar cfm executer${user}.jar MANIFEST.MF com/heart/app/*.class && java -jar executer${user}.jar`, options, (error, stdout, stderr) => {
                         if (error) {
 
                             res.status(500).json({ error: "Error en el codigo", output: stderr });
@@ -61,13 +66,14 @@ const executeCode = async (req, res) => {
                 fs.writeFileSync(javaMainDir, userCode);
 
                 // Ejecucion del codigo de usuario
-                exec(`javac -d . src/com/heart/app/Main.java && jar cfm executer${user}.jar MANIFEST.MF com/heart/app/*.class && java -jar executer${user}.jar`, options, (error, stdout, stderr) => {
+                exec(`LANG=es_ES.UTF-8 javac -encoding UTF-8 -d . src/com/heart/app/Main.java && jar cfm executer${user}.jar MANIFEST.MF com/heart/app/*.class && java -jar executer${user}.jar`, options, (error, stdout, stderr) => {
                     if (error) {
                         console.log("message------------", error.message);
+                        
 
-                        res.status(500).json({ error: "Error en el codigo", output: stderr });
+                        res.status(500).json({ error: "Error en el codigo", output: extractErrors(error, -2) });
                     } else {
-                        console.log("DONE OK", stdout);
+                        console.log("DONE OK", stdout, stderr);
                         res.status(200).json({ output: stdout });
                     }
                 });
@@ -81,34 +87,34 @@ const executeCode = async (req, res) => {
 }
 
 const checkValidity = (dummyCode, res, callback) => {
-    
-  /*   if (isUnsafeCode(dummyCode)) {
-        res.status(500).json({ error: "Codigo Inseguro" });
-        return;
-    } 
- */
-    if(dummyCode.match(/import\s+\w+(\.\w+)*\s*;\s*/g) != null){//false){//dummyCode.match(/import\s+\w+(\.\w+)*\s*;\s*/g) != null){
-        
+
+    /*   if (isUnsafeCode(dummyCode)) {
+          res.status(500).json({ error: "Codigo Inseguro" });
+          return;
+      } 
+   */
+    if (dummyCode.match(/import\s+\w+(\.\w+)*\s*;\s*/g) != null) {//false){//dummyCode.match(/import\s+\w+(\.\w+)*\s*;\s*/g) != null){
+
         res.status(500).json({ error: "No puede se permiten imports" });
         callback(false);
         return
-    } 
-    
+    }
+
     //userCode = userCode.replace(/import\s+\w+(\.\w+)*\s*;\s*/g, ''); 
 
     // Get the current working directory
-const currentDirectory = process.cwd();
+    const currentDirectory = process.cwd();
 
     let auxDummyCode = dummyCode
     let mainFunctionMatch = extractMainFunction(auxDummyCode);
 
     if (mainFunctionMatch) {
         let mainFunctionContent = mainFunctionMatch
-        mainFunctionContent = 'public static void main(String[] args) { System.setSecurityManager(new CustomSecurityManager()); \n ' 
-        + mainFunctionContent.substring(mainFunctionContent.indexOf('{') + 1, mainFunctionContent.length-1); 
-        
+        mainFunctionContent = 'public static void main(String[] args) { System.setSecurityManager(new CustomSecurityManager()); \n '
+            + mainFunctionContent.substring(mainFunctionContent.indexOf('{') + 1, mainFunctionContent.length - 1);
+
         auxDummyCode = auxDummyCode.replace(mainFunctionMatch, mainFunctionContent) +
-        `\nclass CustomSecurityManager extends SecurityManager {
+            `\nclass CustomSecurityManager extends SecurityManager {
 
            
             @Override
@@ -128,8 +134,6 @@ const currentDirectory = process.cwd();
             }
 
             private boolean esRutaPermitida(String file) {
-                // Implementa tu lógica para validar si la ruta del archivo es permitida
-                // En este ejemplo, solo permitimos archivos que estén en /ruta/permitida
                 return  !file.startsWith("C:") || file.startsWith("${currentDirectory.replace(/\\/g, '\\\\')}\\\\src\\\\java\\\\test\\\\");
             }
 
@@ -143,26 +147,28 @@ const currentDirectory = process.cwd();
             @Override
             public void checkPropertyAccess(String key){
                 
-                    System.err.println("¿Que buscas? " );
-                throw new SecurityException("¿Que buscas? ");
+                    System.err.println("Que buscas? " );
+                throw new SecurityException("Que buscas? ");
                 
             }
         }   
         `;
     }
-   // console.log(auxDummyCode);
+    console.log(auxDummyCode);
 
     fs.writeFileSync(javaMainDir, auxDummyCode, options);
 
-    exec(`javac -d test src/com/heart/app/Main.java && cd test && java Main`, options, (error, stdout, stderr) => {
-        
-        if (error || stderr.split('\n').length > 3) {
-            console.log("vro", error, stderr)
+    exec(`LANG=es_ES.UTF-8 javac -encoding UTF-8 -d test src/com/heart/app/Main.java && cd test && java Main`, options, (error, stdout, stderr) => {
 
-            res.status(500).json({ error: (stderr ?  stderr.split('\n')[2] :"Error en la validez el codigo"), output: (error ? extractErrors(error, -1) : undefined) });
+        if (error || stderr.split('\n').length > 3) {
+            //console.log("vro", error, stderr)
+            /* console.log("AAA",error) */
+            console.log("erro: ", error)
+
+            res.status(500).json({ error: (stderr ? stderr.split('\n')[2] : "Error en la validez el codigo"), output: (error ? extractErrors(error, -1) : undefined) });
             callback(false); // Pass false to the callback if there's an error
         } else {
-            console.log("err: ",stderr)
+            console.log("err: ", stderr)
             console.log(stdout)
             callback(true); // Pass true to the callback if everything is okay 
         }
@@ -200,9 +206,9 @@ const checkFunctions = (code, functionsToCheck, callback) => {
 
     fs.writeFileSync(javaMainDir, dummyCode, options);
 
-    exec(`javac -d test src/com/heart/app/Main.java && cd test && java Main`, options, (error, stdout, stderr) => {
+    exec(`LANG=es_ES.UTF-8 javac -encoding UTF-8 -d test src/com/heart/app/Main.java && cd test && java Main`, options, (error, stdout, stderr) => {
         if (error) {
-            
+
             console.log(error)
             /*  res.status(500).json({ error: error.message, output: errorsInfo }); */
             callback(extractErrors(error, 0)); // Pass false to the callback if there's an error
@@ -225,19 +231,30 @@ const checkFunctions = (code, functionsToCheck, callback) => {
         }
     });
 }
-const extractErrors = (error, linesOffset) =>{
-    
-    const regex = /^(?:src\\com\\heart\\app\\Main.java:(\d+): error:)/gm;
-    const matches = error.message.matchAll(regex);
-    const errorsInfo = []
+const extractErrors = (error, linesOffset) => {
+    const regex = /^(?:src\/com\/heart\/app\/Main\.java:(\d+): error:)/gm;
+    const matches = [...error.message.matchAll(regex)];
 
-    for (const match of matches) {
+
+    // Extract content between errors
+    const errorsInfo = matches.map((match, index, array) => {
         const lineNumber = match[1];
-        const end = error.message.indexOf('\n', match.index + match.length);
-        errorsInfo.push({ line: parseInt(lineNumber) + linesOffset, 
-            msg: error.message.substring(match.index + match[0].length, 
-            (error.message.includes("cannot find symbol") ? error.message.indexOf('\n', end + 2) : end )) })
-    }
+        const start = match.index + match[0].length;
+        const end = index < array.length - 1 ? array[index + 1].index : undefined;
+
+        return { line: parseInt(lineNumber) + linesOffset, msg: error.message.slice(start, end).trim() }
+
+    });
+
+
+    /*     for (const match of matches) {
+            const lineNumber = match[1];
+            const end = error.message.indexOf('\n', match.index + match.length);
+    
+            errorsInfo.push({ line: parseInt(lineNumber) + linesOffset, 
+                msg: error.message.substring(match.index + match[0].length, 
+                (error.message.includes("cannot find symbol") ? error.message.indexOf('\n', end + 2) : end )) })
+        } */
     return errorsInfo
 }
 
@@ -285,11 +302,11 @@ function extractMainFunction(code) {
 const formatCode = (code) => {
 
     const classDeclarationRegex = /public\s+class\s+Main\s+\{/; // Regular expression to match "public class Main {" line
-    const objectCreationRegex = /(\w+)\s*=\s*new\s+(\w+)\([^)]*\);/g; ///(\w+)\s+(\w+)\s*=\s*new\s+(\w+)\([^)]*\);/g  Regular expression to match object creation lines,
+    const objectCreationRegex = /(\w+(?:\[\d+\])?)\s*=\s*new\s+(\w+)\([^)]*\);/g; ///(\w+)\s+(\w+)\s*=\s*new\s+(\w+)\([^)]*\);/g  Regular expression to match object creation lines,
 
     let userCode = code
 
-  
+
     userCode = "package com.heart.app;\n" + userCode;
 
     // Apply the regular expression to the main function content
