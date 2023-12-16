@@ -10,13 +10,14 @@ import java.util.List;
 import java.util.Iterator;
 import java.lang.reflect.Field;
 import java.lang.reflect.AccessibleObject;
+import java.lang.reflect.Array;
 import java.lang.ref.WeakReference;
 
 public class Utils {
     public static Utils current;
     private List<ObjectWrapper> objectList = new ArrayList<>();
 
-    public Utils(){
+    public Utils() {
         current = this;
     }
 
@@ -43,7 +44,7 @@ public class Utils {
         int id = object.hashCode();
 
         WeakReference<Object> weakReference = new WeakReference<>(object);
-        
+
         ObjectWrapper toSave = new ObjectWrapper(id, nameType, weakReference, frames, getChilds(object));
         objectList.add(toSave);
     }
@@ -121,7 +122,7 @@ public class Utils {
     public static Object CloneObject(Object obj) {
         try {
             ObjectMapper mapper = new ObjectMapper();
-            
+
             mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
             return mapper.treeToValue(mapper.valueToTree(obj), Object.class);
         } catch (Exception e) {
@@ -136,7 +137,7 @@ public class Utils {
             // Create ObjectMapper
             ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
-            
+
             // Parse JSON strings into JSON objects
             JsonNode json1 = objectMapper.valueToTree(obj);
 
@@ -148,10 +149,43 @@ public class Utils {
                 String fieldname = fieldNamesIterator.next();
                 JsonNode fieldObj = json1.get(fieldname);
                 if (!fieldObj.isValueNode()) {
-                    Field field = obj.getClass().getDeclaredField(fieldname);
-                    field.setAccessible(true);
 
-                    childs.add(field.get(obj).hashCode());
+                    if (fieldObj.isArray()) {
+                        int length = fieldObj.size();
+                        if (length != 0) {
+                            JsonNode arrayElementNode = fieldObj.get(0);
+
+                            if (!arrayElementNode.isValueNode()) {
+
+                                Field field = obj.getClass().getDeclaredField(fieldname);
+                                field.setAccessible(true);
+
+                                // Get the array from the object
+                                Object arrayObject = field.get(obj);
+
+                                // If the array is not null and it is an array type
+                                if (arrayObject != null && arrayObject.getClass().isArray()) {
+                                    for (int i = 0; i < length; i++) {
+
+                                        Object arrayElement = Array.get(arrayObject, i);
+                                        if (arrayElement != null) {
+                                            childs.add(arrayElement.hashCode());
+
+                                        }
+                                    }
+                                }
+
+                            }
+                        }
+
+                    } else {
+                        Field field = obj.getClass().getDeclaredField(fieldname);
+                        field.setAccessible(true);
+
+                        childs.add(field.get(obj).hashCode());
+
+                    }
+
                 }
             }
 
@@ -183,7 +217,7 @@ public class Utils {
             boolean isChanged = false;
 
             // Create ObjectMapper
-            ObjectMapper objectMapper = new ObjectMapper(); 
+            ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
 
             // Create a new JSON object to store the changed properties
@@ -230,7 +264,7 @@ public class Utils {
             boolean isChanged = false;
 
             // Create ObjectMapper
-            ObjectMapper objectMapper = new ObjectMapper(); 
+            ObjectMapper objectMapper = new ObjectMapper();
             objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
 
             JsonNode prevProperties = objectMapper.valueToTree(stateA); // new changes
