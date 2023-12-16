@@ -1,7 +1,7 @@
 export const infoStage = { 
-    nombre: "Etapa 4",
-    descripcion: "Objetos y clases",
-    imagen: "/images/java-logo.png"
+    nombre: "Etapa 4: Introducción a la POO",
+    descripcion: "Aprende a crear y utilizar clases y objetos, herramientas fundamentales para organizar y estructurar un programa.",
+    imagen: "/images/lessons/stage5-P.jpg",
 }
 
 import {codeStyle, valueStyle, variableStyle} from "./stagesStyle"
@@ -922,6 +922,63 @@ class Gato extends Animal {
     },
     {
         id: 5,
+        enunciado: (
+            <div className="text-black">
+                    {/* <img
+                        src="/images/lessons/stage4/Leccion4-img.jpg"
+                        alt="Leccion4-img"
+                    /> */}
+          </div>)
+        ,
+        instrucciones: (
+            <div className="text-black p-4 text-justify">
+                <p>
+                    fdghdfgfd
+                </p>
+
+                <hr className="my-4"/>
+
+                <p>
+                    fdgfdgfdg
+                </p>
+
+                <ul className="list-disc p-4 list-inside" style={{ listStyleType: 'decimal'}}>
+                    <li>
+                        xdsdfsdfsdf
+                    </li>
+                </ul>
+
+                <p>
+                    dsfljksdlfsd
+                </p>
+
+                <hr className="my-4"/>
+
+                <p>
+                    xd
+                </p>
+
+                <ul className="list-disc p-4 list-inside" style={{ listStyleType: 'decimal'}}>
+                    <li>
+                        xdsdfsdfsdf
+                    </li>
+                </ul>
+
+            </div>
+        ),
+        checkResult : false,
+        codeAnswer: `
+
+`,
+        
+        code: `
+
+
+`,
+        isConsole : false
+    },
+    {
+        id: 6,
         enunciado: (
             <div className="text-black">
                     {/* <img

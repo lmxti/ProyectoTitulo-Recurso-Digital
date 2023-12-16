@@ -1,9 +1,9 @@
 import { codeStyle, valueStyle, variableStyle } from "./stagesStyle";
 
 export const infoStage = {
-  nombre: "Introduccion",
-  descripcion: "Para Empezar!",
-  imagen: "/images/java-logo.png",
+  nombre: "Introduccion programación",
+  descripcion: "Hola, mundo!. Inicia tu camino en el mundo de la programación.",
+  imagen: "/images/lessons/stage1-P.jpg",
 };
 
 const lessonsStage0 = [

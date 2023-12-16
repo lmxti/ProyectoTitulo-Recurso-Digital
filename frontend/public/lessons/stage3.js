@@ -1,7 +1,7 @@
 export const infoStage = { 
-    nombre: "Etapa 3",
-    descripcion: "Arrays y matrices",
-    imagen: "/images/java-logo.png"
+    nombre: "Etapa 3: Arrays y Matrices",
+    descripcion: "Explorando lo que son conjuntos de datos y estructuras multidimensionales.",
+    imagen: "/images/lessons/stage4-P.jpg",
 }
 
 import {codeStyle, valueStyle, variableStyle} from "./stagesStyle"

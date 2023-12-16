@@ -2,9 +2,9 @@
 import {codeStyle, variableStyle, valueStyle} from "./stagesStyle"
 
 export const infoStage = { 
-    nombre: "Etapa 1",
-    descripcion: "Variables y operaciones",
-    imagen: "/images/java-logo.png"
+    nombre: "Etapa 1: Variables y operaciones",
+    descripcion: "Descubre lo que son las variables y como se pueden utilizar",
+    imagen: "/images/lessons/stage2-P.jpg",
 }
 
 

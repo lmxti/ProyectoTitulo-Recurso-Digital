@@ -8,9 +8,9 @@ const NavBar = () => {
     return (
         <header className="bg-[#3A3F43]">
             <nav className="flex justify-between items-center w-[92%] mx-auto p-2">
-                <div>
+                <a href='/'>
                     <img src="images/cabeza-panda-rojo.png" alt="Logo" className="w-16 cursor-pointer" />
-                </div>
+                </a>
                 <div
                     className="nav-links duration-500 md:static absolute md:min-h-fit min-h-[60vh] left-0 top-[-100%] md:w-auto  w-full flex items-center px-5">
                 <ul className="flex md:flex-row flex-col md:items-center md:gap-[4vw] gap-8">
@@ -19,13 +19,13 @@ const NavBar = () => {
                     </li>
                 </ul>
             </div>
-                <div>
+                {/* <div>
                     <Link href="/Etapas">
                         <button className="bg-primary hover:bg-emerald-500 rounded-full text-white px-5 py-2">
                             Comenzar
                         </button>
                     </Link>
-                </div>
+                </div> */}
             </nav>
         </header>
 

@@ -1,7 +1,20 @@
 import React from "react";
 import NavBar from '@/components/NavBar';
+import Carousel from '@/components/Carousel';
 
 const index = () => {
+
+    const images = [
+        '/images/material/material1.jpg',
+        '/images/material/material2.jpg',
+        '/images/material/material3.jpg',
+        '/images/material/material4.jpg',
+        '/images/material/material5.jpg',
+        '/images/material/material6.jpg',
+    ];
+
+    
+
     return (
         <>
             <NavBar />
@@ -26,13 +39,10 @@ const index = () => {
                         </div>
 
                         <div className="text-center lg:text-left">
-                            <a className="block visible py-4 px-8 mb-4 text-xs font-semibold tracking-wide leading-none text-white bg-orange-500 transition duration-700 ease-in-out hover:bg-amber-700 hover:text-black rounded cursor-pointer sm:mr-3 sm:mb-0 sm:inline-block" >
+                            <a href="/Etapas" className="block visible py-4 px-8 mb-4 text-xs font-semibold tracking-wide leading-none text-white bg-orange-500 transition duration-700 ease-in-out hover:bg-amber-700 hover:text-black rounded cursor-pointer sm:mr-3 sm:mb-0 sm:inline-block" >
                                 Comenzar
                             </a>
 
-                            <a className="block visible py-4 px-8 text-xs font-semibold leading-none bg-white transition duration-700 ease-in-out hover:bg-slate-900 hover:text-white  rounded border border-solid cursor-pointer sm:inline-block border-slate-200 text-slate-500"
-                            >Más información
-                            </a >
                         </div>
                     </div>
 
@@ -44,7 +54,7 @@ const index = () => {
                     </div>
                 </section>
 
-                {/* Parallax background*/}
+                {/*<--------------------------------------- Parallax background -------------------------------------->*/}
                 <section
                     className="flex-col w-full h-[500px] bg-cover bg-fixed bg-center flex justify-center items-center bg-[url('/images/wallpaper4.jpg')]" >
                     <h1 className="text-white text-5xl font-semibold mt-20 mb-20 text-center">
@@ -55,7 +65,6 @@ const index = () => {
                         puede ser una tarea dificil y compleja para los estudiantes, especialmente para aquellos que
                         no tienen experiencia previa y no han podido desarrollar un pensamiento programatico.
                     </p>
-
                     <span className="text-center font-bold my-10 text-white/90">
                         <a href="https://www.java.com/es/"
                             target="_blank"
@@ -73,12 +82,27 @@ const index = () => {
 
                         <hr className="my-4" /> 
                     */}
-
                     </span>
-
                 </section>
 
-                {/* Sección 1 */}
+
+                {/*<--------------------------------------- Sección Carousel -------------------------------------->*/}    
+                <section className="bg-[#3A3F43]">
+                    <h1 className="text-white text-5xl font-semibold py-8 text-center">
+                        Material de apoyo POO
+                    </h1>
+                    <p className="text-center max-w-4xl mx-auto px-4 py-6">
+                        Si quieres saber un poco mas sobre la programación orientada a objetos y sobre lo que encontrarás en este recurso digital,
+                         puedes ver las siguientes imágenes.
+                    </p>
+                    <Carousel images={images} />
+                </section>
+
+
+
+
+
+                {/*<--------------------------------------- Sección de Habilidades Cognitivas -------------------------------------->*/}
                 <section className="p-20 space-y-8">
                     <h1 className="text-4xl text-center my-10">Habilidades cognitivas</h1>
                     <p className="text-center max-w-3xl mx-auto px-4">
@@ -90,7 +114,6 @@ const index = () => {
                         entretenida.
                     </p>
                     <div className="max-w-screen-md mx-auto text-center">
-
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 text-black">
                             {/* Card 1 */}
                             <div className="bg-white rounded-md overflow-hidden shadow-lg">
@@ -99,7 +122,6 @@ const index = () => {
                                     <div className="font-bold text-xl mb-2">Atención</div>
                                 </div>
                             </div>
-
                             {/* Card 2 */}
                             <div className="bg-white rounded-md overflow-hidden shadow-lg">
                                 <img className="h-[300px] object-contain" src="/images/habilidadesCognitivas/memoria.png" />
@@ -107,7 +129,6 @@ const index = () => {
                                     <div className="font-bold text-xl mb-2">Memoria</div>
                                 </div>
                             </div>
-
                             {/* Card 3 */}
                             <div className="bg-white rounded-md overflow-hidden shadow-lg">
                                 <img className="h-[300px] object-contain" src="/images/habilidadesCognitivas/razonamiento.png" />
@@ -116,7 +137,6 @@ const index = () => {
 
                                 </div>
                             </div>
-
                             {/* Card 4 */}
                             <div className="bg-white rounded-md overflow-hidden shadow-lg">
                                 <img className="h-[300px] object-contain" src="/images/habilidadesCognitivas/pensamientoCritico.png" />
@@ -125,9 +145,10 @@ const index = () => {
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 </section>
+
+
             </main>
         </>
     );
