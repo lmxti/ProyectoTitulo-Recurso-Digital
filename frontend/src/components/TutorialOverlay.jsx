@@ -109,7 +109,7 @@ const TutorialOverlay = ({ onClose }) => {
                 <img src="/images/panda-rojo.png" alt="Character" className="mb-4 z-0 w-[100%] h-full animate__slowMov " />
 
                 <div className="absolute flex right-[-45%] top-[-35%] cursor-pointer w-[80%] " onClick={() => nextTutorial()} style={{ transformOrigin: 'left bottom' }}>
-                    <img id="panda" src="/images/speechBubble.png" alt="bubble" className=" mb-4 w-[100%] h-full" />
+                    <img id="panda" src="/images/SpeechBubble.png" alt="bubble" className=" mb-4 w-[100%] h-full" />
 
                     <div className="absolute top-[36%] left-[60%] transform -translate-x-[60%] -translate-y-[36%] w-[70%]  text-center text-background ">
                         <p className="text-[16px] font-extrabold font-sans"> {currText} </p>
