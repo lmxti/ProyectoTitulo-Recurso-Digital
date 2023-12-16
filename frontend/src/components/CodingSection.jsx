@@ -90,6 +90,9 @@ const CodingSection = ({ onResult, leccionInfo }) => {
     const [rectLeft, setRectLeft] = useState(1000)
     const [errorToShow, setErrorToShow] = useState(undefined)
     const [executingCode, setExecutingCode] = useState(false)
+    // Lineas de codigo erroneas
+    const [errorLines, setErrorLines] = useState([])
+
 
     useEffect(() => {
         setUserCode(leccionInfo.code)
@@ -100,14 +103,13 @@ const CodingSection = ({ onResult, leccionInfo }) => {
             /* container.setAttribute("height", "100vh") */
         }
         setErrorToShow(undefined)
-
+        setErrorLines([])
+        
         //container.setAttribute()
     }, [leccionInfo.code])
 
 
 
-    // Lineas de codigo erroneas
-    const [errorLines, setErrorLines] = useState([])
     // Referencia al editor de codigo
     const editorRef = useRef(null);
 
@@ -132,9 +134,12 @@ const CodingSection = ({ onResult, leccionInfo }) => {
      * Funcion que ejecuta el codigo en el lado del servidor (backend) y
      * en caso de error, registra las lineas de codigo con errores
      */
-    
+
     const execCode = async () => {
         setExecutingCode(true)
+        onResult({ error: "Waiting..." })
+        setErrorLines([])
+
         // Llamado de funcion con parametros de ejecucion que ejecuta el codigo en el lado del servidor (backend)
         await executeCode({ code, functionCheckInfo: leccionInfo.functionToCheck }).then((res) => {
             // Devuelve el "output" (resultado de la ejecucion) y la
@@ -286,20 +291,20 @@ const CodingSection = ({ onResult, leccionInfo }) => {
 
             )}
 
-               {errorToShow != undefined &&
+            {errorToShow != undefined &&
                 <div className="fixed bg-background p-5 rounded-[10px] shadow-2xl border-[1px] border-foreground flex" style={{ top: errorLines[errorToShow].y - 25, left: rectLeft }} onMouseLeave={() => setErrorToShow(undefined)}>
                     <BiSolidErrorCircle size={25} className="fill-accent mr-3 my-auto" />
                     <h3 className=" text-justify text-md font-bold text-white font-mono " >
-                        {errorLines[errorToShow].msg.map((msg, index) => ( 
-                            
+                        {errorLines[errorToShow].msg.map((msg, index) => (
+
                             <React.Fragment key={index}>
-                                {"> "}{ msg.split('\n').map((line, lineIndex) => (
+                                {"> "}{msg.split('\n').map((line, lineIndex) => (
                                     <span key={lineIndex}>
                                         {line[1].toUpperCase() + line.substring(2)}
                                         <br />
                                     </span>
                                 ))}
-                            </React.Fragment> )
+                            </React.Fragment>)
 
                         )}
 
