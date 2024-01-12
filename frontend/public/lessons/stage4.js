@@ -1,10 +1,10 @@
-export const infoStage = { 
+export const infoStage = {
     nombre: "Etapa 4: Introducción a la POO",
     descripcion: "Aprende a crear y utilizar clases y objetos, herramientas fundamentales para organizar y estructurar un programa.",
     imagen: "/images/lessons/stage5-P.jpg",
 }
 
-import {codeStyle, valueStyle, variableStyle} from "./stagesStyle"
+import { codeStyle, valueStyle, variableStyle } from "./stagesStyle"
 
 
 const lessonsStage4 = [
@@ -14,58 +14,58 @@ const lessonsStage4 = [
         id: 0,
         enunciado: (
             <div className="text-black">
-                    <img
-                        src="/images/lessons/stage4/Leccion0-img.jpg"
-                        alt="Leccion0-img"
-                    />
-          </div>)
+                <img
+                    src="/images/lessons/stage4/Leccion0-img.jpg"
+                    alt="Leccion0-img"
+                />
+            </div>)
         ,
         instrucciones: (
             <div className=" text-black p-4 text-justify">
                 <p>
-                    En esta etapa, comprenderas conceptos básicos de la POO, encontrarás un ejemplo práctico que te 
-                    ayudara a comprender mejor los conceptos de clases y objetos a traves de una representacion visual.
+                    En esta etapa, comprenderás conceptos básicos de la POO, encontrarás un ejemplo práctico que te
+                    ayudara a comprender mejor los conceptos de clases y objetos a través de una representación visual.
                 </p>
 
-                <hr className="my-4"/>
+                <hr className="my-4" />
 
-                
-                <p>El primer paso, es ejecutar el codigo que encontrarás en el editor de codigo</p>
+
+                <p>El primer paso es ejecutar el código que encontrarás en el editor de código</p>
                 <ul className="list-disc p-4">
                     <li>
-                        ¿Qué es lo que pasa al ejecutar el codigo?, Explora e intenta analizar el codigo
+                        ¿Qué es lo que pasa al ejecutar el código?, Explora e intenta analizar el código
                     </li>
                 </ul>
                 <p>
                     Lo que acabas de ver es un ejemplo visual de como se puede representar un objeto en la vida real en la POO,
-                    en este caso, analizaremos el codigo y veremos como se compone:
-                    <br/>
+                    en este caso, analizaremos el código y veremos como se compone:
+                    <br />
                 </p>
-                    <ul className="list-disc p-4" style={{ listStyleType: 'decimal'}}>
-                        <li>
-                            Clase <b>"Auto":</b> Tenemos una clase llamada Auto, que contiene atributos y metodos, los atributos son las caracteristicas de lo 
-                            que seria una version muy simplificada de un auto del mundo real.
-                        </li>
-                        <li>
-                            
-                            Objeto<code style={variableStyle(0)}>autoRojo</code>: Tenemos un objeto llamado autoRojo, que es una instancia de la clase Auto,
-                            y cuenta con atributos como: nombre(Toyota), modelo(Yaris), color(#FF0000), velocidad(20) y un atributo x que es la posicion en el eje x
-                        </li>
-                        <li>
-                        
-                        <code style={codeStyle(0)}>Métodos</code>: Los métodos son acciones que puede realizar un objeto, en este caso, el metodo avanzar, es una accion que realiza el objeto autoRojo
-                        </li>
-                    </ul>
+                <ul className="list-disc p-4" style={{ listStyleType: 'decimal' }}>
+                    <li>
+                        Clase <b>"Auto":</b> Tenemos una clase llamada Auto, que contiene atributos y métodos, los atributos son las características de lo
+                        que sería una versión muy simplificada de un auto del mundo real.
+                    </li>
+                    <li>
 
-                <hr className="my-4"/>
-                
+                        Objeto<code style={variableStyle(0)}>autoRojo</code>: Tenemos un objeto llamado autoRojo, que es una instancia de la clase Auto,
+                        y cuenta con atributos como: nombre(Toyota), modelo(Yaris), color(#FF0000), velocidad(20) y un atributo "x" que representa la posición en el eje x
+                    </li>
+                    <li>
+
+                        <code style={codeStyle(0)}>Métodos</code>: Los métodos son acciones que puede realizar un objeto, en este caso, el método avanzar, es una acción que realiza el objeto <code style={variableStyle(0)}>autoRojo</code>
+                    </li>
+                </ul>
+
+                <hr className="my-4" />
+
                 <p>
                     No te asustes si no puedes comprender los conceptos y el funcionamiento a la primera, este ejemplo práctico es solo para que puedas hacerte una idea
                     de como se puede representar un objeto de la vida real en la POO, en las siguientes lecciones, veremos desde como se declara una clase hasta como se crea un objeto.
                 </p>
             </div>
         ),
-        checkResult : false,
+        checkResult: false,
         codeAnswer: `
 
 public class Main {
@@ -87,7 +87,7 @@ public class Main {
 class Auto{
     
     // Atributos de clase
-    Texto modelo;
+    String modelo;
     String marca;
     String color; 
     double velocidad;
@@ -99,10 +99,10 @@ class Auto{
         this.color = color;
         this.velocidad = velocidad;
         x = 200;
-        this.modelo = new Texto(textoModelo, color, 100);
+        this.modelo = textoModelo;
     }
 
-    public Texto getModelo(){
+    public String getModelo(){
         return modelo;
     }
     
@@ -127,43 +127,9 @@ class Auto{
         return x; 
     }
 }
-
-class Texto {
-    private int tamano;
-    private String color;
-    private String texto;
-
-    public Texto(String texto, String color, int tamano)  {
-        this.texto = texto;
-        this.color = color;
-        this.tamano = tamano;
-    }
-
-
-    public String getColor() {
-        return color;
-    }
-
-    public String getTexto() {
-        return texto;
-    }
-    public int getTamano() {
-        return tamano;
-    }
-
-
-    public void setColor(String color) {
-        this.color = color;
-    }
-    
-    public void setTexto(String texto) {
-        this.texto = texto;
-    }
-}
-    
     
 `,
-        
+
         code: `
 
 public class Main {
@@ -185,7 +151,7 @@ public class Main {
 class Auto{
     
     // Atributos de clase
-    Texto modelo;
+    String modelo;
     String marca;
     String color; 
     double velocidad;
@@ -197,10 +163,10 @@ class Auto{
         this.color = color;
         this.velocidad = velocidad;
         x = 200;
-        this.modelo = new Texto(textoModelo, color, 100);
+        this.modelo = textoModelo;
     }
 
-    public Texto getModelo(){
+    public String getModelo(){
         return modelo;
     }
     
@@ -225,60 +191,27 @@ class Auto{
         return x; 
     }
 }
-
-class Texto {
-    private int tamano;
-    private String color;
-    private String texto;
-
-    public Texto(String texto, String color, int tamano)  {
-        this.texto = texto;
-        this.color = color;
-        this.tamano = tamano;
-    }
-
-
-    public String getColor() {
-        return color;
-    }
-
-    public String getTexto() {
-        return texto;
-    }
-    public int getTamano() {
-        return tamano;
-    }
-
-
-    public void setColor(String color) {
-        this.color = color;
-    }
     
-    public void setTexto(String texto) {
-        this.texto = texto;
-    }
-}
-        
 `,
-        isConsole : false
+        isConsole: false
     },
     {
         id: 1,
         enunciado: (
             <div className="text-black">
-                    <img
-                        src="/images/lessons/stage4/Leccion1v3-img.jpg"
-                        alt="Leccion1-img"
-                    />
-          </div>)
+                <img
+                    src="/images/lessons/stage4/Leccion1v3-img.jpg"
+                    alt="Leccion1-img"
+                />
+            </div>)
         ,
         instrucciones: (
             <div className="text-black p-4 text-justify">
                 <p>
                     En esta lección, aprenderás lo que son las clases y objetos, y como se pueden crear y utilizar en Java, encontrarás un ejemplo
-                    práctico en la seccion de Teoria del cual puedes guiarte para realizar el ejercicio, para comenzar deberás:
+                    práctico en la sección de Teoría del cual puedes guiarte para realizar el ejercicio, para comenzar deberás:
                 </p>
-                <ul className="list-disc p-4" style={{ listStyleType: 'decimal'}}>
+                <ul className="list-disc p-4" style={{ listStyleType: 'decimal' }}>
 
                     <li>
                         Crea y define una clase <b>Persona</b> con los atributos <b>nombre</b> y <b>edad </b>
@@ -287,7 +220,7 @@ class Texto {
 
                     <li>
                         Define un método <code style={codeStyle(0)}>saludar()</code> que imprima por consola un mensaje de la forma:
-                         <code style={valueStyle(0)}>"Hola, mi nombre es: Miguel"</code> por ejemplo.
+                        <code style={valueStyle(0)}>"Hola, mi nombre es: Miguel"</code> por ejemplo.
                     </li>
 
                     <li>
@@ -296,7 +229,7 @@ class Texto {
 
                     <li>
                         Asigna valores a las propiedades del objeto <code style={variableStyle(0)}>nuevaPersona</code>, utiliza
-                         la notación de punto para acceder a las propiedades del objeto, ejemplo <i>(objeto.propiedad = valor)</i>
+                        la notación de punto para acceder a las propiedades del objeto, ejemplo <i>(objeto.propiedad = valor)</i>
                     </li>
 
                     <li>
@@ -304,15 +237,17 @@ class Texto {
                     </li>
                 </ul>
 
-                <hr className="my-4"/>
+                <hr className="my-4" />
 
                 <p>
-                    En este ejercicio, se aplica lo que se conoce como la abstracción de un objeto/concepto del mundo real en la programacion,
-                    en este caso, la clase Persona representa una persona del mundo real, los atributos y métodos de la clase Persona son las caracteristicas comúnes de una persona
+                    En este ejercicio, se aplica lo que se conoce como la abstracción de un objeto/concepto del mundo real en la programación,
+                    en este caso, la clase Persona representa una persona del mundo real, los atributos y métodos de la clase Persona son las características comunes de una persona
                 </p>
             </div>
         ),
-        checkResult : false,
+        
+        checkResult: true,
+        objectsToCheck: [{ type: "Persona", properties: [{ name: "nombre" }, { name: "edad" }] }, ],
         codeAnswer: `
 public class Main {
     public static void main(String[] args) {
@@ -372,47 +307,47 @@ class Persona{
 
 
         `,
-        isConsole : true
+        isConsole: true
     },
     //  <------------------------------------------------------ EJERCICIO 2 ---------------------------------------------------------->
     {
         id: 2,
         enunciado: (
             <div className="text-black">
-                    <img
-                        src="/images/lessons/stage4/Leccion2-img.jpg"
-                        alt="Leccion2-img"
-                    />
-          </div>)
+                <img
+                    src="/images/lessons/stage4/Leccion2-img.jpg"
+                    alt="Leccion2-img"
+                />
+            </div>)
         ,
         instrucciones: (
             <div className="text-black p-4 text-justify">
 
                 <p>
-                    Anteriormente, se utilizo la notación de punto para acceder a las propiedades de un objeto y asignarles valores,
-                    ahora utilizaras lo que se conoce como un <b>constructor</b> para inicializar los atributos de un objeto al momento de crearlo.
+                    Anteriormente, se utilizó la notación de punto para acceder a las propiedades de un objeto y asignarles valores,
+                    ahora utilizarás lo que se conoce como un <b>constructor</b> para inicializar los atributos de un objeto al momento de crearlo.
                 </p>
 
-                <hr className="my-4"/>
+                <hr className="my-4" />
 
-                <ul className="list-disc p-4" style={{ listStyleType: 'decimal'}}>
+                <ul className="list-disc p-4" style={{ listStyleType: 'decimal' }}>
                     <li>
                         Crea una clase <b>Persona</b> con los atributos nombre, edad y altura
                         de tipo <code style={codeStyle(1)}>String</code>, <code style={codeStyle(1)}>int</code> y <code style={codeStyle(1)}>double</code> respectivamente.
                     </li>
 
                     <li>
-                        Declara un método constructor para la clase <b>Persona</b>, este debe recibir los parámetros nombre, edad y altura definidos anteriormente.
+                        Declara un método constructor para la clase <b>Persona</b>, este debe recibir los parámetros: nombre, edad y altura definidos anteriormente.
                     </li>
 
                     <li>
-                        Dentro del contructor, debes declarar que los parametros recibidos se asignen a los atributos de la clase <b>Persona</b>,
-                         para ello, utiliza la palabra reservada <code style={codeStyle(0)}>this</code> en caso de que compartan el mismo nombre.
+                        Dentro del constructor, debes declarar que los parámetros recibidos se asignen a los atributos de la clase <b>Persona</b>,
+                        para ello, utiliza la palabra reservada <code style={codeStyle(0)}>this</code> en caso de que compartan el mismo nombre.
                     </li>
 
 
                     <li>
-                       Completa el método <code style={codeStyle(0)}>saludar()</code> para que este imprima por consola un mensaje de saludo y presentación, por ejemplo:
+                        Completa el método <code style={codeStyle(0)}>saludar()</code> para que este imprima por consola un mensaje de saludo y presentación, por ejemplo:
                         <code style={valueStyle(0)}>"Hola, mi nombre es: Juan"</code>
                     </li>
 
@@ -435,15 +370,17 @@ class Persona{
                     </li>
                 </ul>
 
-                <hr className="my-4"/>
+                <hr className="my-4" />
 
                 <p>
-                    La diferencia entre declarar un constructor y no hacerlo, es que la primera opcion permite inicializar los atributos de la clase
+                    La diferencia entre declarar un constructor y no hacerlo, es que la primera opción permite inicializar los atributos de la clase
                     al momento de crear un objeto y no tener que asignarles valores uno por uno, cada vez que se crea un objeto.
                 </p>
             </div>
         ),
-        checkResult : false,
+        
+        checkResult: true,
+        objectsToCheck: [{ type: "Persona", properties: [{ name: "nombre" }, { name: "edad" }, { name: "altura" }] }, ],
         codeAnswer: `
 
 public class Main {
@@ -478,12 +415,9 @@ class Persona {
     public void despedirse() {
         System.out.println("Adios, hasta luego!");
     }
-
-
-
 }
 `,
-        
+
         code: `
 
 public class Main {
@@ -521,35 +455,35 @@ class Persona {
 
 }
         `,
-        isConsole : true
+        isConsole: true
     },
     {
         id: 3,
         enunciado: (
             <div className="text-black">
-                    <img
-                        src="/images/lessons/stage4/Leccion3-img.jpg"
-                        alt="Leccion3-img"
-                    />
-          </div>)
+                <img
+                    src="/images/lessons/stage4/Leccion3-img.jpg"
+                    alt="Leccion3-img"
+                />
+            </div>)
         ,
         instrucciones: (
             <div className="text-black p-4 text-justify">
                 <p>
-                    En esta lección, utilizaremos parte de lo aprendido anteriormente para comprender como se declaran y utilizan 
+                    En esta lección, utilizaremos parte de lo aprendido anteriormente para comprender como se declaran y utilizan
                     los <b>setters</b> y <b>getters</b>
                 </p>
 
-                <br/>
+                <br />
 
                 <p>
-                    Ya cuentas con la clase <b>Persona</b> y su método constructor, como pequeña ayuda ya cuentas 
-                    con un método getter <code style={codeStyle(0)}>getNombre()</code> que se encarga de obtener el nombre del objeto <code style={variableStyle(0)}>p1</code> por lo que solo deberas:
+                    Ya cuentas con la clase <b>Persona</b> y su método constructor, como pequeña ayuda ya cuentas
+                    con un método getter <code style={codeStyle(0)}>getNombre()</code> que se encarga de obtener el nombre del objeto <code style={variableStyle(0)}>p1</code> por lo que solo deberás:
                 </p>
 
-                <ul className="list-disc p-4" style={{ listStyleType: 'decimal'}}>
+                <ul className="list-disc p-4" style={{ listStyleType: 'decimal' }}>
                     <li>
-                        Utilizar y completa la instancia de objeto <code style={variableStyle(0)}>p1</code> asignandole valores para sus atributos nombre y edad,
+                        Utilizar y completa la instancia de objeto <code style={variableStyle(0)}>p1</code> asignándole valores para sus atributos: nombre y edad,
                         que son de tipo <code style={codeStyle(1)}>String</code> y <code style={codeStyle(1)}>int</code> respectivamente.
                     </li>
 
@@ -560,11 +494,11 @@ class Persona {
 
                     <li>
                         Ahora es momento de utilizar los métodos <b>setters</b>, deberás definir un método <code style={codeStyle(0)}>setNombre()</code>
-                        el cuál debe encargase de asignar un nuevo valor al atributo nombre del objeto <code style={variableStyle(0)}>p1</code>.
+                        el cual debe encargarse de asignar un nuevo valor al atributo nombre del objeto <code style={variableStyle(0)}>p1</code>.
                     </li>
 
                     <li>
-                        Define un método <code style={codeStyle(0)}>setEdad()</code> el cuál debe encargase de asignar un nuevo valor al atributo edad del objeto <code style={variableStyle(0)}>p1</code>.
+                        Define un método <code style={codeStyle(0)}>setEdad()</code> el cual debe encargarse de asignar un nuevo valor al atributo edad del objeto <code style={variableStyle(0)}>p1</code>.
                     </li>
 
                     <li>
@@ -574,25 +508,26 @@ class Persona {
 
 
                     <li>
-                        Imprime un mensaje por consola utilizando los métodos <code style={codeStyle(0)}>getNombre()</code> 
+                        Imprime un mensaje por consola utilizando los métodos <code style={codeStyle(0)}>getNombre()</code>
                         y <code style={codeStyle(0)}>getEdad()</code> para obtener los nuevos valores de los atributos del objeto <code style={variableStyle(0)}>p1</code>.
                     </li>
                 </ul>
 
                 <p>
-                    Recuerda que para esta lección, solo debes incorporar codigo y no borrar, ya que es esencial que puedas ver los cambios sobre el objeto.
+                    Recuerda que para esta lección, solo debes incorporar código y no borrar, ya que es esencial que puedas ver los cambios sobre el objeto.
                 </p>
 
-                <hr className="my-4"/>
+                <hr className="my-4" />
 
                 <p>
-                    Los setters y getters se utilizan para acceder a los atributos privados de una clase, en este caso, la clase Persona tiene dos atributos privados
-                    nombre y age, y para poder acceder a ellos, se utilizan los metodos setters y getters.
+                    Los setters y getters se utilizan para acceder a los atributos privados de una clase, en este caso, la clase Persona tiene dos atributos privados:
+                    nombre y age, y para poder acceder a ellos se utilizan los métodos setters y getters.
                 </p>
 
             </div>
         ),
-        checkResult : false,
+        checkResult: true,
+        objectsToCheck: [{ type: "Persona", properties: [{ name: "nombre" }, { name: "edad" }] }, ],
         codeAnswer: `
 
 public class Main {
@@ -619,9 +554,8 @@ public class Main {
 }
 
 class Persona {
-    public String nombre;
-    public int edad;
-    public double altura;
+    private String nombre;
+    private int edad;
 
     public Persona(String nombre, int edad ) {
         this.nombre = nombre;
@@ -677,9 +611,8 @@ public class Main {
 }
 
 class Persona {
-    public String nombre;
-    public int edad;
-    public double altura;
+    private String nombre;
+    private int edad;
 
     public Persona(String nombre, int edad ) {
         this.nombre = nombre;
@@ -708,56 +641,56 @@ class Persona {
 }
 
 `,
-        isConsole : true
+        isConsole: true
     },
     {
         id: 4,
         enunciado: (
             <div className="text-black">
-                    <img
-                        src="/images/lessons/stage4/Leccion4-img.jpg"
-                        alt="Leccion4-img"
-                    />
-          </div>)
+                <img
+                    src="/images/lessons/stage4/Leccion4-img.jpg"
+                    alt="Leccion4-img"
+                />
+            </div>)
         ,
         instrucciones: (
             <div className="text-black p-4 text-justify">
                 <p>
                     Para esta lección, vamos a poner a prueba lo aprendido anteriormente en conjunto de lo que se conoce como <b>herencia</b> en la POO,
-                    en la seccion de teoria encontrarás un ejemplo práctico que te ayudara a comprender mejor el concepto de herencia
+                    en la sección de teoría encontrarás un ejemplo práctico que te ayudara a comprender mejor el concepto de herencia
                 </p>
 
-                <hr className="my-4"/>
+                <hr className="my-4" />
 
                 <p>
-                    Ya cuentas con un código base sobre el cual trabajar, este código contiene una clase <b>Animal</b>
-                     y una clase <b>Perro</b> que es una subclase de la clase Animal y esta ya cuenta con un método constructor y un método <code style={codeStyle(0)}>ladrar()</code>,
-                     del cual podrás guiarte para realizar el ejercicio.
+                    Ya cuentas con un código base sobre el cual trabajar, este código contiene una clase <b>Animal </b>
+                    y una clase <b>Perro</b> que es una subclase de la clase Animal y esta ya cuenta con un método constructor y un método <code style={codeStyle(0)}>ladrar()</code>,
+                    del cual podrás guiarte para realizar el ejercicio.
                 </p>
 
-                <ul className="list-disc p-4" style={{ listStyleType: 'decimal'}}>
+                <ul className="list-disc p-4" style={{ listStyleType: 'decimal' }}>
 
                     <li>
-                        Observa y ejecuta el código actual, y analiza que succede y como se logra.
+                        Observa y ejecuta el código actual, analiza que sucede y como se logra.
                     </li>
 
                     <li>
-                        Ahora es tu turno, deberas crear una nueva subclase llamada <b>Gato</b> que herede de la superclase <b>Animal</b> igual que la clase <b>Perro</b>, esta debera
+                        Ahora es tu turno, deberás crear una nueva subclase llamada <b>Gato</b> que herede de la superclase <b>Animal</b> igual que la clase <b>Perro</b>, esta deberá
                         tener un atributo de clase llamado <code style={variableStyle(0)}>nombre</code> de tipo <code style={codeStyle(1)}>String</code>
                     </li>
 
                     <li>
-                        Tambien, deberas definir su método constructor que reciba como parametro nombre y raza, no olvides que esta ultima es un atributo de la superclase Animal por lo que
-                        deberas utilizar la palabra reservada <code style={codeStyle(0)}>super</code> para acceder a ella.
+                        También, deberás definir su método constructor que reciba como parámetro nombre y raza, no olvides que esta última es un atributo de la superclase Animal por lo que
+                        deberás utilizar la palabra reservada <code style={codeStyle(0)}>super</code> para acceder a ella.
                     </li>
 
                     <li>
-                        Similar a la clase <b>Perro</b>, deberas definir el método <code style={codeStyle(0)}>maullar()</code> que imprima por consola un mensaje de la accion
+                        Similar a la clase <b>Perro</b>, deberás definir el método <code style={codeStyle(0)}>maullar()</code> que imprima por consola un mensaje de la acción
                         que realiza y el nombre de quien lo realiza, por ejemplo: <code style={valueStyle(0)}>"El gato [nombre de gato] esta maullando!"</code>
                     </li>
 
                     <li>
-                        Crea un objeto <code style={variableStyle(0)}>gato1</code> de la clase <b>Gato</b> pasando como parametros "Felix" y "Angora" al constructor
+                        Crea un objeto <code style={variableStyle(0)}>gato1</code> de la clase <b>Gato</b> pasando como parámetros "Felix" y "Angora" al constructor
                     </li>
 
                     <li>
@@ -767,47 +700,47 @@ class Persona {
                 </ul>
 
                 <p>
-                    La herencia es un concepto que permite la creación de nuevas clases basadas en clases existentes, lo que facilita la 
+                    La herencia es un concepto que permite la creación de nuevas clases basadas en clases existentes, lo que facilita la
                     reutilización del código y la creación de jerarquías de clases, lo que lleva a un diseño de software más flexible y modular.
                 </p>
 
-                <hr className="my-4"/>
+                <hr className="my-4" />
 
                 <p>
-                    <b>Reto extra</b>: Quiza no lo notaste, pero el método <code style={codeStyle(0)}>dormir()</code>
-                    solo imprime por consola <code style={valueStyle(0)}>"Durmiendo..."</code>, quiza esto puede ser poco detallado e incluso genérico, por lo que te parece
-                    si intentas sobreescribir su funcionamiento cuando un objeto de la clase <b>Gato</b> llama al método <code style={codeStyle(0)}>dormir()</code>? 
+                    <b>Reto extra</b>: Quizá no lo notaste, pero el método <code style={codeStyle(0)}>dormir()</code>
+                    solo imprime por consola <code style={valueStyle(0)}>"Durmiendo..."</code>, esto puede ser poco detallado e incluso genérico, por lo que te parece
+                    si intentas sobreescribir su funcionamiento cuando un objeto de la clase <b>Gato</b> llama al método <code style={codeStyle(0)}>dormir()</code>?
                     Por ejemplo: <code style={valueStyle(0)}>"El gato [nombre de gato] esta durmiendo!"</code>
                 </p>
 
-                <br/>
+                <br />
                 <p>
                     Para lograr esto, sigue las siguientes instrucciones y consejos:
                 </p>
-                <ul className="list-disc p-4 list-inside" style={{ listStyleType: 'decimal'}}>
-                     <li>
+                <ul className="list-disc p-4 list-inside" style={{ listStyleType: 'decimal' }}>
+                    <li>
                         Vuelve a declarar el mismo método <code style={codeStyle(0)}>dormir()</code> dentro de la clase <b>Gato</b> y sin borrar la original de la superclase <b>Animal</b>
                     </li>
 
                     <li>
-                        Sobre la nueva declaración del método <code style={codeStyle(0)}>dormir()</code>, 
-                        utiliza la anotacion <code style={codeStyle(0)}>@Override</code> para indicar y anular el método de la superclase <b>Animal</b>
+                        Sobre la nueva declaración del método <code style={codeStyle(0)}>dormir()</code>,
+                        utiliza la anotación  <code style={codeStyle(0)}>@Override</code> para indicar y anular el método de la superclase <b>Animal</b>
                     </li>
 
                     <li>
-                        Sobreescribe el funcionamiento del método para que imprima por consola un mensaje de la accion que realiza 
+                        Sobreescribe el funcionamiento del método para que imprima por consola un mensaje de la acción que realiza
                         y el nombre de quien lo realiza, por ejemplo: <code style={valueStyle(0)}>"El gato [nombre de gato] esta durmiendo!"</code>
                     </li>
 
                     <li>
-                        Ten en cuenta, que el metodo sobreescrito solo aplicara para la subclase en la cual se sobreescribe, en este caso, el nuevo método 
+                        Ten en cuenta, que el método sobreescrito solo aplicara para la subclase en la cual se sobreescribe, en este caso, el nuevo método
                         <code style={codeStyle(0)}>dormir()</code> solo aplicara para la clase Gato
                     </li>
                 </ul>
 
             </div>
         ),
-        checkResult : false,
+        checkResult: false,
         codeAnswer: `
 public class Main {
     public static void main(String[] args) {
@@ -861,196 +794,582 @@ class Gato extends Animal {
     }
 }
 `,
-        
+
         code: `
-        public class Main {
-            public static void main(String[] args) {
+public class Main {
+    public static void main(String[] args) {
 
-                Perro perro1 = new Perro("Fido", "Chihuahua");
-                perro1.ladrar();
+        Perro perro1 = new Perro("Fido", "Chihuahua");
+        perro1.ladrar();
 
-                // Crea un objeto "gato1" de la clase Gato
-                
-                // Llama al metodo "maullar()" del objeto "gato1"
-               
-            }
-        }
+        // Crea un objeto "gato1" de la clase Gato
         
-        // Superclase o clase padre
-        class Animal {
-            public String raza;
+        // Llama al metodo "maullar()" del objeto "gato1"
         
-            public Animal(String raza) {
-                this.raza = raza;
-            }
-        
-            public void dormir() {
-                System.out.println("Durmiendo...");
-            }
-        }
-        
-        // Subclase o clase hija "Perro"
-        class Perro extends Animal {
-            public String nombre;
-        
-            public Perro(String nombre, String raza) {
-                super(raza);
-                this.nombre = nombre;
-            }
-        
-            public void ladrar() {
-                System.out.println("El perro " + nombre + " esta ladrando!");
-            }
-        }
-        
-        // Crea una subclase "Gato"
-        
-           
-        
-            // Declara el metodo constructor de la clase Gato
+    }
+}
 
-        
-            // Declara el metodo "maullar()" de la clase Gato
+// Superclase o clase padre
+class Animal {
+    public String raza;
 
-        
-            // Reto, sobreescribe el método dormir() de la superclase Animal utilizando @Override
-            
+    public Animal(String raza) {
+        this.raza = raza;
+    }
 
-        
+    public void dormir() {
+        System.out.println("Durmiendo...");
+    }
+}
+
+// Subclase o clase hija "Perro"
+class Perro extends Animal {
+    public String nombre;
+
+    public Perro(String nombre, String raza) {
+        super(raza);
+        this.nombre = nombre;
+    }
+
+    public void ladrar() {
+        System.out.println("El perro " + nombre + " esta ladrando!");
+    }
+}
+
+// Crea una subclase "Gato"
+
+    
+
+    // Declara el metodo constructor de la clase Gato
+
+
+    // Declara el metodo "maullar()" de la clase Gato
+
+
+    // Reto, sobreescribe el método dormir() de la superclase Animal utilizando @Override
+    
+
+
 `,
-        isConsole : true
+        isConsole: true
     },
     {
         id: 5,
         enunciado: (
             <div className="text-black">
-                    {/* <img
-                        src="/images/lessons/stage4/Leccion4-img.jpg"
-                        alt="Leccion4-img"
-                    /> */}
-          </div>)
+                <img
+                    src="/images/lessons/stage4/Leccion5-img.jpg"
+                    alt="Leccion5-img"
+                />
+            </div>)
         ,
         instrucciones: (
             <div className="text-black p-4 text-justify">
                 <p>
-                    fdghdfgfd
+                    Para esta lección, pondremos a prueba tu habilidad para traducir representaciones visuales
+                    a código, en la sección teórica, <b>Realidad a programación</b>. Aquí, encontrarás
+                    el contexto del problema junto con el código inicial proporcionado en el editor.
                 </p>
 
-                <hr className="my-4"/>
+                <hr className="my-4" />
 
                 <p>
-                    fdgfdgfdg
+                    Para la clase <b>Pasajero</b>, deberás:
                 </p>
 
-                <ul className="list-disc p-4 list-inside" style={{ listStyleType: 'decimal'}}>
+                <ul className="list-disc p-4 list-inside" style={{ listStyleType: 'decimal' }}>
                     <li>
-                        xdsdfsdfsdf
+                        Crea o instancia 3 objetos de clase, estas serán <code style={variableStyle(0)}>pasajero1</code>,
+                        <code style={variableStyle(0)}> pasajero2</code> y <code style={variableStyle(0)}>pasajero3</code>
+                    </li>
+                    <li>
+                        Cada pasajero <i>(1, 2 y 3)</i> debe tener sus valores para sus atributos: rut y nombre, puedes utilizar como ejemplo los que se encuentran
+                        en la infografía de teoría <code style={valueStyle(0)}>("22.000.000", "Juan"), ("18.000.000", "Pepe") y ("23.000.000", "Maria")</code>.
+                    </li>
+                    <li>
+                        Crea los getters y setter de la clase Pasajero.
+                    </li>
+                    <li>
+                        Crea un método <code style={codeStyle(0)}>mostrarInformacion()</code> que muestre por consola la información de sus atributos rut y nombre.
                     </li>
                 </ul>
 
-                <p>
-                    dsfljksdlfsd
-                </p>
-
-                <hr className="my-4"/>
+                <hr className="my-4" />
 
                 <p>
-                    xd
+                    La clase <b>Bus</b> cuenta con la mayoría de se estructura, por lo que solo debes: :
                 </p>
-
-                <ul className="list-disc p-4 list-inside" style={{ listStyleType: 'decimal'}}>
+                <ul className="list-disc p-4 list-inside" style={{ listStyleType: 'decimal' }}>
                     <li>
-                        xdsdfsdfsdf
+                        Crea una instancia llamada <code style={variableStyle(0)}>bus1</code>,
+                    </li>
+                    <li>
+                        Asígnale la matrícula <code style={valueStyle(0)}>"45678G"</code>.
+                    </li>
+                    <li>
+                        Para la cantidad de pasajeros que puede llevar, por defecto viene con una capacidad para 3, esto se indica en el constructor,
+                        se declara que la lista(array) <code style={variableStyle(0)}>pasajeros </code> es un array de tipo <b>Pasajero</b> y de tamaño [<code style={valueStyle(0)}>3</code>]
+                    </li>
+                    <li>
+                        Crea los getters y setter de la clase Bus.
+                    </li>
+                    <li>
+                        Asigna los pasajeros <code style={variableStyle(0)}>pasajeros1,pasajeros2 y pasajeros3</code> al listado(array) de<code style={variableStyle(0)}>pasajeros</code>, recuerda que puedes utilizar
+                        la notación  punto "." para acceder a los atributos de los objetos.
                     </li>
                 </ul>
+
+                <hr className="my-4" />
+
+                <p>
+                    La clase <b>Conductor</b> ya esta completa, solo debes:
+                </p>
+
+                <ul className="list-disc p-4 list-inside" style={{ listStyleType: 'decimal' }}>
+                    <li>
+                        Crear una instancia llamada <code style={variableStyle(0)}>conductor1</code>.
+                    </li>
+                    <li>
+                        Asígnale el valor de licencia como<code style={valueStyle(0)}>"45678GL"</code> y el bus que le pertenece<code style={variableStyle(0)}>bus1</code>.
+                    </li>
+                    <li>
+                        Crea los getters y setter de la clase Conductor.
+                    </li>
+                </ul>
+
+                <hr className="my-4" />
+
+                <p>
+                    Ahora toca crear métodos para interactuar con objetos similarmente a como lo harías en el mundo real, para ello deberás hacer lo siguiente:
+                </p>
+
+                <ul className="list-disc p-4 list-inside" >
+                    <li>
+                        Accede al método<code style={codeStyle(0)}>mostrarInformacion()</code> de un pasajero.
+                    </li>
+                    <li>
+                        Accede al método de un pasajero <code style={codeStyle(0)}>mostrarInformacion()</code> desde<code style={variableStyle(0)}>bus1</code>.
+                    </li>
+                    <li>
+                        Accede al método de un pasajero <code style={codeStyle(0)}>mostrarInformacion()</code> desde<code style={variableStyle(0)}>conductor1</code>.
+                    </li>
+                    <li>
+                        Accede al método <code style={codeStyle(0)}>mostrarMatricula()</code>de<code style={variableStyle(0)}>bus1</code> desde<code style={variableStyle(0)}>conductor1</code>.
+                    </li>
+                </ul>
+
 
             </div>
         ),
-        checkResult : false,
+        checkResult: true,
+        objectsToCheck: [{ type: "Bus", properties: [{ name: "matricula", value: "45678G" }] },
+        { type: "Pasajero", properties: [{ name: "nombre", value: "Juan" }, { name: "rut", value: "22.000.000" }] },
+        { type: "Pasajero", properties: [{ name: "nombre", value: "Pepe" }, { name: "rut", value: "18.000.000" }] },
+        { type: "Pasajero", properties: [{ name: "nombre", value: "Maria" }, { name: "rut", value: "23.000.000" }] },
+        { type: "Conductor", properties: [{ name: "licencia", value: "45678GL" }] }
+        ],
         codeAnswer: `
 
-`,
+public class Main {
+    public static void main(String[] args) { 
+    
+        // Instancias de pasajeros        
+        Pasajero pasajero1 = new Pasajero("22.000.000", "Juan");
+        Pasajero pasajero2 = new Pasajero("18.000.000", "Pepe");
+        Pasajero pasajero3 = new Pasajero("23.000.000", "Maria");
         
+        // Instancia de "bus1"
+        Bus bus1 = new Bus("45678G");
+
+        // Asigna pasajeros de "bus1"
+        bus1.pasajeros[0] = pasajero1;
+        bus1.pasajeros[1] = pasajero2;
+        bus1.pasajeros[2] = pasajero3;
+        
+        // Instancia un conductor para el "bus1"
+        Conductor conductor1 = new Conductor("45678GL", bus1);
+
+        // Accede e imprime la informacion de un pasajero a traves del bus
+        bus1.pasajeros[0].mostrarInformacion();
+
+        // Accede e imprime la informacion de un pasajero a traves del conductor
+        conductor1.bus.pasajeros[0].mostrarInformacion();
+
+        // Imprime la matricula del "bus1"
+        bus1.mostrarMatricula();
+
+        // Imprime la matricula del "bus1" a traves del "conductor1"
+        conductor1.bus.mostrarMatricula();
+    }
+}
+
+class Pasajero {
+    private String rut;
+    private String nombre;
+
+    public Pasajero(String rut, String nombre) {
+        this.rut = rut;
+        this.nombre = nombre;
+    }
+
+    public void mostrarInformacion() {
+        System.out.println("RUT: " + rut);
+        System.out.println("Nombre: " + nombre);
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getRut() {
+        return rut;
+    }
+}
+
+class Bus{
+    private String matricula;
+    public Pasajero[] pasajeros;
+
+    public Bus(String matricula) {
+        this.matricula = matricula;
+        pasajeros = new Pasajero[3];
+    }
+
+    public void mostrarMatricula(){
+        System.out.println("La matricula es: " + matricula);
+    }
+
+    public Pasajero[] getPasajeros() {
+        return pasajeros;
+    }
+    public String getMatricula() {
+        return matricula;
+    }
+}
+
+class Conductor{
+    private String licencia;
+    public Bus bus;
+
+    public Conductor(String licencia, Bus bus) {
+        this.licencia = licencia;
+        this.bus = bus;
+    }
+    
+    public String getLicencia() {
+        return licencia;
+    }
+} 
+`,
+
         code: `
 
+public class Main {
+    public static void main(String[] args) {
+        // Instancias de pasajeros        
+        Pasajero pasajero1 = new Pasajero();
 
+
+
+        // Instancia de "bus1"
+        Bus bus1 = new Bus("45678G");
+
+        // Asigna pasajeros de "bus1"
+        bus1.pasajeros[0] = pasajero1;
+
+        
+        
+        // Instancia un conductor para el "bus1"
+        Conductor conductor1 = new Conductor("45678GL", bus1);
+
+        // Accede e imprime la informacion de un pasajero a traves del bus
+        
+
+        // Accede e imprime la informacion de un pasajero a traves del conductor
+        
+
+        // Imprime la matricula del "bus1"
+        bus1.mostrarMatricula();
+
+        // Imprime la matricula del "bus1" a traves del "conductor1"
+
+    }
+}
+
+class Pasajero {
+    private String rut;
+    private String nombre;
+
+    public Pasajero(String rut, String nombre) {
+        this.rut = rut;
+        this.nombre = nombre;
+    }
+
+    public void mostrarInformacion() {
+        System.out.println();
+        
+    }
+}
+
+class Bus{
+    private String matricula;
+    private Pasajero[] pasajeros;
+
+    public Bus(String matricula) {
+        this.matricula = matricula;
+        pasajeros = new Pasajero[3];
+    }
+
+    public void mostrarMatricula(){
+        System.out.println("La matricula es: " + matricula);
+    }
+}
+
+class Conductor{
+    private String licencia;
+    private Bus bus;
+
+    public Conductor(String licencia, Bus bus) {
+        this.licencia = licencia;
+        this.bus = bus;
+    }
+}        
 `,
-        isConsole : false
+        isConsole: true
     },
     {
         id: 6,
         enunciado: (
             <div className="text-black">
-                    {/* <img
-                        src="/images/lessons/stage4/Leccion4-img.jpg"
-                        alt="Leccion4-img"
-                    /> */}
-          </div>)
+                <img
+                    src="/images/lessons/stage4/Leccion5-img.jpg"
+                    alt="Leccion5-img"
+                />
+
+            </div>)
         ,
         instrucciones: (
-            <div className="text-black p-4 text-justify">
-                <p>
-                    fdghdfgfd
+            <div className="text-black p-4 text-center items-center font-bold text-[2vw]">
+                <p className="my-auto">
+                    ¡Felicidades! has completado todas las lecciones, para finalizar: 
                 </p>
-
-                <hr className="my-4"/>
-
-                <p>
-                    fdgfdgfdg
+                
+                <p className="my-auto">
+                    PRESIONA EJECUTAR Y VE EL RESULTADO
                 </p>
-
-                <ul className="list-disc p-4 list-inside" style={{ listStyleType: 'decimal'}}>
-                    <li>
-                        xdsdfsdfsdf
-                    </li>
-                </ul>
-
-                <p>
-                    dsfljksdlfsd
-                </p>
-
-                <hr className="my-4"/>
-
-                <p>
-                    xd
-                </p>
-
-                <ul className="list-disc p-4 list-inside" style={{ listStyleType: 'decimal'}}>
-                    <li>
-                        xdsdfsdfsdf
-                    </li>
-                </ul>
 
             </div>
         ),
-        checkResult : false,
+        checkResult: false,
         codeAnswer: `
-
-`,
-        
-        code: `
 public class Main {
-    public static void main(String[] args) {
-        // Bus
-        Bus bus1 = new Bus("ABC123");
+    public static void main(String[] args) { 
+    
+        // Instancias de pasajeros        
+        Pasajero pasajero1 = new Pasajero("22.000.000", "Juan");
+        Pasajero pasajero2 = new Pasajero("18.000.000", "Pepe");
+        Pasajero pasajero3 = new Pasajero("23.000.000", "Maria");
+        
+        // Instancia un conductor para el "bus1"
+        Conductor conductor1 = new Conductor("45678GL");
+        
+        // Instancia de "bus1"
+        Bus bus1 = new Bus("45678G", conductor1);
+
+        // Asigna pasajeros de "bus1"
+        bus1.pasajeros[0] = pasajero1;
+        bus1.pasajeros[1] = pasajero2;
+        bus1.pasajeros[2] = pasajero3;
         Esperar();
+        bus1.x = 2000;
+        
+        Texto textoFinal = new Texto("#FF0000", "Felicidades!", 100);
+        Esperar();
+        Esperar();
+        Esperar();
+
+
     }
 }
 
+class Pasajero {
+    private String rut;
+    private String nombre;
+
+    public Pasajero(String rut, String nombre) {
+        this.rut = rut;
+        this.nombre = nombre;
+    }
+
+    public void mostrarInformacion() {
+        System.out.println("RUT: " + rut);
+        System.out.println("Nombre: " + nombre);
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getRut() {
+        return rut;
+    }
+}
 
 class Bus{
-    String matricula;
-    double x;
+    private String matricula;
+    public Pasajero[] pasajeros;
+    public Conductor conductor;
+    public int x;
 
-    public Bus(String matricula) {
+    public Bus(String matricula, Conductor conductor) {
         this.matricula = matricula;
-        x = 200;
+        pasajeros = new Pasajero[3];
+        this.conductor = conductor;
+        x = 0;
+    }
+
+    public void mostrarMatricula(){
+        System.out.println("La matricula es: " + matricula);
+    }
+
+    public Pasajero[] getPasajeros() {
+        return pasajeros;
+    }
+    public String getMatricula() {
+        return matricula;
     }
 }
 
+class Conductor{
+    private String licencia;
 
+    public Conductor(String licencia) {
+        this.licencia = licencia;
+    }
+    
+    public String getLicencia() {
+        return licencia;
+    }
+} 
+
+
+class Texto{
+    public String color;
+    public String texto;
+    public int tamano;
+    
+    public Texto(String color, String texto, int tamano){
+        this.color = color;
+        this.texto = texto;
+        this.tamano = tamano;
+    }
+}
 `,
-        isConsole : false
+
+        code: `
+public class Main {
+    public static void main(String[] args) { 
+    
+        // Instancias de pasajeros        
+        Pasajero pasajero1 = new Pasajero("22.000.000", "Juan");
+        Pasajero pasajero2 = new Pasajero("18.000.000", "Pepe");
+        Pasajero pasajero3 = new Pasajero("23.000.000", "Maria");
+        
+        // Instancia un conductor para el "bus1"
+        Conductor conductor1 = new Conductor("45678GL");
+        
+        // Instancia de "bus1"
+        Bus bus1 = new Bus("45678G", conductor1);
+
+        // Asigna pasajeros de "bus1"
+        bus1.pasajeros[0] = pasajero1;
+        bus1.pasajeros[1] = pasajero2;
+        bus1.pasajeros[2] = pasajero3;
+        Esperar();
+        bus1.x = 2000;
+        
+        Texto textoFinal = new Texto("#FF0000", "Felicidades!", 100);
+        Esperar();
+        Esperar();
+        Esperar();
+
+    }
+}
+
+class Pasajero {
+    private String rut;
+    private String nombre;
+
+    public Pasajero(String rut, String nombre) {
+        this.rut = rut;
+        this.nombre = nombre;
+    }
+
+    public void mostrarInformacion() {
+        System.out.println("RUT: " + rut);
+        System.out.println("Nombre: " + nombre);
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public String getRut() {
+        return rut;
+    }
+}
+
+class Bus{
+    private String matricula;
+    public Pasajero[] pasajeros;
+    public Conductor conductor;
+    public int x;
+
+    public Bus(String matricula, Conductor conductor) {
+        this.matricula = matricula;
+        pasajeros = new Pasajero[3];
+        this.conductor = conductor;
+        x = 0;
+    }
+
+    public void mostrarMatricula(){
+        System.out.println("La matricula es: " + matricula);
+    }
+
+    public Pasajero[] getPasajeros() {
+        return pasajeros;
+    }
+    public String getMatricula() {
+        return matricula;
+    }
+}
+
+class Conductor{
+    private String licencia;
+
+    public Conductor(String licencia) {
+        this.licencia = licencia;
+    }
+    
+    public String getLicencia() {
+        return licencia;
+    }
+} 
+
+
+class Texto{
+    public String color;
+    public String texto;
+    public int tamano;
+    
+    public Texto(String color, String texto, int tamano){
+        this.color = color;
+        this.texto = texto;
+        this.tamano = tamano;
+    }
+}
+`,
+        isConsole: false
     },
 
 

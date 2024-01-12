@@ -32,18 +32,18 @@ const lessonsStage1 = [
                 <br/>
                 <p>
                     Sabemos que las variables se utilizan para almacenar valores, por lo que si queremos almacenar un valor en una variable,
-                    como por ejemplo, la cantidad de horas que tiene un día, deberias realizar lo siguiente:
+                    como por ejemplo, la cantidad de horas que tiene un día, deberías realizar lo siguiente:
                 </p>
                 <ol className="list-inside p-4" style={{ listStyleType: 'decimal'}}>
                     <li>
                         Declara una variable de tipo <code style={codeStyle(1)}>int</code>
-                        de nombre a tu elección como por ejemplo <code style={variableStyle(0)}>horasDia</code>
-                        , se recomienda utilizar nombres descriptivos para que sea más facil de comprender.
+                        de nombre a tu elección, como por ejemplo <code style={variableStyle(0)}>horasDia</code>
+                        , se recomienda utilizar nombres descriptivos para que sea más fácil de comprender.
                     </li>
 
                     <li>
-                        Puedes declarar la variable con el valor inicializado en la misma linea, 
-                        o puedes declarar la variable y asignarle el valor en otra linea.
+                        Puedes declarar la variable con el valor inicializado en la misma línea, 
+                        o puedes declarar la variable y asignarle el valor en otra línea.
                     </li>
 
                     <li>
@@ -53,7 +53,7 @@ const lessonsStage1 = [
                 </ol>
                 <p>
                     Recuerda que las comillas dobles o simples en <code style={codeStyle(0)}>System.out.println()</code>
-                    solo se utilizan para imprimir texto, para imprimir el valor de una variable solo debes escribir su nombre dentro de esta funcion.
+                    solo se utilizan para imprimir texto, para imprimir el valor de una variable solo debes escribir su nombre dentro de esta función.
                 </p>
 
                 <hr className="my-4"/>
@@ -130,12 +130,12 @@ public class Main {
 
                 <ul className="p-4 " style={{ listStyleType: 'decimal'}}>
                     <li>
-                        Utiliza <code style={codeStyle(0)}>System.out.println()</code> para imprimir un mensaje por consola
+                        Utiliza <code style={codeStyle(0)}>System.out.println()</code> para imprimir un mensaje por consola.
                     </li>
 
                     <li>
                         El mensaje debe contener un texto que especifique que representa el valor de la variable, por ejemplo:
-                        <em>"El dia tiene: <code style={valueStyle(0)}>x</code> horas"</em>
+                        <em>"El día tiene: <code style={valueStyle(0)}>x</code> horas"</em>
                     </li>
 
                     <li>
@@ -197,12 +197,12 @@ public class Main {
                 <p>
                     Las variables, además de almacenar valores, también se utilizan para realizar y almacenar
                     operaciones matemáticas. En este ejercicio, exploraremos las operaciones matemáticas básicas,
-                    en la seccion de teoria, encontraras una breve explicación de cada una de ellas.
+                    en la sección de teoría, encontrarás una breve explicación de cada una de ellas.
                 </p>
                 <br />
 
                 <p>
-                    Sigue los siguientes pasos para poner en practica estas operaciones:
+                    Sigue los siguientes pasos para poner en práctica estas operaciones:
                 </p>
 
                 <ul className="p-4" style={{ listStyleType: 'decimal'}}>
@@ -214,13 +214,13 @@ public class Main {
                     </li>
 
                     <li>
-                        Realiza las operaciones matematicas basicas entre las variables <code style={variableStyle(0)}>num1</code> y
+                        Realiza las operaciones matemáticas básicas entre las variables <code style={variableStyle(0)}>num1</code> y
                         <code style={variableStyle(0)}>num2</code> almacenando cada resultado en una variable que lleve el nombre de la operación,
                         ya cuentas con un ejemplo: <code style={variableStyle(0)}>suma</code>, para que puedas guiarte
                     </li>
 
                     <li>
-                        Utilizala el método <code style={codeStyle(0)}>System.out.println()</code> para mostrar los valores de las variables
+                        Utiliza el método <code style={codeStyle(0)}>System.out.println()</code> para mostrar los valores de las variables
                         por consola
                         <code style={variableStyle(0)}>resta</code>,
                         <code style={variableStyle(0)}>multiplicacion</code>, 
@@ -329,16 +329,16 @@ public class Main {
             <div className=" text-black p-4 text-justify">
 
                 <p>
-                    En esta lección,  introduciremos un tipo de variable no primitiva conocida como
+                    En esta lección, introduciremos un tipo de variable no primitiva conocida como
                     <code style={codeStyle(1)}>String</code>. Este tipo de variable se utiliza para almacenar secuencias de texto o caracteres.
-                    En la seccion de teoria, encontraras una breve explicación de este tipo de variable.
+                    En la sección de teoría, encontrarás una breve explicación de este tipo de variable.
                 </p>
 
                 <br/>
 
                 <p>
                     Esta lección tiene como objetivo demostrar que la concatenación no se limita únicamente a combinar texto con variables;
-                    si no que también se puede utilizar para unir dos o más variables, ya sea de tipo <code style={codeStyle(1)}>String</code>,
+                    sino que también se puede utilizar para unir dos o más variables, ya sea de tipo <code style={codeStyle(1)}>String</code>,
                     <code style={codeStyle(1)}>int</code>, u otros tipos.
                 </p>
 
@@ -349,11 +349,11 @@ public class Main {
                 <ul className="list-disc p-4" style={{ listStyleType: 'decimal'}}>
                     <li>
                         Declara una variable de tipo texto <code style={codeStyle(1)}>String</code> llamada 
-                        <code style={variableStyle(0)}>nombre</code>y asignale tu nombre.
+                        <code style={variableStyle(0)}>nombre</code>y asígnale tu nombre.
                     </li>
                     <li>
                         Declara una variable de tipo  <code style={codeStyle(1)}>int</code> 
-                         llamada <code style={variableStyle(0)}>edad</code> y asignale tu edad.
+                         llamada <code style={variableStyle(0)}>edad</code> y asígnale tu edad.
                     </li>
 
                     <li>
@@ -366,7 +366,7 @@ public class Main {
                 <hr className="my-4"/>
 
                 <p>
-                    Recuerda utilizar el operador <code style={codeStyle(0)}>+</code> para la concatenación.La elección de cómo utilizarlo
+                    Recuerda utilizar el operador <code style={codeStyle(0)}>+</code> para la concatenación. La elección de cómo utilizarlo
                     dependerá de lo que desees imprimir. Puedes utilizarlo entre texto y variables, o entre variables, asegurándote de emplear
                     comillas dobles o simples según sea necesario
                 </p>

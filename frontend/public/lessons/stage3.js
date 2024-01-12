@@ -26,7 +26,7 @@ const lessonsStage3 = [
             <div className="text-black p-4 text-justify">
 
                 <p>
-                    En esta leccion aprenderas a declarar y utilizar arrays, un array es una variable que puede almacenar varios valores del mismo tipo.
+                    En esta lección aprenderás a declarar y utilizar arrays, un array es una variable que puede almacenar varios valores del mismo tipo.
                     En la sección teórica, encontrarás información detallada y una explicación exhaustiva sobre cómo utilizar esta estructura para almacenar
                     y manipular conjuntos de datos. 
                 </p>
@@ -34,9 +34,9 @@ const lessonsStage3 = [
                 <hr className="my-4"/>
 
                 <p>
-                    Para esta leccion, vamos a trabajar con un array de tipo de tipo <code style={codeStyle(1)}>int</code> que contiene
+                    Para esta lección, vamos a trabajar con un array de tipo <code style={codeStyle(1)}>int</code> que contiene
                     las edades de 5 personas que son Juan, Pedro, Maria, Jose y Luis en el mismo orden. Se necesita mostrar el nombre de las personas
-                    junto a su edad, para ello deberas:
+                    junto a su edad, para ello deberás:
                 </p>
 
                 <ul className="list-disc p-4" style={{ listStyleType: 'decimal'}}>
@@ -46,7 +46,7 @@ const lessonsStage3 = [
                     </li>
 
                     <li>
-                        Ya cuentas con una base del método <b>infoPersonas</b>, deberas declarar el tipo de dato que retornará
+                        Ya cuentas con una base del método <b>infoPersonas</b>, deberás declarar el tipo de dato que retornará
                         y los tipos de dato que recibirá como parámetros.
                     </li>
 
@@ -59,8 +59,8 @@ const lessonsStage3 = [
                     </li>
 
                     <li>
-                        Puedes utilizar un bucle <code style={codeStyle(2)}>for</code> para recorrer los arrays y concatenar los valores, recuerda tambien
-                        que puedes acceder a los valores de un array a traves de su indice, por ejemplo: <code style={codeStyle(1)}>nombres[0]</code> accede al primer valor del array.
+                        Puedes utilizar un bucle <code style={codeStyle(2)}>for</code> para recorrer los arrays y concatenar los valores, recuerda también
+                        que puedes acceder a los valores de un array a través de su índice, por ejemplo: <code style={codeStyle(1)}>nombres[0]</code> accede al primer valor del array.
                     </li>
 
                     <li>
@@ -73,7 +73,7 @@ const lessonsStage3 = [
 
                     <li>
                         Imprime el contenido de la variable <code style={variableStyle(0)}>resultado</code> por consola,
-                        deberia mostrarse algo como: <i><code style={valueStyle(0)}>16.Juan-45.Pedro-30.Maria-20.Jose-30.Luis-</code></i>
+                        debería mostrarse algo como: <i><code style={valueStyle(0)}>16.Juan-45.Pedro-30.Maria-20.Jose-30.Luis-</code></i>
                     </li>
                 </ul>
 
@@ -159,14 +159,14 @@ public class Main {
             <div className="text-black p-4 text-justify">
 
                 <p>
-                    Si tuvieramos un array de 5, 10 elementos o hasta 20 podriamos trabajar facilmente con ellos, pero si la cantidad de elementos
+                    ¿Si tuviéramos un array de 5, 10 elementos o hasta 20 podríamos trabajar fácilmente con ellos, pero si la cantidad de elementos
                     cambia/aumenta constantemente como de 10 a 50 o incluso hasta 1000? 
                 </p>
 
                 <br/>
 
                 <p>
-                    En esta lección, encontrarás informacion sobre la propiedad <code style={codeStyle(0)}>.length</code> que
+                    En esta lección, encontrarás información sobre la propiedad <code style={codeStyle(0)}>.length</code> que
                     permite obtener la longitud/cantidad de elementos de un <b> array</b>. Esta propiedad es particularmente útil cuando trabajamos con
                     <b> arrays</b> cuya cantidad de elementos puede cambiar dinámicamente
                 </p>
@@ -175,8 +175,8 @@ public class Main {
 
                 <p>
                     Para este ejercicio, contarás con un array <code style={variableStyle(0)}>numeros</code> de tipo <code style={codeStyle(1)}>int</code>
-                    que contiene una cantidad de números que no sabemos su exactitud, necesitamos mostrar cuantos numeros contiene el array y la suma de ellos,
-                    por lo que deberas:
+                    que contiene una cantidad de números que no sabemos su exactitud, necesitamos mostrar cuantos números contiene el array y la suma de ellos,
+                    por lo que deberás:
                 </p>
 
                 <ul className="list-disc p-4" style={{ listStyleType: 'decimal'}}>
@@ -285,12 +285,12 @@ public class Main {
             <div className="text-black p-4 text-justify">
                 <p>
                     En esta lección, encontrarás información sobre lo que es una matriz, el término se utiliza para referirse a un
-                    array bidimensional, organizando datos en filas y columnas, formando una cuadricula.
+                    array bidimensional, organizando datos en filas y columnas, formando una cuadrícula.
                 </p>
                 <br/>
                 <p>
-                    Para este ejercicio, necesitamos contar la cantidad de numeros pares que contiene una matriz de 3x3, que contiene valores del 1 al 9,
-                    para ello deberas:
+                    Para este ejercicio, necesitamos contar la cantidad de números pares que contiene una matriz de 3x3, que contiene valores del 1 al 9,
+                    para ello deberás:
                 </p>
                 <ul className="list-disc p-4" style={{ listStyleType: 'decimal'}}>
                     <li>
@@ -302,11 +302,11 @@ public class Main {
                         
                     <li>
                         Completa y utiliza el método <code style={codeStyle(0)}>numerosPares()</code> que esta semi-listo para 
-                        programar la lógica que permita contar los numeros pares que contiene la matriz.
+                        programar la lógica que permita contar los números pares que contiene la matriz.
                     </li>
 
                     <li>
-                        Almacena la cantidad de numeros pares que contiene la matriz en una variable <code style={variableStyle(0)}>pares</code>.
+                        Almacena la cantidad de números pares que contiene la matriz en una variable <code style={variableStyle(0)}>pares</code>.
                     </li>
                     <li>
                         Recorre <code style={variableStyle(0)}>matriz</code> utilizando un bucle, se recomienza utilizar el <b>'for anidado'</b>, que corresponde a un for dentro de otro,
@@ -317,12 +317,12 @@ public class Main {
                     </li>
 
                     <li>
-                        Realiza la llamada al método <code style={codeStyle(0)}>numerosPares()</code> pasandole como parámetro la matriz <code style={variableStyle(0)}>matriz</code>
+                        Realiza la llamada al método <code style={codeStyle(0)}>numerosPares()</code> pasándole como parámetro la matriz <code style={variableStyle(0)}>matriz</code>
                          y almacena el resultado en una variable <code style={variableStyle(0)}>resultado</code>.
                     </li>
 
                     <li>
-                        Imprime un mensaje que indique la cantidad de numeros pares que contiene la matriz, deberia mostrarse algo como: <i><code style={valueStyle(0)}>La matriz contiene 2 numeros pares</code></i>
+                        Imprime un mensaje que indique la cantidad de numeros pares que contiene la matriz, debería mostrarse algo como: <i><code style={valueStyle(0)}>La matriz contiene 2 numeros pares</code></i>
                     </li>
                 </ul>
             </div>
