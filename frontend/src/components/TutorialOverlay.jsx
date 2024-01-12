@@ -3,39 +3,39 @@ import { FaHandPointDown } from "react-icons/fa";
 import React, { useEffect, useState } from 'react';
 
 const tutorialStages = [
-    { text: "¡Hola! Bienvenido a introduccion a la programacion" },
+    { text: "¡Hola! Bienvenido a la introducción a la programación" },
     { text: "¡¿Preparado para aprender?!" },
-    { text: "¿Como funciona la plataforma? ¿Como se programa? ¿POO?" },
+    { text: "¿Cómo funciona la plataforma? ¿Cómo se programa? ¿POO?" },
     { text: "Como sobrevivir la universidad..." },
-    { text: "La plataforma no es magica pero deberia ayudar" },
-    { text: "Probablemente..." },
-    { text: "Para comenzar explicare como funciona esta pagina" },
-    { text: "Empezando por la izquierda tenemos la-" },
-    { toOutline: "theoryTitle", text: "TEORIA" },
-    { toOutline: "theoryTitle", text: "En cada leccion, la teoria sera la explicacion general de la materia" },
-    { toOutline: "theoryTitle", text: "Tendra ilustraciones y pistas para completar la leccion" },
-    { toOutline: "theoryTitle", text: "Asi que es importante leer" },
-    { text: "Debajo de la teoria estan los-" },
-    { toOutline: "instructionsTitle", text: "OBJETIVOS", event: { id: "instructionsOpen", name: "click" } },
-    { toOutline: "instructionsTitle", text: "Este apartado servira para señalar lo que esperamos de ti" },
-    { toOutline: "instructionsTitle", text: "En algunos casos las lecciones seran evaluadas en base a estos objetivos" },
-    { toOutline: "instructionsTitle", text: "Asi que es importante que los sigas para avanzar" },
-    { text: "En la seccion derecha, lo primero que ves es-" },
-    { toOutline: "codeEditorTitle", text: "El EDITOR DE CODIGO" },
-    { toOutline: "codeEditorTitle", text: "En todas las lecciones existira una pieza de codigo" },
-    { toOutline: "codeEditorTitle", text: "Te ayudara a practicar" },
-    { toOutline: "codeEditorTitle", text: "Algunas veces abra mas o menos codigo" },
-    { toOutline: "codeEditorTitle", text: "Pero en general lo mas importante es experimentar" },
-    { toOutline: "codeEditorTitle", text: "Todo esto con el objetivo de ayudarte a tener experiencia practica" },
-    { toOutline: "executeButton", text: "Tambien como ves al extremo derecho, esta el boton de EJECUTAR codigo" },
-    { toOutline: "executeButton", text: "Debes presionarlo cuando quieras compilar y ejecutar el codigo" },
-    { text: "Finalmente debajo del Editor de codigo esta-" },
-    { toOutline: "consoleTitle", text: "LA CONSOLA" },
-    { toOutline: "consoleTitle", text: "Una vez ejecutes el codigo, esta mostrara su resultado" },
-    { toOutline: "consoleTitle", text: "Para que existan resultados el codigo debe ser correcto" },
-    { toOutline: "consoleTitle", text: "De otra manera, no se mostrara nada en este apartado" },
-    { text: "¡Ahora Llego tu turno de experimentar!" },
-    { text: "¡Buena suerte!" },
+    { text: "Esta plataforma no es mágica pero debería ayudar" },
+    { text: "O eso esperamos..." },
+    { text: "Para comenzar explicaré como funciona esta página" },
+    { text: "Empezando por la izquierda, encontrarás" },
+    { toOutline: "theoryTitle", text: "La sección de Teoría" },
+    { toOutline: "theoryTitle", text: "En cada lección, la teoría será la explicación general de la materia" },
+    { toOutline: "theoryTitle", text: "Tendrá ilustraciones y pistas para completar la lección" },
+    { toOutline: "theoryTitle", text: "Por lo tanto, es importante dedicarle tiempo a la lectura" },
+    { text: "Debajo de la teoría está la sección de" },
+    { toOutline: "instructionsTitle", text: "Objetivos", event: { id: "instructionsOpen", name: "click" } },
+    { toOutline: "instructionsTitle", text: "Este apartado servirá para señalar lo que esperamos de ti" },
+    { toOutline: "instructionsTitle", text: "En algunos casos las lecciones serán evaluadas basándonos en estos objetivos" },
+    { toOutline: "instructionsTitle", text: "Así que es importante que los completes para avanzar" },
+    { text: "En la sección derecha, lo primero que tenemos es" },
+    { toOutline: "codeEditorTitle", text: "El editor de código" },
+    { toOutline: "codeEditorTitle", text: "En todas las lecciones, encontrarás una base de código desde la cual trabajaras" },
+    { toOutline: "codeEditorTitle", text: "Y también te ayudará a practicar" },
+    { toOutline: "codeEditorTitle", text: "Algunas veces habrá más o menos código" },
+    { toOutline: "codeEditorTitle", text: "Pero en general lo más importante es experimentar" },
+    { toOutline: "codeEditorTitle", text: "Todo esto con el objetivo de ayudarte a tener experiencia práctica" },
+    { toOutline: "executeButton", text: "También, como ves al extremo derecho, está el botón de EJECUTAR código" },
+    { toOutline: "executeButton", text: "Debes presionarlo cuando quieras compilar y ejecutar el código" },
+    { text: "Finalmente, debajo del Editor de código, encontrarás" },
+    { toOutline: "consoleTitle", text: "La consola" },
+    { toOutline: "consoleTitle", text: "Una vez ejecutes el código, esta mostrará su resultadoo" },
+    { toOutline: "consoleTitle", text: "Para que existan resultados el código debe ser correcto" },
+    { toOutline: "consoleTitle", text: "De otra manera, no se mostrará nada en este apartado" },
+    { text: "¡Ahora llego tu turno de experimentar!" },
+    { text: "Hasta la próxima y ¡Buena suerte!" },
 ]
 
 
@@ -109,7 +109,7 @@ const TutorialOverlay = ({ onClose }) => {
                 <img src="/images/panda-rojo.png" alt="Character" className="mb-4 z-0 w-[100%] h-full animate__slowMov " />
 
                 <div className="absolute flex right-[-45%] top-[-35%] cursor-pointer w-[80%] " onClick={() => nextTutorial()} style={{ transformOrigin: 'left bottom' }}>
-                    <img id="panda" src="/images/speechBubble.png" alt="bubble" className=" mb-4 w-[100%] h-full" />
+                    <img id="panda" src="/images/SpeechBubble.png" alt="bubble" className=" mb-4 w-[100%] h-full" />
 
                     <div className="absolute top-[36%] left-[60%] transform -translate-x-[60%] -translate-y-[36%] w-[70%]  text-center text-background ">
                         <p className="text-[16px] font-extrabold font-sans"> {currText} </p>

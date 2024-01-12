@@ -35,7 +35,7 @@ const lessonsStage2 =[
                 </p>
                <ul className="list-disc p-4" style={{ listStyleType: 'decimal'}}>
                    <li>
-                     Crea una variable <code style={variableStyle(0)}>numero</code> de tipo entero <code style={codeStyle(1)}>int</code> y inicializada con un valor a tu elección.
+                     Crea una variable <code style={variableStyle(0)}>numero</code> de tipo entero <code style={codeStyle(1)}>int</code> e inicializada con un valor a tu elección.
                    </li>
 
                    <li>
@@ -50,12 +50,12 @@ const lessonsStage2 =[
 
                    
                    <li>
-                        En caso que la condición sea verdadera (si el residuo de división es igual a '0') utiliza la función <code style={codeStyle(0)}>System.out.println()</code>                        
+                        En caso de que la condición sea verdadera (si el residuo de división es igual a '0') utiliza la función <code style={codeStyle(0)}>System.out.println()</code>                        
                         para imprimir por consola que el número es par.
                    </li>
 
                    <li>
-                        En caso que la condición sea falsa, imprime por consola que el  número es impar.
+                        En caso de que la condición sea falsa, imprime por consola que el número es impar.
                    </li>
                 
                    <li>
@@ -130,44 +130,44 @@ public class Main {
 
             <p>
                 Para este ejercicio, crearemos un sencillo programa que nos permita imprimir los números del 1 al 5,
-                como sabras la estructura de control <b>"for"</b> es ideal para este tipo de situaciones, para comenzar:
+                como sabrás la estructura de control <b>"for"</b> es ideal para este tipo de situaciones, para comenzar:
             </p>
             <br/>
 
             <p>
-                Ya cuentas con un for casi completo, tu tarea es completar la estructura con sus valores de inicializacion,
-                 condicion y actualizacion, para comenzar deberás:
+                Ya cuentas con un for casi completo, tu tarea es completar la estructura con sus valores de inicialización,
+                 condición y actualización, para comenzar deberás:
             </p>
 
             <ul className="list-disc p-4" style={{ listStyleType: 'decimal'}}>
                 <li>
-                    Declarar la variable de inicializacion de tipo entero <code style={codeStyle(1)}>int</code> con un valor inicial de 0,
-                    generalmente a esta variable se le asigna el nombre <code style={variableStyle(0)}>i</code> y actua como un contador, esta se considera
+                    Declarar la variable de inicialización de tipo entero <code style={codeStyle(1)}>int</code> con un valor inicial de 0,
+                    generalmente, a esta variable se le asigna el nombre <code style={variableStyle(0)}>i</code> y actúa como un contador, esta se considera
                     como la primera iteración.
                 </li>
                 <li>
-                    Declarar la condicion de ejecucion del <b>'for'</b>, normalmente se utiliza y evalua una expresion que utiliza el contador y un valor,
+                    Declarar la condición de ejecución del <b>'for'</b>, normalmente se utiliza y evalúa una expresión que utiliza el contador y un valor,
                     como por ejemplo <code style={codeStyle(0)}>i &lt; 5</code>, esto significa que el for se ejecutara mientras que el valor de <code style={variableStyle(0)}>i</code> sea menor a 5.
                 </li>
                 <li>
-                    Declarar el valor de actualizacion del contador, generalmente se utiliza la expresion <code style={codeStyle(0)}>i++</code>,
+                    Declarar el valor de actualización del contador, generalmente se utiliza la expresión <code style={codeStyle(0)}>i++</code>,
                      esto significa que el valor de <code style={variableStyle(0)}>i</code> se incrementara en 1 en cada iteracion.
                 </li>
                 <li>
-                    En cada iteracion del for, imprime el valor de <code style={variableStyle(0)}>i</code> en la consola.
+                    En cada iteración del for, imprime el valor de <code style={variableStyle(0)}>i</code> en la consola.
                 </li>
             </ul>
 
             <p>
-                Podras darte que cuenta que el for se ejecuta 5 veces, debido a que la variable <code style={variableStyle(0)}>i</code>
-                comienza con un valor inicial de <code style={valueStyle(0)}>0</code> y se incrementa en 1 en cada iteracion.
+                Podrás darte que cuenta que el for se ejecuta 5 veces, debido a que la variable <code style={variableStyle(0)}>i</code>
+                comienza con un valor inicial de <code style={valueStyle(0)}>0</code> y se incrementa en 1 en cada iteración.
             </p>
 
             <hr className="my-4"/>
 
             <p>
-                Esto demuestra que la estructura de control <b>"for"</b> es ideal para ejecutar un bloque de codigo cuando sabemos
-                la cantidad de iteraciones o repeticiones de bloque de codigo que queremos ejecutar.
+                Esto demuestra que la estructura de control <b>"for"</b> es ideal para ejecutar un bloque de código cuando sabemos
+                la cantidad de iteraciones o repeticiones de bloque de código que queremos ejecutar.
             </p>
         </div>
     ),
@@ -218,15 +218,15 @@ public class Main {
                 <hr className="my-4"/>
 
                 <p>
-                    Para esta leccion, crearemos un programa que nos permita imprimir los números del <code style={valueStyle(0)}>0</code> al <code style={valueStyle(0)}>5</code>, de forma similar al ejercicio anterior,
-                    pero en esta ocasion utilizaremos la estructura de control <b>"while"</b>. Para comenzar:
+                    Para esta lección, crearemos un programa que nos permita imprimir los números del <code style={valueStyle(0)}>0</code> al <code style={valueStyle(0)}>5</code>, de forma similar al ejercicio anterior,
+                    pero en esta ocasión utilizaremos la estructura de control <b>"while"</b>. Para comenzar:
                 </p>
 
                 <ul className="list-disc p-4" style={{ listStyleType: 'decimal'}}>
                     <li>
                         Declara una variable <code style={variableStyle(0)}>i</code> de tipo <code style={codeStyle(1)}>int</code> que 
                         utilizaras como contador y debe estar inicializada con un valor de <code style={valueStyle(0)}>0</code>, recuerda que la iteración 0
-                        es la primera iteracion.
+                        es la primera iteración.
                     </li>
                     <li>
                         Ya cuentas con la estructura básica de un <b>"while"</b>, solo debes agregar una condición y el bloque de código que se ejecutará.
@@ -238,9 +238,9 @@ public class Main {
                 </ul>
 
                 <p>
-                    Quiza te preguntaras, porque imprime hasta el 5 si la condición es <code style={codeStyle(0)}>i &lt; 6</code>,
+                    Quizá te preguntaras, porque imprime hasta el 5 si la condición es <code style={codeStyle(0)}>i &lt; 6</code>,
                     esto se debe a que comenzamos con la iteración 0, y se ejecuta hasta que <code style={variableStyle(0)}>i</code> sea menor a 6, si quisieras
-                    imprimir hasta el 6 empezando desde 0, podrias modificar la condición como <code style={codeStyle(0)}>i &lt;= 6</code>.
+                    imprimir hasta el 6 empezando desde 0, podrías modificar la condición como <code style={codeStyle(0)}>i &lt;= 6</code>.
                 </p>
 
                 <hr className="my-4"/>
@@ -308,7 +308,7 @@ public class Main {
                 <hr className="my-4"/>
 
                 <p>
-                    Para esta leccion, crearemos un programa que nos permita imprimir los números del <code style={valueStyle(0)}>0</code>
+                    Para esta lección, crearemos un programa que nos permita imprimir los números del <code style={valueStyle(0)}>0</code>
                      al <code style={valueStyle(0)}>5</code>, de forma similar al ejercicio anterior, pero utilizando la estructura de control <b>"do-while"</b>.
                 </p>
 
@@ -319,10 +319,10 @@ public class Main {
                     </li>
                     <li>
                         Declara una estructura <b>"do-while"</b> que itere mientras que <code style={variableStyle(0)}>i</code> menor a 6, recuerda que la condición
-                        se evalua al final de cada iteración, por lo que se ejecutará al menos una vez.
+                        se evalúa al final de cada iteración, por lo que se ejecutará al menos una vez.
                     </li>
                     <li>
-                        En cada iteración, deberá imprimir el valor de la variable que hace de contador <code style={variableStyle(0)}>i</code> en la consola.
+                        En cada iteración, deberá imprimir el valor de la variable que hace de contador <code style={variableStyle(0)}>i</code> en la consola
                         y luego incrementar su valor en 1 utilizando la expresión <code style={codeStyle(0)}>i++</code>.
                     </li>
                     <li>
@@ -334,7 +334,7 @@ public class Main {
                 <hr className="my-4"/>
 
                 <p>
-                    Como podras darte cuenta, la estructura de control <b>"do-while"</b> siempre ejecuta el bloque de código al menos una vez y luego
+                    Como podrás darte cuenta, la estructura de control <b>"do-while"</b> siempre ejecuta el bloque de código al menos una vez y luego
                     evalua la condición, si esta se cumple, se vuelve a ejecutar el bloque de código, de lo contrario, se termina la ejecución.
                 </p>
             </div>
@@ -386,14 +386,14 @@ public class Main {
                 <div className=" text-black p-5 text-justify">
 
                     <p>
-                        En esta lección, comprenderás lo que es un método y como utilizarlo, en la seccion de teoria encontrarás
-                        informacion y una explicación sobre como declarar y utilizar un método.
+                        En esta lección, comprenderás lo que es un método y como utilizarlo, en la sección de teoría encontrarás
+                        información y una explicación sobre como declarar y utilizar un método.
                     </p>
 
                     <hr className="my-4"/>
 
                     <p>
-                        Para este ejercicio, crearemos utilizaremos todo lo aprendido hasta ahora para crear un programa que nos permita
+                        Para este ejercicio, crearemos y utilizaremos todo lo aprendido hasta ahora para crear un programa que nos permita
                         sumar dos números, empecemos con las instrucciones:
                     </p>
 
@@ -414,7 +414,7 @@ public class Main {
 
                         <li>
                             <b>Realiza llamada al método sumar </b><br/>
-                            En el método <code style={codeStyle(0)}>main</code> realiza una llamada al método sumar pasandole dos parámetros enteros
+                            En el método <code style={codeStyle(0)}>main</code> realiza una llamada al método sumar pasándole dos parámetros enteros
                             y almacena el resultado en una variable <code style={variableStyle(0)}>result</code> de tipo <code style={codeStyle(1)}>int</code>.
                         </li>
 
