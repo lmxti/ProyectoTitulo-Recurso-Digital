@@ -122,6 +122,8 @@ const Lesson = ({leccionInfo, setResult}) => {
                         
                     }
 
+                    console.log(nuevoResultado.resCode, matches[0])
+
                     return nuevoResultado.resCode.replace(matches[0], "")
 
                 } catch (error) {
@@ -157,8 +159,10 @@ const Lesson = ({leccionInfo, setResult}) => {
      */
     
     const handleResultado = async (nuevoResultado) => {
-
+        console.log(nuevoResultado)
         if(nuevoResultado.error){
+            setFrames([])
+            setCurrentFrame([])
             setResultado(nuevoResultado.error);
         }else if (leccionInfo.isConsole) { // Leccion es de tipo 'consola'
             
@@ -204,12 +208,18 @@ const Lesson = ({leccionInfo, setResult}) => {
                 if (auxElement.state.parent != -1) {
                     // Busqueda del objeto padre en el arreglo de objetos que tenga el mismo id que el padre del objeto actual
                     // Esto establece la posicion en el eje "x" del objeto en funcion a su padre
+                    const parent = objects.find((ob) => ob.id == auxElement.state.parent)
 
-                    if(objects.find((ob) => ob.id == auxElement.state.parent).state.x){
-                        auxElement.state.x = objects.find((ob) => ob.id == auxElement.state.parent).state.x 
+                    if(auxElement.state.localX != undefined && parent.state.ratio){
+                        const sizeX = canvasSize.height * (parent.state.ratio ? parent.state.ratio : 0.7)
+                        const xLeft =  (parent.state.x != undefined ? parent.state.x : canvasSize.width * 0.5) - (sizeX * 0.5)
+
+                        auxElement.state.x = xLeft + (sizeX / (parent.childs ? parent.childs.length + 1 : 2)) * (auxElement.state.localX + 1) 
+                        
                     }else{
-                        auxElement.state.x = canvasSize.width * 0.5 
+                        auxElement.state.x = (parent.state.x != undefined ? parent.state.x : canvasSize.width * 0.5)
                     }
+
                 } else {
                     // Si el objeto no tiene padre, se establece su posicion en el eje x en la mitad del lienzo (canvas)
                     auxElement.state.x = canvasSize.width * 0.5;
@@ -222,12 +232,18 @@ const Lesson = ({leccionInfo, setResult}) => {
                 if (auxElement.state.parent != -1) {
                     // Busqueda del objeto padre en el arreglo de objetos que tenga el mismo id que el padre del objeto actual
                     // Esto establece la posicion en el eje "y" del objeto en funcion a su padre
-                    const parent = objects.find((ob) => ob.id == auxElement.state.parent).state
-                    if(parent.y){
-                        auxElement.state.y = objects.find((ob) => ob.id == auxElement.state.parent).state.y +  + (auxElement.type == "Texto" ? (parent.alto ? parent.alto : (parent.img ? canvasSize.height / 5 : -100)) : 0) 
+                    const parent = objects.find((ob) => ob.id == auxElement.state.parent)
+
+                    if(auxElement.state.localY != undefined){
+                        const sizeY = canvasSize.height * (parent.state.ratio ? parent.state.ratio : 0.7)
+                        const yTop =  (parent.state.y != undefined ? parent.state.y : canvasSize.height * 0.5) - (sizeY * 0.5)
+
+                        auxElement.state.y = yTop + (sizeY / (parent.childs ? parent.childs.length + 1 : 2)) * (auxElement.state.localY + 1) 
                     }else{
-                        auxElement.state.y = canvasSize.height * 0.5  + (auxElement.type == "Texto" ? (parent.alto ? parent.alto : (parent.img ? canvasSize.height / 5 : -100)) : 0) 
+                        auxElement.state.y = (parent.state.y != undefined ? parent.state.y : canvasSize.height * 0.5)
                     }
+
+
 
                 } else {
                     // Si el objeto no tiene padre, se establece su posicion en el eje y en la mitad del lienzo (canvas)
@@ -303,7 +319,7 @@ const Lesson = ({leccionInfo, setResult}) => {
                 if(auxElement.state.img.complete){
                     context.save()
                     const aspRatio = auxElement.state.img.naturalHeight / auxElement.state.img.naturalWidth
-                    const originalWidth = canvasSize.height * 0.7;
+                    const originalWidth = canvasSize.height * (auxElement.state.ratio ? auxElement.state.ratio : 0.7);
                     const originalHeight = aspRatio * originalWidth;
 
 
@@ -318,8 +334,9 @@ const Lesson = ({leccionInfo, setResult}) => {
                         // Guarda el estado actual del contexto, permite realizar transformaciones/configuraciones sin afectar otros objetos dibujados
                         context.save()
                         const aspRatio = auxElement.state.img.naturalHeight / auxElement.state.img.naturalWidth
-                        const originalWidth = canvasSize.height * 0.7;
+                        const originalWidth = canvasSize.height * (auxElement.state.ratio ? auxElement.state.ratio : 0.7);
                         const originalHeight = aspRatio * originalWidth;
+    
     
                         // Se establece el "punto de origen" del contexto a la posicion `auxElement.state.x` y `auxElement.state.y`
                         context.translate(auxElement.state.x, auxElement.state.y)
@@ -497,8 +514,7 @@ const Lesson = ({leccionInfo, setResult}) => {
     // Actualiza el tamaño del lienzo (canvas) cada vez que cambia la leccion
     useEffect(() => {
         // Verificacion si la leccion no es de tipo 'consola' y si el lienzo (canvas) existe
-        if (!leccionInfo.isConsole && canvasRef.current) {
-            
+        if (!leccionInfo.isConsole && canvasRef.current) {  
             // Obtencion del contexto 2D del lienzo (canvas)
             const context = canvasRef.current.getContext('2d')
             // Limpieza de contenido previo en  lienzo (canvas)
@@ -531,9 +547,12 @@ const Lesson = ({leccionInfo, setResult}) => {
         setExpand(false)
         setResultado("")
         setFrames([])
+        setCurrentFrame(undefined)
 
     }, [leccionInfo]);
 
+
+    
 
     // Actualiza el lienzo (canvas) con el contenido del 'currentFrame' o frame actual cuando no se esta
     // en una leccion de consola y para que tambien se adapate cuando cambie el tamaño del lienzo (canvas)
