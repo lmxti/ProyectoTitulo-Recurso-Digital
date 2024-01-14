@@ -3,7 +3,7 @@ import React from "react";
 const CheckResults = (resInfo, lesInfo) => {
     const badFunctions = []
     let index = -1;
-    console.log("Chekingres ", lesInfo, resInfo); 
+
     if(lesInfo.functionToCheck){
         for(let i = 0; i < lesInfo.functionToCheck.length; i++){
             if((index = resInfo.functionsResult.findIndex((func)=> func.name == lesInfo.functionToCheck[i].name)) == -1 
@@ -57,15 +57,16 @@ const CheckResults = (resInfo, lesInfo) => {
     if(lesInfo.objectsToCheck){
         for(let i = 0; i < lesInfo.objectsToCheck.length; i++){ 
             if((objs = resInfo.objectsResult.filter((obj)=> obj.type == lesInfo.objectsToCheck[i].type)).length > 0){
+                
                 for(let p = 0; p < lesInfo.objectsToCheck[i].properties.length; p++){
-                    if(!objs.some(()=> objs.changes.some((obj)=> checkProperty(obj, lesInfo.objectsToCheck[i].properties[p])))){
-                        badFunctions.push({name: lesInfo.objectsToCheck[i].name, variable : lesInfo.objectsToCheck[i].properties[p].name}); 
+                    if(!objs.some((objChange)=> objChange.changes.some((obj)=> checkProperty(obj, lesInfo.objectsToCheck[i].properties[p])) )){
+
+                        badObjects.push({name: lesInfo.objectsToCheck[i].type, variable : lesInfo.objectsToCheck[i].properties[p].name}); 
                     }
                 }
             } 
         }
     }
-
 
     if(badObjects.length == 0 && badFunctions.length == 0){
         return undefined
