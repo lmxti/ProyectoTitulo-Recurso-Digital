@@ -4,7 +4,7 @@ export default async function handler(req, res) {
     const { action } = req.query
     try {
         
-        const response = await fetch('http://localhost:4000/user/' + action.join('/'), {
+        const response = await fetch('http://localhost:3001/user/' + action.join('/'), {
             method: req.method,
             headers: {
                 cookie: req.headers.cookie,

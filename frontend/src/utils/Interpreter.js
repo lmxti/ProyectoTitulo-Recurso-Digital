@@ -10,17 +10,13 @@ const objImgs = [
 ]
 
 const Interpreter = async (objectsList, maxFrames) => {
-    let frames = []
-    specialObjects = []
-    console.log(objectsList)
+    const frames = []
 
     for (let i = 0; i < maxFrames; i++) {
-
         const asyncList = objectsList.filter((el) => el.startFrame <= i).map(async (obj) => {
-            if (obj.startFrame == i) {
+            if(obj.startFrame == i){
                 let state = obj.changes.length == 0 ? obj.value : obj.changes[0];
-
-                if (!primitivos.includes(obj.type)) {
+                if (i == 0 && !primitivos.includes(obj.type)) {
                     const index = objImgs.findIndex((objImg) => objImg.type == obj.type);
                     if (index > -1) {
                         var img = new Image();
@@ -56,17 +52,23 @@ const Interpreter = async (objectsList, maxFrames) => {
 
                 }
 
+<<<<<<< HEAD
                 state = {...state, ...getSpecialValues(obj, objectsList)}
-
-
+=======
                 return { id: obj.id, state, type: obj.type }
             } else if (obj.startFrame + obj.changes.length > i + 1) { 
+>>>>>>> parent of 9060962 (UPDATE FRONTEND)
 
-                return { id: obj.id, state: obj.changes[i - obj.startFrame], type: obj.type }
+                return { id: obj.id, state : obj.changes[i - obj.startFrame], type: obj.type }
 
-            } else if (obj.startFrame + obj.changes.length == i + 1) {
+<<<<<<< HEAD
+                return { id: obj.id, state, type: obj.type }
+            } else if (obj.startFrame + obj.changes.length > i + 1) { 
+=======
+            } else if (obj.startFrame + obj.changes.length == i + 1) { 
+>>>>>>> parent of 9060962 (UPDATE FRONTEND)
 
-                return { id: obj.id, state: { ...obj.value, parent: obj.lastValue.parent }, type: obj.type }
+                return { id: obj.id, state : {...obj.value, parent : obj.lastValue.parent}, type: obj.type }
             } else {
                 return { id: obj.id, deleted: true }
             }
@@ -75,7 +77,6 @@ const Interpreter = async (objectsList, maxFrames) => {
         const auxObjectStates = await Promise.all(asyncList)
 
         frames.push(auxObjectStates)
-
     }
     frames.push(objectsList.map((obj)=>{ //BECAUSE IT MAY BE THAT THERE IS NOT A WAITIGN AT THE END
         if(obj.value != null){
@@ -97,4 +98,8 @@ const Interpreter = async (objectsList, maxFrames) => {
     return frames
 }
 
+<<<<<<< HEAD
 export default Interpreter
+=======
+export default Interpreter
+>>>>>>> parent of 9060962 (UPDATE FRONTEND)

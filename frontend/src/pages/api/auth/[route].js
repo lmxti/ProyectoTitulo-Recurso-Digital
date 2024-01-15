@@ -3,7 +3,7 @@
 export default async function handler(req, res) {
     const { route } = req.query
     try {
-        const response = await fetch('http://localhost:4000/auth/' + route, {
+        const response = await fetch('http://localhost:3001/auth/' + route, {
             method: req.method,
             headers: {
                 cookie: req.headers.cookie,

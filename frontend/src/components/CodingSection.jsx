@@ -34,27 +34,10 @@ function myCompletions(context) { //OCUPAR DE PRUEBA
     return {
         from: word.from,
         options: [
-            { label: "System.out.println();", type: "method", detail: "Imprimir por consola" },
-
-            { label: "String", type: "class", detail: "Tipo texto" },
-            { label: "int", type: "class", detail: "Tipo entero" },
-            { label: "char", type: "class", detail: "Tipo caracter" },
-            { label: "boolean", type: "class", detail: "Tipo booleano" },
-            { label: "double", type: "class", detail: "Tipo doble" },
-            { label: "float", type: "class", detail: "Tipo flotante" },
-
-            //{ label: "ArrayList", type: "class", detail: "Dynamic array" },
-
-
-            { label: "for", type: "keyword",  apply: "for(i = 0; i < 10; i++){}", detail: "Bucle Loop" },
-            { label: "if", type: "keyword", apply: "if(){}", detail: "Una condicional" },
-            { label: "else", type: "keyword", apply: "else{}", detail: "Otra condicional" },
-            { label: "while", type: "keyword", apply: "while(){}", detail: "Bucle While" },
-            { label: "class", type: "keyword", detail: "Define una clase" },
-            { label: "public", type: "keyword", detail: "Restringe el acceso abierto para todos" },
-            { label: "private", type: "keyword", detail: "Restring el acceso cerrado para el resto" },
-            { label: "static", type: "keyword", detail: "Una unica referencia a traves del codigo" },
-            { label: "void", type: "keyword", detail: "Sin retorno" },
+            { label: "System.out.println()", type: "function", detail: "function" },
+            { label: "hello", type: "variable", info: "(World)" },
+            { label: "match", type: "keyword", detail: "keyword" },
+            { label: "magic", type: "text", apply: "⠁⭒*.✩.*⭒⠁", detail: "macro" },
         ]
     };
 }
@@ -107,9 +90,6 @@ const CodingSection = ({ onResult, leccionInfo }) => {
     const [rectLeft, setRectLeft] = useState(1000)
     const [errorToShow, setErrorToShow] = useState(undefined)
     const [executingCode, setExecutingCode] = useState(false)
-    // Lineas de codigo erroneas
-    const [errorLines, setErrorLines] = useState([])
-
 
     useEffect(() => {
         setUserCode(leccionInfo.code)
@@ -120,13 +100,14 @@ const CodingSection = ({ onResult, leccionInfo }) => {
             /* container.setAttribute("height", "100vh") */
         }
         setErrorToShow(undefined)
-        setErrorLines([])
-        
+
         //container.setAttribute()
     }, [leccionInfo.code])
 
 
 
+    // Lineas de codigo erroneas
+    const [errorLines, setErrorLines] = useState([])
     // Referencia al editor de codigo
     const editorRef = useRef(null);
 
@@ -151,7 +132,7 @@ const CodingSection = ({ onResult, leccionInfo }) => {
      * Funcion que ejecuta el codigo en el lado del servidor (backend) y
      * en caso de error, registra las lineas de codigo con errores
      */
-
+    
     const execCode = async () => {
         setExecutingCode(true)
         // Llamado de funcion con parametros de ejecucion que ejecuta el codigo en el lado del servidor (backend)
@@ -305,20 +286,20 @@ const CodingSection = ({ onResult, leccionInfo }) => {
 
             )}
 
-            {errorToShow != undefined &&
+               {errorToShow != undefined &&
                 <div className="fixed bg-background p-5 rounded-[10px] shadow-2xl border-[1px] border-foreground flex" style={{ top: errorLines[errorToShow].y - 25, left: rectLeft }} onMouseLeave={() => setErrorToShow(undefined)}>
                     <BiSolidErrorCircle size={25} className="fill-accent mr-3 my-auto" />
                     <h3 className=" text-justify text-md font-bold text-white font-mono " >
-                        {errorLines[errorToShow].msg.map((msg, index) => (
-
+                        {errorLines[errorToShow].msg.map((msg, index) => ( 
+                            
                             <React.Fragment key={index}>
                                 {"> "}{ msg.split('\n').map((line, lineIndex) => (
                                     <span key={lineIndex}>
-                                        {line[0].toUpperCase() + line.substring(1)}
+                                        {line[1].toUpperCase() + line.substring(2)}
                                         <br />
                                     </span>
                                 ))}
-                            </React.Fragment>)
+                            </React.Fragment> )
 
                         )}
 
