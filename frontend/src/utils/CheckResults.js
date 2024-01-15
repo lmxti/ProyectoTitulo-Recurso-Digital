@@ -54,19 +54,22 @@ const CheckResults = (resInfo, lesInfo) => {
     const badObjects = []
     let objs = []
 
-    if(lesInfo.objectsToCheck){
+       if(lesInfo.objectsToCheck){
         for(let i = 0; i < lesInfo.objectsToCheck.length; i++){ 
             if((objs = resInfo.objectsResult.filter((obj)=> obj.type == lesInfo.objectsToCheck[i].type)).length > 0){
                 
+                
                 for(let p = 0; p < lesInfo.objectsToCheck[i].properties.length; p++){
-                    if(!objs.some((objChange)=> objChange.changes.some((obj)=> checkProperty(obj, lesInfo.objectsToCheck[i].properties[p])) )){
-
+                    
+                    if(!objs.some((objChange)=> objChange.changes.some((obj)=> checkProperty(obj, lesInfo.objectsToCheck[i].properties[p])) 
+                        || checkProperty(objChange.value, lesInfo.objectsToCheck[i].properties[p]) )){
                         badObjects.push({name: lesInfo.objectsToCheck[i].type, variable : lesInfo.objectsToCheck[i].properties[p].name}); 
                     }
                 }
             } 
         }
     }
+
 
     if(badObjects.length == 0 && badFunctions.length == 0){
         return undefined
