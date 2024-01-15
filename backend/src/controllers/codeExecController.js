@@ -6,6 +6,7 @@ const { exec } = require('child_process');
 // Configuracion de directorio de trabajo actual (cwd = current working directory) para ejecutar comandos con 'exec'
 const options = {
     cwd: './src/java',
+    encoding: 'utf-8'
 };
 
 const javaMainDir = './src/java/src/com/heart/app/Main.java'
@@ -48,7 +49,7 @@ const executeCode = async (req, res) => {
                     in case of libs change use = javac -encoding UTF-8  -cp ./lib/*  -d . src/com/heart/app/*.java
                      otherwise = javac -encoding UTF-8  -d . src/com/heart/app/Main.java*/
 
-                    exec(`javac -d . src/com/heart/app/Main.java && jar cfm executer${user}.jar MANIFEST.MF com/heart/app/*.class && java -jar executer${user}.jar`, options, (error, stdout, stderr) => {
+                    exec(`LANG=es_ES.UTF-8 javac -encoding UTF-8 -d . src/com/heart/app/Main.java && jar cfm executer${user}.jar MANIFEST.MF com/heart/app/*.class && java -jar executer${user}.jar`, options, (error, stdout, stderr) => {
                         if (error) {
 
                             res.status(500).json({ error: "Error en el codigo", output: stderr });
@@ -65,7 +66,7 @@ const executeCode = async (req, res) => {
                 fs.writeFileSync(javaMainDir, userCode);
 
                 // Ejecucion del codigo de usuario
-                exec(`javac -d . src/com/heart/app/Main.java && jar cfm executer${user}.jar MANIFEST.MF com/heart/app/*.class && java -jar executer${user}.jar`, options, (error, stdout, stderr) => {
+                exec(`LANG=es_ES.UTF-8 javac -encoding UTF-8 -d . src/com/heart/app/Main.java && jar cfm executer${user}.jar MANIFEST.MF com/heart/app/*.class && java -jar executer${user}.jar`, options, (error, stdout, stderr) => {
                     if (error) {
                         console.log("message------------", error.message);
                         
@@ -157,7 +158,7 @@ const checkValidity = (dummyCode, res, callback) => {
 
     fs.writeFileSync(javaMainDir, auxDummyCode, options);
 
-    exec(` javac -d test src/com/heart/app/Main.java && cd test && java Main`, options, (error, stdout, stderr) => {
+    exec(`LANG=es_ES.UTF-8 javac -encoding UTF-8 -d test src/com/heart/app/Main.java && cd test && java Main`, options, (error, stdout, stderr) => {
 
         if (error || stderr.split('\n').length > 3) {
             //console.log("vro", error, stderr)
@@ -205,7 +206,7 @@ const checkFunctions = (code, functionsToCheck, callback) => {
 
     fs.writeFileSync(javaMainDir, dummyCode, options);
 
-    exec(`javac -d test src/com/heart/app/Main.java && cd test && java Main`, options, (error, stdout, stderr) => {
+    exec(`LANG=es_ES.UTF-8 javac -encoding UTF-8 -d test src/com/heart/app/Main.java && cd test && java Main`, options, (error, stdout, stderr) => {
         if (error) {
 
             console.log(error)
